@@ -1,7 +1,6 @@
 package com.api.ppp.back.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,4 +9,13 @@ import lombok.Setter;
 @Entity
 @Table(name = "accion")
 public class Accion {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "acc_id")
+    private Integer id;
+
+    @Column(name = "acc_descripcion")
+    private String descripcion;
+
 }
