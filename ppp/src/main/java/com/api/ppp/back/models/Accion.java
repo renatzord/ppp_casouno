@@ -1,8 +1,11 @@
 package com.api.ppp.back.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.List;
 
 @Setter
 @Getter
@@ -17,5 +20,11 @@ public class Accion {
 
     @Column(name = "acc_descripcion")
     private String descripcion;
+
+    // Bidirectional Relationships
+
+    @OneToMany(mappedBy = "accion")
+    @JsonIgnore
+    private List<AccionConvoca> accionConvocas;
 
 }
