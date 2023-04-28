@@ -5,11 +5,13 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
+
 @Setter
 @Getter
 @Entity
 @Table(name = "usuario")
-public class Usuario {
+public class Usuario implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
