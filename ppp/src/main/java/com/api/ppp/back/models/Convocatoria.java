@@ -38,5 +38,10 @@ public class Convocatoria {
     @JsonIgnore
     private List<SolicitudEstudiante> solicitudEstudiante;
 
+    @OneToMany(mappedBy = "convocatoria")
+    @JsonIgnore
+    private List<AccionConvoca> accionConvocas;
+
+
 
 }

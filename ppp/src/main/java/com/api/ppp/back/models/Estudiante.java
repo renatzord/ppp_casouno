@@ -3,6 +3,8 @@ package com.api.ppp.back.models;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 @Entity
 @Table(name = "estudiante")
@@ -25,7 +27,7 @@ public class Estudiante {
     @Column(name = "est_prioridad")
     private Boolean prioridad;
 
-    // Relationships
+    // Foreign Key - Relationships
 
     @Column(name = "est_id_estudiante")
     private String id_estudiante;
@@ -37,5 +39,11 @@ public class Estudiante {
     //@OneTo
     //@JoinColumn(name = "est_car_id")
     //private Carrera carrera;
+
+    // Bidirectional Relationships
+
+    /*@OneToMany(mappedBy = "estudiante")
+    @JsonIgnore
+    private List<Practica> practicas;*/
 
 }

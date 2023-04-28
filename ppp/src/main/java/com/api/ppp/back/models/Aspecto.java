@@ -1,13 +1,15 @@
 package com.api.ppp.back.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
+import java.util.List;
 
-@Setter
-@Getter
+@Data
 @Entity
 @Table(name = "aspecto")
 public class Aspecto implements Serializable {
@@ -22,5 +24,10 @@ public class Aspecto implements Serializable {
 
     @Column(name = "aps_observaciones")
     private String observaciones;
+
+    // Bidirectional Relationships
+    @OneToMany(mappedBy = "aspecto")
+    @JsonIgnore
+    private List<AspectoPractica> aspectoPracticas;
 
 }
