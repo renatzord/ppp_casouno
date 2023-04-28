@@ -17,7 +17,7 @@ public class Convenio implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "con_id")
-    private Long id;
+    private Integer id;
 
     @Column(name = "con_numero")
     private Integer numero;

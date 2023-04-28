@@ -16,7 +16,7 @@ public class ResultadoMateria implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "rem_id")
-    private Long id;
+    private Integer id;
 
     @Column(name = "rem_descripcion")
     private String descripcion;

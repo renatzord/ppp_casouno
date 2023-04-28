@@ -17,7 +17,7 @@ public class SolicitudEmpresa implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "sol_id")
-    private Long id;
+    private Integer id;
 
     @Column(name = "sol_num_practicas")
     private Integer numPracticantes;

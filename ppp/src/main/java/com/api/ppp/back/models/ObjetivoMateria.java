@@ -16,7 +16,7 @@ public class ObjetivoMateria implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "obm_id")
-    private Long id;
+    private Integer id;
 
     @Column(name = "obm_descripcion")
     private String descripcion;

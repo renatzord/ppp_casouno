@@ -16,7 +16,7 @@ public class Empresa implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "epr_id")
-    private Long id;
+    private Integer id;
 
     @Column(name = "epr_ruc")
     private String ruc;
