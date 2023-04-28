@@ -35,8 +35,8 @@ public class SemanaActividad implements Serializable {
     @Column(name = "sac_actividad")
     private String actividad;
 
-    /* @ManyToOne
+    @ManyToOne
     @JoinColumn(name = "pra_id",referencedColumnName = "pra_id")
-    private Practica practica;*/
+    private Practica practica;
 
 }

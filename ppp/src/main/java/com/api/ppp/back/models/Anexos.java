@@ -18,8 +18,8 @@ public class Anexos implements Serializable {
     @Column(name = "ane_url")
     private String url;
 
-    /* @ManyToOne
+    @ManyToOne
     @JoinColumn(name = "pra_id",referencedColumnName = "pra_id")
-    private Practica practica;*/
+    private Practica practica;
 
 }

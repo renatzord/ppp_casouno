@@ -34,7 +34,7 @@ public class Calificacion implements Serializable {
     @Column(name = "pra_departamento")
     private String departamento;
 
-   /* @ManyToOne
+    @ManyToOne
     @JoinColumn(name = "pra_id",referencedColumnName = "pra_id")
-    private Practica practica;*/
+    private Practica practica;
 }

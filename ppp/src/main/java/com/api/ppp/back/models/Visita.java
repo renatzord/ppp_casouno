@@ -26,6 +26,6 @@ public class Visita implements Serializable {
     private String observacion;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "visita",fetch = FetchType.LAZY)
-    private List<Visita_Actividad> visitas;
+    private List<VisitaActividad> visitas;
 
 }
