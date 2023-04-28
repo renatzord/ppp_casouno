@@ -4,5 +4,5 @@ import com.api.ppp.back.models.Anexos;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface AnexosRepository extends BaseRepository<Anexos, Integer> {
+public interface AnexoRepository extends BaseRepository<Anexos, Integer> {
 }
