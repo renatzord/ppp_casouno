@@ -1,11 +1,11 @@
 package com.api.ppp.back.models;
 
 import jakarta.persistence.*;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
-@Setter
-@Getter
+@Data
 @Entity
 @Table(name = "tutor_instituto")
 public class TutorInstituto {

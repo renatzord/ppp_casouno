@@ -1,13 +1,13 @@
 package com.api.ppp.back.models;
 
 import jakarta.persistence.*;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Date;
 
-@Setter
-@Getter
+@Data
 @Entity
 @Table(name = "solicitud_estudiante")
 public class SolicitudEstudiante {

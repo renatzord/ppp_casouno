@@ -1,13 +1,13 @@
 package com.api.ppp.back.models;
 
 import jakarta.persistence.*;
+import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
 
-@Getter
-@Setter
+@Data
 @Entity
 @Table(name = "sucursal")
 public class Sucursal implements Serializable {

@@ -1,10 +1,14 @@
 package com.api.ppp.back.models;
 
 import jakarta.persistence.*;
+import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.List;
-
+@Entity
+@Data
 public class Resultado implements Serializable {
 
     @Id

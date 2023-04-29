@@ -7,8 +7,7 @@ import lombok.Setter;
 
 import java.io.Serializable;
 
-@Setter
-@Getter
+@Data
 @Entity
 @Table(name = "usuario")
 public class Usuario implements Serializable {
