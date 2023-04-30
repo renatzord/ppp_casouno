@@ -2,15 +2,14 @@ package com.api.ppp.back.models;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @Data
 @Entity
 @Table(name = "solicitud_estudiante")
-public class SolicitudEstudiante {
+public class SolicitudEstudiante implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,18 +20,17 @@ public class SolicitudEstudiante {
     private Boolean estado;
 
     @Column(name = "ses_fecha_envio")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date fechaEnvio;
 
     // Foreign Key - Relationships
 
-    @OneToOne
-    @JoinColumn(name = "ses_est_id")
+    @ManyToOne
+    @JoinColumn(name = "est_id")
     private Estudiante estudiante;
 
     @ManyToOne
-    @JoinColumn(name = "ses_cov_id")
+    @JoinColumn(name = "cov_id", referencedColumnName = "cov_id")
     private Convocatoria convocatoria;
-
-    // Bidirectional Relationships
 
 }

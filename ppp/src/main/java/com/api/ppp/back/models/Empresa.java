@@ -3,8 +3,6 @@ package com.api.ppp.back.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.List;
@@ -39,10 +37,18 @@ public class Empresa implements Serializable {
     @Column(name = "epr_activo")
     private Boolean activo;
 
-    @OneToMany(mappedBy = "empresa")
+    // Bidirectional Relationships
+
+    @OneToMany(mappedBy = "empresa",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore
     private List<Sucursal> sucursales;
 
+    @OneToMany(mappedBy = "empresa",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<TutorEmpresarial> empleados;
 
+    @OneToMany(mappedBy = "empresa",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<Convenio> convenios;
 
 }

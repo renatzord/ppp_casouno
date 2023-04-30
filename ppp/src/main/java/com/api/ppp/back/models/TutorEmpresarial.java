@@ -1,9 +1,10 @@
 package com.api.ppp.back.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+
+import java.util.List;
 
 @Data
 @Entity
@@ -16,20 +17,25 @@ public class TutorEmpresarial {
     private Integer id;
 
     @Column(name = "tem_rol")
-    private String rol;
+    private Integer rol;
 
     @Column(name = "tem_cargo")
     private String cargo;
 
-    // Relationships
+    // Foreign Key - Relationships
 
-    @OneToOne
-    @JoinColumn(name = "tem_usu_id")
+    @ManyToOne
+    @JoinColumn(name = "emp_id", referencedColumnName = "emp_id")
+    private Empresa empresa;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "usu_id", referencedColumnName = "usu_id")
     private Usuario usuario;
 
-    //@ManyToOne
-    //@JoinColumn(name = "tem_emp_id")
-    //private Empresa empresa;
+    // Bidirectional Relationships
 
+    @OneToMany(mappedBy = "tutorEmpresarial",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<Practica> practicas;
 
 }

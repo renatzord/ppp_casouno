@@ -2,8 +2,6 @@ package com.api.ppp.back.models;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.io.Serializable;
 
@@ -23,8 +21,10 @@ public class Sucursal implements Serializable {
     @Column(name = "suc_direccion")
     private String direccion;
 
+    // Foreign Key - Relationships
+
     @ManyToOne
-    @JoinColumn(name = "epr_id")
+    @JoinColumn(name = "epr_id", referencedColumnName = "epr_id")
     private Empresa empresa;
 
 }

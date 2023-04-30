@@ -2,12 +2,11 @@ package com.api.ppp.back.models;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.io.Serializable;
 @Entity
 @Data
+@Table(name = "detalle_tarea")
 public class DetalleTarea implements Serializable {
 
     @Id
@@ -24,11 +23,13 @@ public class DetalleTarea implements Serializable {
     @Column(name = "dta_horas")
     private Integer horas;
 
+    // Foreign Key - Relationships
+
     @ManyToOne
     @JoinColumn(name = "tar_id",referencedColumnName = "tar_id")
     private Tarea tarea;
 
-    /* @ManyToOne
+    @ManyToOne
     @JoinColumn(name = "obm_id",referencedColumnName = "obm_id")
-    private ObjetoMateria tarea;*/
+    private ObjetivoMateria objetivoMateria;
 }

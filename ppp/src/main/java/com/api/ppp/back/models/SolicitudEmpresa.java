@@ -3,8 +3,6 @@ package com.api.ppp.back.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -26,18 +24,30 @@ public class SolicitudEmpresa implements Serializable {
     private Integer numHoras;
 
     @Column(name = "sol_fecha_inicio_ten")
+    @Temporal(TemporalType.DATE)
     private Date fechaInicioTen;
 
     @Column(name = "sol_max_ten")
+    @Temporal(TemporalType.DATE)
     private Date fechaMaxTen;
 
     @Column(name = "sol_estado")
     private Integer estado;
 
+    // Foreign Key - Relationships
+
     @ManyToOne
-    @JoinColumn(name = "con_id")
+    @JoinColumn(name = "con_id", referencedColumnName = "cov_id")
     private Convenio convenio;
 
+    // Bidirectional Relationships
 
+    @OneToMany(mappedBy = "solicitudEmpresa",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<Actividad> actividades;
+
+    @OneToMany(mappedBy = "solicitudEmpresa",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<Convocatoria> convocatorias;
 
 }

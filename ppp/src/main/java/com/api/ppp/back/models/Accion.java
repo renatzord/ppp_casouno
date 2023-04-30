@@ -3,15 +3,14 @@ package com.api.ppp.back.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Data
 @Entity
 @Table(name = "accion")
-public class Accion {
+public class Accion implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,8 +22,8 @@ public class Accion {
 
     // Bidirectional Relationships
 
-    @OneToMany(mappedBy = "accion")
+    @OneToMany(mappedBy = "accion",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore
-    private List<AccionConvoca> accionConvocas;
+    private List<AccionConvoca> accionConvoca;
 
 }

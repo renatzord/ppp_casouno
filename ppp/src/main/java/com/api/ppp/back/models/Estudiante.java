@@ -1,5 +1,6 @@
 package com.api.ppp.back.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -15,6 +16,9 @@ public class Estudiante {
     @Column(name = "est_id")
     private Integer id;
 
+    @Column(name = "id_estudiante")
+    private Integer idEstudiante;
+
     @Column(name = "est_periodo")
     private String periodo;
 
@@ -22,28 +26,33 @@ public class Estudiante {
     private String ciclo;
 
     @Column(name = "est_horas_cumplidas")
-    private Integer horasCunplidas;
+    private Integer horasCumplidas;
 
     @Column(name = "est_prioridad")
     private Boolean prioridad;
 
     // Foreign Key - Relationships
 
-    @Column(name = "est_id_estudiante")
-    private String id_estudiante;
-
-    @OneToOne
-    @JoinColumn(name = "est_usu_id")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "usu_id", referencedColumnName = "usu_id")
     private Usuario usuario;
 
-    //@OneTo
-    //@JoinColumn(name = "est_car_id")
-    //private Carrera carrera;
+    @ManyToOne
+    @JoinColumn(name = "car_id",referencedColumnName = "car_id")
+    private Carrera carrera;
 
     // Bidirectional Relationships
 
-    /*@OneToMany(mappedBy = "estudiante")
+    @OneToMany(mappedBy = "estudiante",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore
-    private List<Practica> practicas;*/
+    private List<Practica> practicas;
+
+    @OneToMany(mappedBy = "estudiante",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<Actividad> actividades;
+
+    @OneToMany(mappedBy = "estudiante",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<SolicitudEstudiante> solicitudes;
 
 }

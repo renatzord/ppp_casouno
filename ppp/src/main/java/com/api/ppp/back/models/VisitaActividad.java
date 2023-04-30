@@ -21,6 +21,8 @@ public class VisitaActividad implements Serializable {
     @Column(name = "vac_observacion")
     private String observacion;
 
+    // Foreign Key - Relationships
+
     @ManyToOne
     @JoinColumn(name = "vit_id",referencedColumnName = "vit_id")
     private Visita visita;

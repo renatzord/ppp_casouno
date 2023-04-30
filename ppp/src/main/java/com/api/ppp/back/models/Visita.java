@@ -1,5 +1,6 @@
 package com.api.ppp.back.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -25,7 +26,16 @@ public class Visita implements Serializable {
     @Column(name = "vit_observacion")
     private String observacion;
 
+    // Foreign Key - Relationships
+
+    @ManyToOne
+    @JoinColumn(name = "pra_id", referencedColumnName = "pra_id")
+    private Practica practica;
+
+    // Bidirectional Relationships
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "visita",fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<VisitaActividad> visitas;
 
 }

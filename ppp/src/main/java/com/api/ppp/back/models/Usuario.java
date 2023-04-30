@@ -2,8 +2,6 @@ package com.api.ppp.back.models;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.io.Serializable;
 
@@ -16,6 +14,9 @@ public class Usuario implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "usu_id")
     private Integer id;
+
+    @Column(name = "usu_rol")
+    private Integer rol;
 
     @Column(name = "usu_cedula")
     private String cedula;
@@ -37,5 +38,16 @@ public class Usuario implements Serializable {
 
     @Column(name = "usu_activo")
     private Boolean activo;
+
+    // Foreign Key - Relationships
+
+    @OneToOne(mappedBy = "usuario")
+    private Estudiante estudiante;
+
+    @OneToOne(mappedBy = "usuario")
+    private TutorInstituto tutorInstituto;
+
+    @OneToOne(mappedBy = "usuario")
+    private TutorEmpresarial tutorEmpresarial;
 
 }

@@ -9,7 +9,7 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name = "convovatoria")
+@Table(name = "convocatoria")
 public class Convocatoria {
 
     @Id
@@ -18,9 +18,11 @@ public class Convocatoria {
     private Integer id;
 
     @Column(name = "cov_fecha_inicio")
+    @Temporal(TemporalType.DATE)
     private Date fechaInicio;
 
     @Column(name = "cov_fecha_fin")
+    @Temporal(TemporalType.DATE)
     private Date fechaFin;
 
     @Column(name = "cov_numero")
@@ -28,20 +30,22 @@ public class Convocatoria {
 
     // Foreign Key - Relationships
 
-    /*@ManyToOne
-    @JoinColumn(name = "cov_sol_id")
-    private SolicitudEmpresa solicitudEmpresa;*/
+    @ManyToOne
+    @JoinColumn(name = "sol_id")
+    private SolicitudEmpresa solicitudEmpresa;
 
     // Bidirectional Relationships
 
-    @OneToMany(mappedBy = "convocatoria")
+    @OneToMany(mappedBy = "convocatoria",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore
-    private List<SolicitudEstudiante> solicitudEstudiante;
+    private List<SolicitudEstudiante> solicitudEstudiantes;
 
-    @OneToMany(mappedBy = "convocatoria")
+    @OneToMany(mappedBy = "convocatoria",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore
     private List<AccionConvoca> accionConvocas;
 
-
+    @OneToMany(mappedBy = "convocatoria",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<Practica> practicas;
 
 }

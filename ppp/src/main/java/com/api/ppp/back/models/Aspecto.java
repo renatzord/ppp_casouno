@@ -3,8 +3,6 @@ package com.api.ppp.back.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.List;
@@ -26,7 +24,8 @@ public class Aspecto implements Serializable {
     private String observaciones;
 
     // Bidirectional Relationships
-    @OneToMany(mappedBy = "aspecto")
+
+    @OneToMany(mappedBy = "aspecto",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore
     private List<AspectoPractica> aspectoPracticas;
 

@@ -1,9 +1,8 @@
 package com.api.ppp.back.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -39,6 +38,8 @@ public class Practica implements Serializable {
     @Column(name = "pra_departamento")
     private String departamento;
 
+    // Foreign Key - Relationships
+
     @ManyToOne
     @JoinColumn(name = "cov_id", referencedColumnName = "cov_id")
     private Convocatoria convocatoria;
@@ -49,29 +50,36 @@ public class Practica implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "tin_id", referencedColumnName = "tin_id")
-    private TutorInstituto tutorInstituo;
+    private TutorInstituto tutorInstituto;
 
     @ManyToOne
     @JoinColumn(name = "tem_id", referencedColumnName = "tem_id")
     private TutorEmpresarial tutorEmpresarial;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "practica", fetch = FetchType.LAZY)
+    // Bidirectional Relationships
+
+    @OneToMany(mappedBy = "practica",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<Anexos> anexos;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "practica", fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<Resultado> resultados;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "practica", fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<SemanaActividad> semanasActividades;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "practica", fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<Calificacion> calificaciones;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "practica", fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<Visita> visitas;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "practica", fetch = FetchType.LAZY)
+    @JsonIgnore
     private List<AspectoPractica> aspectos;
-
 
 }

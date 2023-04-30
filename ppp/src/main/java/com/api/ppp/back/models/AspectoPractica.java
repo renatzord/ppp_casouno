@@ -3,10 +3,12 @@ package com.api.ppp.back.models;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
 @Entity
 @Table(name = "aspecto_practica")
-public class AspectoPractica {
+public class AspectoPractica implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,13 +21,11 @@ public class AspectoPractica {
     // Foreign Key - Relationships
 
     @ManyToOne
-    @JoinColumn(name = "apr_aps_id")
+    @JoinColumn(name = "aps_id",referencedColumnName = "aps_id")
     private Aspecto aspecto;
 
-    /*@ManyToOne
-    @JoinColumn(name = "apr_pra_id")
-    private Practica practica;*/
-
-    // Bidirectional Relationships
+    @ManyToOne
+    @JoinColumn(name = "pra_id",referencedColumnName = "pra_id")
+    private Practica practica;
 
 }

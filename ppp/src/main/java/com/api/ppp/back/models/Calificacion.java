@@ -12,27 +12,32 @@ import java.util.Date;
 public class Calificacion implements Serializable {
 
     @Id
-    @Column(name = "pra_id")
+    @Column(name = "cal_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "pra_periodo")
-    private String periodo;
+    @Column(name = "cal_tutor")
+    private Integer tutor;
 
-    @Column(name = "pra_nsemanas")
-    private Integer nsemanas;
+    @Column(name = "cal_a")
+    private Integer a;
 
-    @Column(name = "pra_inicio")
-    private Date inicio;
+    @Column(name = "cal_b")
+    private Integer b;
 
-    @Column(name = "pra_fin")
-    private Date fin;
+    @Column(name = "cal_c")
+    private Integer c;
 
-    @Column(name = "pra_concluciones")
-    private String concluciones;
+    @Column(name = "cal_d")
+    private Integer d;
 
-    @Column(name = "pra_departamento")
-    private String departamento;
+    @Column(name = "cal_e")
+    private Integer e;
+
+    @Column(name = "cal_total")
+    private Integer total;
+
+    // Foreign Key - Relationships
 
     @ManyToOne
     @JoinColumn(name = "pra_id",referencedColumnName = "pra_id")

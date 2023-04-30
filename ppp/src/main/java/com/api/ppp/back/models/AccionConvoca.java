@@ -3,10 +3,12 @@ package com.api.ppp.back.models;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.io.Serializable;
+
 @Data
 @Entity
 @Table(name = "accion_convoca")
-public class AccionConvoca {
+public class AccionConvoca implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,13 +21,11 @@ public class AccionConvoca {
     // Foreign Key - Relationships
 
     @ManyToOne
-    @JoinColumn(name = "acv_acc_id")
+    @JoinColumn(name = "acc_id", referencedColumnName = "acc_id")
     private Accion accion;
 
     @ManyToOne
-    @JoinColumn(name = "acv_cov_id")
+    @JoinColumn(name = "cov_id", referencedColumnName = "cov_id")
     private Convocatoria convocatoria;
-
-    // Bidirectional Relationships
 
 }

@@ -29,11 +29,13 @@ public class SemanaActividad implements Serializable {
     @Temporal(TemporalType.TIME)
     private LocalTime horaFin;
 
-    @Column(name = "sac_total")
+    @Column(name = "sac_total_horas")
     private Integer totalHoras;
 
     @Column(name = "sac_actividad")
     private String actividad;
+
+    // Foreign Key - Relationships
 
     @ManyToOne
     @JoinColumn(name = "pra_id",referencedColumnName = "pra_id")

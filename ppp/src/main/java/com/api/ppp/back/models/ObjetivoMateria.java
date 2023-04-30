@@ -1,13 +1,9 @@
 package com.api.ppp.back.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.io.Serializable;
-import java.util.List;
 
 @Data
 @Entity
@@ -21,10 +17,10 @@ public class ObjetivoMateria implements Serializable {
     @Column(name = "obm_descripcion")
     private String descripcion;
 
+    // Foreign Key - Relationships
+
     @ManyToOne
-    @JoinColumn(name = "mat_id")
+    @JoinColumn(name = "mat_id", referencedColumnName = "mat_id")
     private Materia materia;
-
-
 
 }
