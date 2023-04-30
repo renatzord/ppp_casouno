@@ -37,7 +37,7 @@ public class SolicitudEmpresa implements Serializable {
     // Foreign Key - Relationships
 
     @ManyToOne
-    @JoinColumn(name = "con_id", referencedColumnName = "cov_id")
+    @JoinColumn(name = "con_id", referencedColumnName = "con_id")
     private Convenio convenio;
 
     // Bidirectional Relationships

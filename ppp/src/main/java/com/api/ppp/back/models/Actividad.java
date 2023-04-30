@@ -22,7 +22,11 @@ public class Actividad implements Serializable {
     // Foreign Key - Relationships
 
     @ManyToOne
-    @JoinColumn(name = "sol_id", referencedColumnName = "cov_id")
+    @JoinColumn(name = "sol_id", referencedColumnName = "sol_id")
     private SolicitudEmpresa solicitudEmpresa;
+
+    @ManyToOne
+    @JoinColumn(name = "mat_id", referencedColumnName = "mat_id")
+    private Materia materia;
 
 }

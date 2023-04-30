@@ -38,4 +38,8 @@ public class Materia implements Serializable {
     @JsonIgnore
     private List<Tarea> tareas;
 
+    @OneToMany(mappedBy = "materia",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<Actividad> actividades;
+
 }

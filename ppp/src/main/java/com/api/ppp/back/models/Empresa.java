@@ -11,6 +11,7 @@ import java.util.List;
 @Entity
 @Table(name = "empresa")
 public class Empresa implements Serializable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "epr_id")

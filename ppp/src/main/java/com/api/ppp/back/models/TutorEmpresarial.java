@@ -25,7 +25,7 @@ public class TutorEmpresarial {
     // Foreign Key - Relationships
 
     @ManyToOne
-    @JoinColumn(name = "emp_id", referencedColumnName = "emp_id")
+    @JoinColumn(name = "epr_id", referencedColumnName = "epr_id")
     private Empresa empresa;
 
     @OneToOne(cascade = CascadeType.ALL)

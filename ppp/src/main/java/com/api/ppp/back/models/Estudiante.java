@@ -16,9 +16,6 @@ public class Estudiante {
     @Column(name = "est_id")
     private Integer id;
 
-    @Column(name = "id_estudiante")
-    private Integer idEstudiante;
-
     @Column(name = "est_periodo")
     private String periodo;
 
@@ -33,6 +30,9 @@ public class Estudiante {
 
     // Foreign Key - Relationships
 
+    @Column(name = "id_estudiante")
+    private Integer idEstudiante;
+
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "usu_id", referencedColumnName = "usu_id")
     private Usuario usuario;
@@ -46,10 +46,6 @@ public class Estudiante {
     @OneToMany(mappedBy = "estudiante",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore
     private List<Practica> practicas;
-
-    @OneToMany(mappedBy = "estudiante",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonIgnore
-    private List<Actividad> actividades;
 
     @OneToMany(mappedBy = "estudiante",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore
