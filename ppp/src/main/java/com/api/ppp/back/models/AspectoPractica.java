@@ -21,11 +21,13 @@ public class AspectoPractica implements Serializable {
     // Foreign Key - Relationships
 
     @ManyToOne
-    @JoinColumn(name = "aps_id",referencedColumnName = "aps_id")
+    @JoinColumn(name = "apr_aps_id")
     private Aspecto aspecto;
 
     @ManyToOne
-    @JoinColumn(name = "pra_id",referencedColumnName = "pra_id")
+    @JoinColumn(name = "apr_pra_id")
     private Practica practica;
+
+    // Bidirectional Relationships
 
 }
