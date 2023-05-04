@@ -12,4 +12,5 @@ public class ResultadoController {
     @Autowired
     private ResultadoService service;
 
+
 }
