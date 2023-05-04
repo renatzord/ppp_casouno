@@ -39,15 +39,4 @@ public class Usuario implements Serializable {
     @Column(name = "usu_activo")
     private Boolean activo;
 
-    // Foreign Key - Relationships
-
-    @OneToOne(mappedBy = "usuario")
-    private Estudiante estudiante;
-
-    @OneToOne(mappedBy = "usuario")
-    private TutorInstituto tutorInstituto;
-
-    @OneToOne(mappedBy = "usuario")
-    private TutorEmpresarial tutorEmpresarial;
-
 }
