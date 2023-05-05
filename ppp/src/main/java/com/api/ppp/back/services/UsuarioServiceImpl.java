@@ -6,6 +6,8 @@ import com.api.ppp.back.models.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UsuarioServiceImpl extends BaseServiceImpl<Usuario, Integer> implements UsuarioService {
 
@@ -16,4 +18,8 @@ public class UsuarioServiceImpl extends BaseServiceImpl<Usuario, Integer> implem
         super(baseRepository);
     }
 
+    @Override
+    public List<Usuario> findByCorreo(String correo) {
+        return repository.findByCorreo(correo);
+    }
 }

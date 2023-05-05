@@ -1,0 +1,16 @@
+POST http://localhost:8080/signUp
+Content-Type: application/json
+
+{
+  "id": 0,
+  "cedula": "1724455223",
+  "nombre": "Andres",
+  "apellido": "Zuin",
+  "correo": "andres@gmail.com",
+  "titulo": "BGU",
+  "telefono": "1234567890",
+  "activo": true
+}
+
+###
+
