@@ -37,13 +37,13 @@ public class SecurityConfig {
                         config.setMaxAge(3600L);
                         return config;
                     }
-                }).and().csrf((csrf) -> csrf.csrfTokenRequestHandler(requestHandler).ignoringRequestMatchers("/contact","/register")
+                }).and().csrf((csrf) -> csrf.csrfTokenRequestHandler(requestHandler).ignoringRequestMatchers("/register")
                         .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
                 .addFilterAfter(new CsrfCookieFilter(), BasicAuthenticationFilter.class)
                 .authorizeHttpRequests()
-                .requestMatchers("/accion").hasRole("ADMIN")
-                .requestMatchers("/logIn").authenticated()
-                .requestMatchers("/signUp").permitAll()
+                .requestMatchers("/accion/listar").hasRole("ADMIN")
+                .requestMatchers("/login").authenticated()
+                .requestMatchers("/register").permitAll()
                 .and().formLogin()
                 .and().httpBasic();
         return http.build();

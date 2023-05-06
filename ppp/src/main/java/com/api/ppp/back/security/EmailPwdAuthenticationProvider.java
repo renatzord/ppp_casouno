@@ -1,5 +1,6 @@
 package com.api.ppp.back.security;
 
+import com.api.ppp.back.daos.AuthorityRepository;
 import com.api.ppp.back.models.Authority;
 import com.api.ppp.back.models.Usuario;
 import com.api.ppp.back.services.UsuarioService;
@@ -19,7 +20,7 @@ import java.util.List;
 import java.util.Set;
 
 @Component
-public class CorreoPwdProvider implements AuthenticationProvider {
+public class EmailPwdAuthenticationProvider implements AuthenticationProvider {
 
     @Autowired
     private UsuarioService usuarioService;
@@ -27,14 +28,18 @@ public class CorreoPwdProvider implements AuthenticationProvider {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private AuthorityRepository authorityRepository;
+
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String username = authentication.getName();
         String pwd = authentication.getCredentials().toString();
-        List<Usuario> customer = usuarioService.findByCorreo(username);
-        if (customer.size() > 0) {
-            if (passwordEncoder.matches(pwd, customer.get(0).getPassword())) {
-                return new UsernamePasswordAuthenticationToken(username, pwd, getGrantedAuthorities(customer.get(0).getAuthorities()));
+        List<Usuario> usuarios = usuarioService.findByCorreo(username);
+        Set<Authority> authorities = authorityRepository.findByUsuario(usuarios.get(0));
+        if (usuarios.size() > 0) {
+            if (passwordEncoder.matches(pwd, usuarios.get(0).getPassword())) {
+                return new UsernamePasswordAuthenticationToken(username, pwd, getGrantedAuthorities(authorities));
             } else {
                 throw new BadCredentialsException("Invalid password!");
             }
@@ -46,7 +51,7 @@ public class CorreoPwdProvider implements AuthenticationProvider {
     private List<GrantedAuthority> getGrantedAuthorities(Set<Authority> authorities) {
         List<GrantedAuthority> grantedAuthorities = new ArrayList<>();
         for (Authority authority : authorities) {
-            grantedAuthorities.add(new SimpleGrantedAuthority(authority.getNombre()));
+            grantedAuthorities.add(new SimpleGrantedAuthority(authority.getName()));
         }
         return grantedAuthorities;
     }

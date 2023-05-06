@@ -4,22 +4,22 @@ import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
-@Data
+import java.io.Serializable;
+
 @Entity
+@Data
 @Table(name = "authorities")
-public class Authority {
+public class Authority implements Serializable {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO,generator="native")
-    @GenericGenerator(name = "native",strategy = "native")
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
-    private String nombre;
-
-    // Foreign Key - Relationships
+    private String name;
 
     @ManyToOne
     @JoinColumn(name = "usu_id")
     private Usuario usuario;
+
 
 }

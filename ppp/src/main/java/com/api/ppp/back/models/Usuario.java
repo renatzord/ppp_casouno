@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
 @Data
@@ -45,7 +46,7 @@ public class Usuario implements Serializable {
     // Bidirectional Relationships
 
     @JsonIgnore
-    @OneToMany(mappedBy="usuario",fetch=FetchType.EAGER)
+    @OneToMany(mappedBy="usuario", fetch=FetchType.EAGER)
     private Set<Authority> authorities;
 
 }
