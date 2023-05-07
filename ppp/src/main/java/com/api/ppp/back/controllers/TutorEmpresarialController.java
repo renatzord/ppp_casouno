@@ -47,7 +47,6 @@ public class TutorEmpresarialController {
             TutorEmpresarial current = optional.get();
             current.setEmpresa(entity.getEmpresa());
             current.setUsuario(entity.getUsuario());
-            current.setRol(entity.getRol());
             current.setCargo(entity.getCargo());
             return ResponseEntity.status(HttpStatus.CREATED).body(service.save(current));
         }
