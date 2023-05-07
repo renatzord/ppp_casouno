@@ -1,9 +1,12 @@
 package com.api.ppp.back.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.Set;
 
 @Data
 @Entity
@@ -14,9 +17,6 @@ public class Usuario implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "usu_id")
     private Integer id;
-
-    @Column(name = "usu_rol")
-    private Integer rol;
 
     @Column(name = "usu_cedula")
     private String cedula;
@@ -38,5 +38,14 @@ public class Usuario implements Serializable {
 
     @Column(name = "usu_activo")
     private Boolean activo;
+
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    private String password;
+
+    // Bidirectional Relationships
+
+    @JsonIgnore
+    @OneToMany(mappedBy="usuario", fetch=FetchType.EAGER)
+    private Set<Authority> authorities;
 
 }

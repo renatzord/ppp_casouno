@@ -19,8 +19,6 @@ public class TutorInstituto {
     @Column(name = "tin_docente_id")
     private String idDocente;
 
-    @Column(name = "tin_rol")
-    private Integer rol;
 
     // Foreign Key - Relationships
 
