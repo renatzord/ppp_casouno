@@ -1,6 +1,7 @@
 package com.api.ppp.back.controllers;
 
 import com.api.ppp.back.models.Accion;
+import com.api.ppp.back.models.Convocatoria;
 import com.api.ppp.back.models.SolicitudEstudiante;
 import com.api.ppp.back.services.SolicitudEstudianteService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -60,4 +62,11 @@ public class SolicitudEstudianteController {
         service.deleteById(id);
         return ResponseEntity.noContent().build();
     }
+
+    //To find by convocatoria by MAC
+    @GetMapping("/listarxconvocatoria")
+    public List<SolicitudEstudiante> listarxConvocatoria(@RequestBody Convocatoria entity) {
+        return service.solicitudesxConvocatoria(entity);
+    }
+
 }
