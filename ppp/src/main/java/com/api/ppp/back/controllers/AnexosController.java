@@ -11,6 +11,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/anexos")
+@CrossOrigin(origins="*")
 public class AnexosController {
 
     @Autowired

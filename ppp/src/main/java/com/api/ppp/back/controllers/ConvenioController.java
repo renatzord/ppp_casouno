@@ -12,6 +12,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/convenio")
+@CrossOrigin(origins="*")
 public class ConvenioController {
 
     @Autowired
