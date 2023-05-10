@@ -4,15 +4,13 @@ import com.api.ppp.fenix.fmodels.UsuarioFenix;
 import com.api.ppp.fenix.fservices.UsuarioFenixService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/usuariofenix")
+@CrossOrigin(origins="*")
 public class UsuarioFenixController {
 
     @Autowired
@@ -21,6 +19,15 @@ public class UsuarioFenixController {
     @GetMapping("/buscarusuario/{cedula}")
     public ResponseEntity<?> buscarCedula(@PathVariable("cedula") String cedula) {
         Optional<UsuarioFenix> current = Optional.ofNullable(service.findByCedula(cedula));
+        if(current.isPresent()) {
+            return ResponseEntity.ok().body(current.get());
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("/buscaralumnocedula/{cedula}")
+    public ResponseEntity<?> buscarCedulaEstidiantes(@PathVariable("cedula") String cedula) {
+        Optional<UsuarioFenix> current = Optional.ofNullable(service.findByCedulaEstudiante(cedula));
         if(current.isPresent()) {
             return ResponseEntity.ok().body(current.get());
         }

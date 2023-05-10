@@ -1,6 +1,5 @@
 package com.api.ppp.back.controllers;
 
-import com.api.ppp.back.models.Accion;
 import com.api.ppp.back.models.Visita;
 import com.api.ppp.back.services.VisitaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +11,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/visita")
+@CrossOrigin(origins="*")
 public class VisitaController {
 
     @Autowired

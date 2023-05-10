@@ -1,6 +1,5 @@
 package com.api.ppp.back.controllers;
 
-import com.api.ppp.back.models.Accion;
 import com.api.ppp.back.models.Convocatoria;
 import com.api.ppp.back.models.SolicitudEstudiante;
 import com.api.ppp.back.services.SolicitudEstudianteService;
@@ -14,6 +13,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/solicitudEstudiante")
+@CrossOrigin(origins="*")
 public class SolicitudEstudianteController {
 
     @Autowired

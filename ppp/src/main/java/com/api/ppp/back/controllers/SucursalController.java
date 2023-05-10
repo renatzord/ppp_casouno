@@ -12,6 +12,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/sucursal")
+@CrossOrigin(origins="*")
 public class SucursalController {
 
     @Autowired
