@@ -1,11 +1,15 @@
 package com.api.ppp.fenix.fcontrollers;
 
+import com.api.ppp.back.models.Usuario;
+import com.api.ppp.back.services.UsuarioService;
 import com.api.ppp.fenix.fmodels.UsuarioFenix;
 import com.api.ppp.fenix.fservices.UsuarioFenixService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.http.HttpStatus;
 
+import java.util.Collections;
 import java.util.Optional;
 
 @RestController
@@ -15,6 +19,10 @@ public class UsuarioFenixController {
 
     @Autowired
     private UsuarioFenixService service;
+
+    @Autowired
+    private UsuarioService usuService;
+
 
     @GetMapping("/buscarusuario/{cedula}")
     public ResponseEntity<?> buscarCedula(@PathVariable("cedula") String cedula) {
@@ -28,10 +36,18 @@ public class UsuarioFenixController {
     @GetMapping("/buscaralumnocedula/{cedula}")
     public ResponseEntity<?> buscarCedulaEstidiantes(@PathVariable("cedula") String cedula) {
         Optional<UsuarioFenix> current = Optional.ofNullable(service.findByCedulaEstudiante(cedula));
+        Optional<Usuario> existe = Optional.ofNullable(usuService.usuarioxcedula(cedula));
         if(current.isPresent()) {
-            return ResponseEntity.ok().body(current.get());
+            if (existe.isPresent()) {
+                return ResponseEntity.badRequest()
+                        .body(Collections
+                                .singletonMap("Mensaje", "Ya existe el alumno"));
+            }
+            else return ResponseEntity.ok().body(current.get());
         }
-        return ResponseEntity.notFound().build();
+        return ResponseEntity.badRequest()
+                .body(Collections
+                        .singletonMap("Mensaje","No se encontro estudiante para la cédula " + cedula));
     }
 
     @GetMapping("/buscarusuario/{nombres}/{correo}/{tipo}")

@@ -16,4 +16,8 @@ public class UsuarioServiceImpl extends BaseServiceImpl<Usuario, Integer> implem
         super(baseRepository);
     }
 
+    @Override
+    public Usuario usuarioxcedula(String cedula) {
+        return (Usuario) repository.findByCedula(cedula).orElse(null);
+    }
 }
