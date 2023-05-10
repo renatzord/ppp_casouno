@@ -1,6 +1,7 @@
 package com.api.ppp.back.controllers;
 
 import com.api.ppp.back.models.Actividad;
+import com.api.ppp.back.models.SolicitudEmpresa;
 import com.api.ppp.back.services.ActividadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -58,6 +59,12 @@ public class ActividadController {
     public ResponseEntity<Void> eliminarID(@PathVariable("id") Integer id) {
         service.deleteById(id);
         return ResponseEntity.noContent().build();
+    }
+
+    //To find by SolicitudEmpresa by MAC
+    @GetMapping("/listarxSolicitudEmpresa")
+    public ResponseEntity<?> listarxSolicitudEmpresa(@RequestBody SolicitudEmpresa entity) {
+        return ResponseEntity.ok().body(service.buscarxSolicitud(entity));
     }
 
 }
