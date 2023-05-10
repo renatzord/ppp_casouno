@@ -7,7 +7,6 @@ import com.api.ppp.fenix.fservices.UsuarioFenixService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.http.HttpStatus;
 
 import java.util.Collections;
 import java.util.Optional;
@@ -23,6 +22,10 @@ public class UsuarioFenixController {
     @Autowired
     private UsuarioService usuService;
 
+    @GetMapping("/listar")
+    public ResponseEntity<?> listar() {
+        return ResponseEntity.ok().body(service.findAll());
+    }
 
     @GetMapping("/buscarusuario/{cedula}")
     public ResponseEntity<?> buscarCedula(@PathVariable("cedula") String cedula) {
