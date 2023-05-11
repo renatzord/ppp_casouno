@@ -1,5 +1,6 @@
 package com.api.ppp.back.controllers;
 
+import com.api.ppp.back.daos.AuthorityRepository;
 import com.api.ppp.back.models.Authority;
 import com.api.ppp.back.models.Estudiante;
 import com.api.ppp.back.models.Usuario;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -31,6 +33,9 @@ public class AuthController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private AuthorityRepository authorityRepository;
+
     @PostMapping("/register")
     public ResponseEntity<?> crear(@RequestBody Estudiante entity) {
         Estudiante estudiante = null;
@@ -40,6 +45,10 @@ public class AuthController {
             entity.getUsuario().setPassword(hashPwd);
             estudiante = estudianteService.save(entity);
             if (estudiante.getId() > 0) {
+                Authority role = new Authority();
+                role.setName("ROLE_ESTUD");
+                role.setUsuario(estudiante.getUsuario());
+                authorityRepository.save(role);
                 response = ResponseEntity
                         .status(HttpStatus.CREATED)
                         .body("Given user details are successfully registered");
@@ -52,7 +61,7 @@ public class AuthController {
         return response;
     }
 
-    @RequestMapping("/login")
+    @RequestMapping("/ingresar")
     public Usuario getUserDetailsAfterLogin(Authentication authentication) {
         List<Usuario> usuarios = usuarioService.findByCorreo(authentication.getName());
         if (usuarios.size() > 0) {

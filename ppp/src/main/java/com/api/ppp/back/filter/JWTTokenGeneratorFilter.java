@@ -1,8 +1,8 @@
 package com.api.ppp.back.filter;
 
 import com.api.ppp.back.constant.SecurityConstants;
-import io.jsonwebtoken.security.Keys;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.security.Keys;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -20,7 +20,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-public class JWTGeneratorFilter extends OncePerRequestFilter {
+public class JWTTokenGeneratorFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
@@ -28,22 +28,20 @@ public class JWTGeneratorFilter extends OncePerRequestFilter {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (null != authentication) {
             SecretKey key = Keys.hmacShaKeyFor(SecurityConstants.JWT_KEY.getBytes(StandardCharsets.UTF_8));
-            String jwt = Jwts.builder().setIssuer("ISTA").setSubject("JWT Token")
+            String jwt = Jwts.builder().setIssuer("Eazy Bank").setSubject("JWT Token")
                     .claim("username", authentication.getName())
-                    .claim("usu_id", authentication.getCredentials())
                     .claim("authorities", populateAuthorities(authentication.getAuthorities()))
                     .setIssuedAt(new Date())
                     .setExpiration(new Date((new Date()).getTime() + 30000000))
                     .signWith(key).compact();
             response.setHeader(SecurityConstants.JWT_HEADER, jwt);
         }
-
         filterChain.doFilter(request, response);
     }
 
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) {
-        return !request.getServletPath().equals("/user");
+        return !request.getServletPath().equals("/ingresar");
     }
 
     private String populateAuthorities(Collection<? extends GrantedAuthority> collection) {

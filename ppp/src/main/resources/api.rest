@@ -1,3 +1,12 @@
+POST http://localhost:8080/login
+Content-Type: application/json
+
+{
+  "username": "andres@gmail.com",
+  "password": "1234"
+}
+
+###
 POST http://localhost:8080/register
 Content-Type: application/json
 
@@ -7,17 +16,17 @@ Content-Type: application/json
   "ciclo": "4",
   "horasCumplidas": 12,
   "prioridad": true,
-  "idEstudiante": 2,
+  "idEstudiante": 1,
   "usuario": {
     "id": 0,
-    "cedula": "1724455211",
+    "cedula": "1724455223",
     "nombre": "Andres",
     "apellido": "Zuin",
     "correo": "andres@gmail.com",
     "titulo": "BGU",
     "telefono": "0928374321",
     "activo": true,
-    "password": "1234"
+    "password": "12345"
   }
 }
 

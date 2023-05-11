@@ -5,7 +5,6 @@ import com.api.ppp.back.models.Authority;
 import com.api.ppp.back.models.Usuario;
 import com.api.ppp.back.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -20,7 +19,7 @@ import java.util.List;
 import java.util.Set;
 
 @Component
-public class EmailPwdAuthenticationProvider implements AuthenticationProvider {
+public class AuthenticationProvider implements org.springframework.security.authentication.AuthenticationProvider {
 
     @Autowired
     private UsuarioService usuarioService;
