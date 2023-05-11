@@ -67,4 +67,11 @@ public class ActividadController {
         return ResponseEntity.ok().body(service.buscarxSolicitud(entity));
     }
 
+    @GetMapping("/listarxSolicitudEmpresa2")
+    public ResponseEntity<?> listarxSolicitudEmpresa2(@RequestParam Integer id) {
+        SolicitudEmpresa entity=new SolicitudEmpresa();
+        entity.setId(id);
+        return ResponseEntity.ok().body(service.buscarxSolicitud(entity));
+    }
+
 }
