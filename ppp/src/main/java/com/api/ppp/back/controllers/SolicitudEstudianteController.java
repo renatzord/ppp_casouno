@@ -69,4 +69,12 @@ public class SolicitudEstudianteController {
         return service.solicitudesxConvocatoria(entity);
     }
 
+    //Endopiont a peticion de brayan
+    @GetMapping("/listarxconvocatoria2")
+    public List<SolicitudEstudiante> listarxConvocatoria(@RequestParam Integer id) {
+        Convocatoria entity = new Convocatoria();
+        entity.setId(id);
+        return service.solicitudesxConvocatoria(entity);
+    }
+
 }

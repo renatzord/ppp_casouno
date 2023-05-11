@@ -17,7 +17,7 @@ public class SolicitudEstudiante implements Serializable {
     private Integer id;
 
     @Column(name = "ses_estado")
-    private Boolean estado;
+    private Integer estado;
 
     @Column(name = "ses_fecha_envio")
     @Temporal(TemporalType.TIMESTAMP)
