@@ -16,9 +16,6 @@ public class TutorEmpresarial {
     @Column(name = "tem_id")
     private Integer id;
 
-    @Column(name = "tem_rol")
-    private Integer rol;
-
     @Column(name = "tem_cargo")
     private String cargo;
 

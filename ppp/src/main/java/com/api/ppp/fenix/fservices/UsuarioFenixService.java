@@ -10,6 +10,10 @@ public interface UsuarioFenixService {
 
     public UsuarioFenix findByCedula(String cedula);
 
+    public UsuarioFenix findByCedulaEstudiante(String cedula);
 
+    public UsuarioFenix findByNombresAndCorreoAndTipo(String nombres, String correo,Integer tipo);
+
+    public UsuarioFenix findByNombresAndCorreoAlumnos(String nombres, String correo);
 
 }

@@ -25,4 +25,24 @@ public class UsuarioFenixImpl implements UsuarioFenixService{
         return (UsuarioFenix) usuarioFenixRepository.findByCedula(cedula).orElse(null);
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public UsuarioFenix findByCedulaEstudiante(String cedula) {
+        return (UsuarioFenix) usuarioFenixRepository.findByCedulaAndTipo(cedula,1).orElse(null);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public UsuarioFenix findByNombresAndCorreoAndTipo(String nombres, String correo, Integer tipo) {
+        return (UsuarioFenix) usuarioFenixRepository.findByNombresAndCorreoAndTipo(nombres,correo,tipo).orElse(null);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public UsuarioFenix findByNombresAndCorreoAlumnos(String nombres, String correo) {
+        return (UsuarioFenix) usuarioFenixRepository.findByNombresAndCorreoAndTipo(nombres,correo,1).orElse(null);
+    }
+
+
+
 }

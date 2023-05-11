@@ -16,4 +16,8 @@ public class MateriaServiceImpl extends BaseServiceImpl<Materia, Integer> implem
         super(baseRepository);
     }
 
+    @Override
+    public Materia findByIdMateria(Integer idMateria) {
+        return repository.findByIdMateria(idMateria).orElse(null);
+    }
 }

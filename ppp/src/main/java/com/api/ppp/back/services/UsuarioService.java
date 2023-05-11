@@ -6,6 +6,10 @@ import java.util.List;
 
 public interface UsuarioService extends BaseService<Usuario, Integer> {
 
+
     List<Usuario> findByCorreo(String correo);
+
+    public Usuario usuarioxcedula(String cedula);
+
 
 }

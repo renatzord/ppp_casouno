@@ -13,6 +13,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/tutorInstituto")
+@CrossOrigin(origins="*")
 public class TutorInstitutoController {
 
     @Autowired
@@ -48,7 +49,6 @@ public class TutorInstitutoController {
             TutorInstituto current = optional.get();
             current.setUsuario(entity.getUsuario());
             current.setIdDocente(entity.getIdDocente());
-            current.setRol(entity.getRol());
             return ResponseEntity.status(HttpStatus.CREATED).body(service.save(current));
         }
         return ResponseEntity.notFound().build();

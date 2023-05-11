@@ -12,6 +12,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/tarea")
+@CrossOrigin(origins="*")
 public class TareaController {
 
     @Autowired

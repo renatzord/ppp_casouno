@@ -7,13 +7,13 @@ import java.io.Serializable;
 
 @Data
 @Entity
-@Table(name = "usuarios_ppp")
+@Table(name = "usuario_ppp")
 public class UsuarioFenix implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idalumno")
-    private Integer alumnoId;
+    @Column(name = "id")
+    private Integer alumno_docenteId;
 
     @Column(name = "identificacion")
     private String cedula;
@@ -41,4 +41,7 @@ public class UsuarioFenix implements Serializable {
 
     @Column(name = "periodo")
     private String periodo;
+
+    @Column(name = "tipo")
+    private Integer tipo;
 }

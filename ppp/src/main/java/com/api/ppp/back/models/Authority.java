@@ -1,10 +1,8 @@
 package com.api.ppp.back.models;
 
+
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Setter;
-import org.hibernate.annotations.GenericGenerator;
 
 import java.io.Serializable;
 
@@ -22,6 +20,5 @@ public class Authority implements Serializable {
     @ManyToOne
     @JoinColumn(name = "usu_id")
     private Usuario usuario;
-
 
 }
