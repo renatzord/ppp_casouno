@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UsuarioServiceImpl extends BaseServiceImpl<Usuario, Integer> implements UsuarioService {
@@ -19,7 +20,7 @@ public class UsuarioServiceImpl extends BaseServiceImpl<Usuario, Integer> implem
     }
 
     @Override
-    public List<Usuario> findByCorreo(String correo) {
+    public Optional<Usuario> findByCorreo(String correo) {
         return repository.findByCorreo(correo);
     }
 

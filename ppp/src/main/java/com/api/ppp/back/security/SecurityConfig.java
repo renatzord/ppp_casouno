@@ -27,30 +27,51 @@ public class SecurityConfig {
         CsrfTokenRequestAttributeHandler requestHandler = new CsrfTokenRequestAttributeHandler();
         requestHandler.setCsrfRequestAttributeName("_csrf");
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
-            .cors().configurationSource(new CorsConfigurationSource() {
-            @Override
-            public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
-                CorsConfiguration config = new CorsConfiguration();
-                config.setAllowedOrigins(Collections.singletonList("http://localhost:4200"));
-                config.setAllowedMethods(Collections.singletonList("*"));
-                config.setAllowCredentials(true);
-                config.setAllowedHeaders(Collections.singletonList("*"));
-                config.setExposedHeaders(Arrays.asList("Authorization"));
-                config.setMaxAge(3600L);
-                return config;
-            }
+                .cors().configurationSource(new CorsConfigurationSource() {
+                    @Override
+                    public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
+                        CorsConfiguration config = new CorsConfiguration();
+                        config.setAllowedOrigins(Collections.singletonList("http://localhost:4200"));
+                        config.setAllowedMethods(Collections.singletonList("*"));
+                        config.setAllowCredentials(true);
+                        config.setAllowedHeaders(Collections.singletonList("*"));
+                        config.setExposedHeaders(Arrays.asList("Authorization"));
+                        config.setMaxAge(3600L);
+                        return config;
+                    }
                 }).and().csrf((csrf) -> csrf.csrfTokenRequestHandler(requestHandler).ignoringRequestMatchers("/register")
                         .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
                 .addFilterAfter(new CsrfCookieFilter(), BasicAuthenticationFilter.class)
                 .addFilterBefore(new RequestValidationBeforeFilter(), BasicAuthenticationFilter.class)
-                //.addFilterAt(new AuthoritiesLoggingAtFilter(),BasicAuthenticationFilter.class)
-                //.addFilterAfter(new AuthoritiesLoggingAfterFilter(), BasicAuthenticationFilter.class)
                 .addFilterAfter(new JWTTokenGeneratorFilter(), BasicAuthenticationFilter.class)
                 .addFilterBefore(new JWTTokenValidatorFilter(), BasicAuthenticationFilter.class)
                 .authorizeHttpRequests()
-                        .requestMatchers("/estudiante/**").hasRole("ESTUD")
-                        .requestMatchers("/ingresar").authenticated()
-                        .requestMatchers("/register").permitAll()
+                    .requestMatchers("/accion/**").hasAnyRole("")
+                    .requestMatchers("/accionConvoca/**").hasAnyRole("")
+                    .requestMatchers("/anexos/**").hasAnyRole("ESTUD")
+                    .requestMatchers("/aspecto/**").hasAnyRole("ESTUD")
+                    .requestMatchers("/aspectoPractica/**").hasAnyRole("ESTUD")
+                    .requestMatchers("/calificacion/**").hasAnyRole("ESTUD")
+                    .requestMatchers("/carrera/**").hasAnyRole("ESTUD")
+                    .requestMatchers("/convenio/**").hasAnyRole("ESTUD")
+                    .requestMatchers("/convocatoria/**").hasAnyRole("ESTUD")
+                    .requestMatchers("/empresa/**").hasAnyRole("ESTUD")
+                    .requestMatchers("/estudiante/**").hasAnyRole("ESTUD")
+                    .requestMatchers("/materia/**").hasAnyRole("ESTUD")
+                    .requestMatchers("/objetivoMateria/**").hasAnyRole("ESTUD")
+                    .requestMatchers("/resultado/**").hasAnyRole("ESTUD")
+                    .requestMatchers("/resultadoMateria/**").hasAnyRole("ESTUD")
+                    .requestMatchers("/semanaActividad/**").hasAnyRole("ESTUD")
+                    .requestMatchers("/solicitudEmpresa/**").hasAnyRole("ESTUD")
+                    .requestMatchers("/solicitudEstudiante/**").hasAnyRole("ESTUD")
+                    .requestMatchers("/sucursal/**").hasAnyRole("ESTUD")
+                    .requestMatchers("/tutorEmpresa/**").hasAnyRole("TEMP")
+                    .requestMatchers("/tutorInstituto/**").hasAnyRole("TIST")
+                    .requestMatchers("/usuario/**").hasAnyRole("ESTUD", "TEMP", "TIST")
+                    .requestMatchers("/visitaActividad/**").hasAnyRole("ESTUD")
+                    .requestMatchers("/visita/**").hasAnyRole("ESTUD")
+                    .requestMatchers("/ingresar").authenticated()
+                    .requestMatchers("/register").permitAll()
                 .and().formLogin()
                 .and().httpBasic();
         return http.build();

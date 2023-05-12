@@ -10,8 +10,10 @@ import java.util.Optional;
 @Repository
 public interface UsuarioRepository extends BaseRepository<Usuario, Integer> {
 
-    List<Usuario> findByCorreo(String correo);
+    //List<Usuario> findByCorreo(String correo);
 
     Optional<Usuario> findByCedula(String cedula);
+
+    Optional<Usuario> findByCorreo(String correo);
 
 }

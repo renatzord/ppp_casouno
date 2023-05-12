@@ -16,10 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @RestController
 public class AuthController {
@@ -63,12 +60,8 @@ public class AuthController {
 
     @RequestMapping("/ingresar")
     public Usuario getUserDetailsAfterLogin(Authentication authentication) {
-        List<Usuario> usuarios = usuarioService.findByCorreo(authentication.getName());
-        if (usuarios.size() > 0) {
-            return usuarios.get(0);
-        } else {
-            return null;
-        }
+        Optional<Usuario> usuario = usuarioService.findByCorreo(authentication.getName());
+        return usuario.orElse(null);
     }
 
 }

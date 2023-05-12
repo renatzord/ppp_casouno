@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @Component
@@ -34,10 +35,11 @@ public class AuthenticationProvider implements org.springframework.security.auth
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String username = authentication.getName();
         String pwd = authentication.getCredentials().toString();
-        List<Usuario> usuarios = usuarioService.findByCorreo(username);
-        Set<Authority> authorities = authorityRepository.findByUsuario(usuarios.get(0));
-        if (usuarios.size() > 0) {
-            if (passwordEncoder.matches(pwd, usuarios.get(0).getPassword())) {
+        //List<Usuario> usuarios = usuarioService.findByCorreo(username);
+        Optional<Usuario> usuario = usuarioService.findByCorreo(username);
+        if (usuario.isPresent()) {
+            Set<Authority> authorities = authorityRepository.findByUsuario(usuario.get());
+            if (passwordEncoder.matches(pwd, usuario.get().getPassword())) {
                 return new UsernamePasswordAuthenticationToken(username, pwd, getGrantedAuthorities(authorities));
             } else {
                 throw new BadCredentialsException("Invalid password!");
