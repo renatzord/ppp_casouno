@@ -16,17 +16,17 @@ Content-Type: application/json
   "ciclo": "4",
   "horasCumplidas": 12,
   "prioridad": true,
-  "idEstudiante": 1,
+  "idEstudiante": 2,
   "usuario": {
     "id": 0,
-    "cedula": "1724455223",
+    "cedula": "1724455222",
     "nombre": "Andres",
     "apellido": "Zuin",
-    "correo": "andres@gmail.com",
+    "correo": "andre@gmail.com",
     "titulo": "BGU",
     "telefono": "0928374321",
     "activo": true,
-    "password": "12345"
+    "password": "D&stopi@7"
   }
 }
 

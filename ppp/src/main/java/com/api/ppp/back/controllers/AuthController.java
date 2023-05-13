@@ -3,6 +3,7 @@ package com.api.ppp.back.controllers;
 import com.api.ppp.back.daos.AuthorityRepository;
 import com.api.ppp.back.models.Authority;
 import com.api.ppp.back.models.Estudiante;
+import com.api.ppp.back.models.TutorInstituto;
 import com.api.ppp.back.models.Usuario;
 import com.api.ppp.back.services.EstudianteService;
 import com.api.ppp.back.services.UsuarioService;
@@ -17,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.*;
+
+import static com.api.ppp.back.constant.Validate.isPasswordSecure;
 
 @RestController
 public class AuthController {
@@ -35,27 +38,26 @@ public class AuthController {
 
     @PostMapping("/register")
     public ResponseEntity<?> crear(@RequestBody Estudiante entity) {
-        Estudiante estudiante = null;
-        ResponseEntity response = null;
         try {
+            if (!isPasswordSecure(entity.getUsuario().getPassword())) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST) .body("Password must be secure");
+            }
             String hashPwd = passwordEncoder.encode(entity.getUsuario().getPassword());
             entity.getUsuario().setPassword(hashPwd);
-            estudiante = estudianteService.save(entity);
+            Estudiante estudiante = estudianteService.save(entity);
             if (estudiante.getId() > 0) {
                 Authority role = new Authority();
-                role.setName("ROLE_ESTUD");
+                role.setName("ROLE_TEMP");
                 role.setUsuario(estudiante.getUsuario());
                 authorityRepository.save(role);
-                response = ResponseEntity
-                        .status(HttpStatus.CREATED)
+                return ResponseEntity .status(HttpStatus.CREATED)
                         .body("Given user details are successfully registered");
+            } else {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("An error occurred while saving the user");
             }
-        } catch (Exception ex) {
-            response = ResponseEntity
-                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("An exception occured due to " + ex.getMessage());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An exception occured due to " + e.getMessage());
         }
-        return response;
     }
 
     @RequestMapping("/ingresar")

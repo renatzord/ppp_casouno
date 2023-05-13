@@ -6,9 +6,12 @@ import com.api.ppp.back.services.EstudianteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
+
+import static com.api.ppp.back.constant.Validate.isPasswordSecure;
 
 @RestController
 @RequestMapping("/estudiante")
@@ -17,6 +20,9 @@ public class EstudianteController {
 
     @Autowired
     private EstudianteService service;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     // To list all records
     @GetMapping("/listar")
@@ -43,8 +49,13 @@ public class EstudianteController {
     // To find one record and update it, specifically by a unique identifier (PK or ID)
     @PostMapping("/editar/{id}")
     public ResponseEntity<?> editar(@PathVariable("id") Integer id, @RequestBody Estudiante entity) {
+        if (!isPasswordSecure(entity.getUsuario().getPassword())) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST) .body("Password must be secure");
+        }
         Optional<Estudiante> optional = service.findById(id);
         if(optional.isPresent()) {
+            String hashPwd = passwordEncoder.encode(entity.getUsuario().getPassword());
+            entity.getUsuario().setPassword(hashPwd);
             Estudiante current = optional.get();
             current.setUsuario(entity.getUsuario());
             current.setIdEstudiante(entity.getIdEstudiante());
@@ -64,4 +75,5 @@ public class EstudianteController {
         service.deleteById(id);
         return ResponseEntity.noContent().build();
     }
+
 }
