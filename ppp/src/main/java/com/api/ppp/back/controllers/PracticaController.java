@@ -2,6 +2,7 @@ package com.api.ppp.back.controllers;
 
 import com.api.ppp.back.models.Accion;
 import com.api.ppp.back.models.Practica;
+import com.api.ppp.back.models.Usuario;
 import com.api.ppp.back.services.PracticaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -66,6 +67,12 @@ public class PracticaController {
     public ResponseEntity<Void> eliminarID(@PathVariable("id") Integer id) {
         service.deleteById(id);
         return ResponseEntity.noContent().build();
+    }
+
+    // List of all assigned internships according the Tutor_Instituto linked an User
+    @GetMapping("/listar/usuario")
+    public ResponseEntity<?> listarByUsuario(@RequestBody Usuario usuario) {
+        return ResponseEntity.ok().body(service.findByTutorInstituto_Usuario(usuario));
     }
 
 }
