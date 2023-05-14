@@ -59,7 +59,7 @@ public class TutorInstitutoController {
             TutorInstituto tutor = service.save(entity);
             if (tutor.getId() > 0) {
                 Authority role = new Authority();
-                role.setName("ROLE_TEMP");
+                role.setName("ROLE_TISTA");
                 role.setUsuario(tutor.getUsuario());
                 authorityRepository.save(role);
                 return ResponseEntity .status(HttpStatus.CREATED)

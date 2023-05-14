@@ -47,7 +47,7 @@ public class AuthController {
             Estudiante estudiante = estudianteService.save(entity);
             if (estudiante.getId() > 0) {
                 Authority role = new Authority();
-                role.setName("ROLE_TEMP");
+                role.setName("ROLE_ESTUD");
                 role.setUsuario(estudiante.getUsuario());
                 authorityRepository.save(role);
                 return ResponseEntity .status(HttpStatus.CREATED)
