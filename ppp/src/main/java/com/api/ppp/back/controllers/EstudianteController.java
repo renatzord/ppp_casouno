@@ -2,12 +2,18 @@ package com.api.ppp.back.controllers;
 
 import com.api.ppp.back.models.Accion;
 import com.api.ppp.back.models.Estudiante;
+import com.api.ppp.back.models.Practica;
+import com.api.ppp.back.models.TutorInstituto;
 import com.api.ppp.back.services.EstudianteService;
+import com.api.ppp.back.services.PracticaService;
+import com.api.ppp.back.services.TutorInstitutoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -17,6 +23,12 @@ public class EstudianteController {
 
     @Autowired
     private EstudianteService service;
+
+    @Autowired
+    private PracticaService practicaService;
+
+    @Autowired
+    private TutorInstitutoService tutorInstitutoService;
 
     // To list all records
     @GetMapping("/listar")
@@ -64,4 +76,16 @@ public class EstudianteController {
         service.deleteById(id);
         return ResponseEntity.noContent().build();
     }
+
+
+    @GetMapping("/listarxtutoracademico/{id}")
+    public ResponseEntity<?> listar(@PathVariable("id") Integer id) {
+        List<Estudiante> estudiantes = new ArrayList<>();
+        TutorInstituto docente=tutorInstitutoService.findById(id).orElse(null);
+        for (Practica pra: practicaService.practicaxDocente(docente)) {
+            estudiantes.add(pra.getEstudiante());
+        }
+        return ResponseEntity.ok().body(estudiantes);
+    }
+
 }

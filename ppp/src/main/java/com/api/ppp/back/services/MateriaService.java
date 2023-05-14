@@ -4,6 +4,6 @@ import com.api.ppp.back.models.Materia;
 
 public interface MateriaService extends BaseService<Materia, Integer> {
 
-    public Materia findByIdMateria(Integer idMateria);
+    public boolean findByIdMateria(Integer idMateria);
 
 }
