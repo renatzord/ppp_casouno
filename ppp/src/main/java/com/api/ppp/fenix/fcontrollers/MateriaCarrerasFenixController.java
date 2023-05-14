@@ -64,7 +64,7 @@ public class MateriaCarrerasFenixController {
             return "Algo Malio Sal";
         }else{
             for (MateriaCarrera fenix: listacarrera) {
-                boolean ban=carreraService.findByIdCarrera(fenix.getCarreraId());
+                boolean ban=carreraService.findByIdCarrera(fenix.getCarreraMateriaId());
                 if(ban){
                     Carrera nueva = new Carrera();
                     nueva.setIdCarrera(fenix.getCarreraMateriaId());

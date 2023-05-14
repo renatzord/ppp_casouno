@@ -18,6 +18,6 @@ public class CarreraServiceImpl extends BaseServiceImpl<Carrera, Integer> implem
 
     @Override
     public boolean findByIdCarrera(Integer idCarrera) {
-        return (repository.findByIdCarrera(idCarrera).orElse(null)!=null);
+        return (repository.findByIdCarrera(idCarrera).orElse(null)==null);
     }
 }

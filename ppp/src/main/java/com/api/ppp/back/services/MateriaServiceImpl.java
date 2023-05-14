@@ -18,6 +18,6 @@ public class MateriaServiceImpl extends BaseServiceImpl<Materia, Integer> implem
 
     @Override
     public boolean findByIdMateria(Integer idMateria) {
-        return (repository.findByIdMateria(idMateria).orElse(null)!=null);
+        return (repository.findByIdMateria(idMateria).orElse(null)==null);
     }
 }
