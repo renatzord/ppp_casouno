@@ -39,7 +39,7 @@ public class SecurityConfig {
                         config.setMaxAge(3600L);
                         return config;
                     }
-                }).and().csrf((csrf) -> csrf.csrfTokenRequestHandler(requestHandler).ignoringRequestMatchers("/register", "/usuariofenix/**", "/listarcarreras/**")
+                }).and().csrf((csrf) -> csrf.csrfTokenRequestHandler(requestHandler).ignoringRequestMatchers("/register", "/usuariofenix/**", "/fenix/**", "/carrera/listar")
                         .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
                 .addFilterAfter(new CsrfCookieFilter(), BasicAuthenticationFilter.class)
                 .addFilterBefore(new RequestValidationBeforeFilter(), BasicAuthenticationFilter.class)
@@ -72,7 +72,7 @@ public class SecurityConfig {
                     .requestMatchers("/visita/**").hasAnyRole("ESTUD", "TEMP", "TISTA")
                     .requestMatchers("/ingresar").authenticated()
                     // Letting Access of fenix to ALL by the moment
-                    .requestMatchers("/register", "/usuariofenix/**", "/listarcarreras/**").permitAll()
+                    .requestMatchers("/register", "/usuariofenix/**", "/fenix/**", "/carrera/listar").permitAll()
                 .and().formLogin()
                 .and().httpBasic();
         return http.build();
