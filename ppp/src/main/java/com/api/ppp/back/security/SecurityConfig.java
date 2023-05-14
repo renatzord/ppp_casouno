@@ -36,7 +36,7 @@ public class SecurityConfig {
                         config.setAllowCredentials(true);
                         config.setAllowedHeaders(Collections.singletonList("*"));
                         config.setExposedHeaders(Arrays.asList("Authorization"));
-                        config.setMaxAge(3600L);
+                        config.setMaxAge(360000L);
                         return config;
                     }
                 }).and().csrf((csrf) -> csrf.csrfTokenRequestHandler(requestHandler).ignoringRequestMatchers("/register", "/usuariofenix/**", "/fenix/**", "/carrera/**")
@@ -58,6 +58,7 @@ public class SecurityConfig {
                     .requestMatchers("/estudiante/**").hasAnyRole("ESTUD", "TEMP", "TISTA")
                     .requestMatchers("/materia/**").hasAnyRole("ESTUD", "TEMP", "TISTA")
                     .requestMatchers("/objetivoMateria/**").hasAnyRole("ESTUD", "TEMP", "TISTA")
+                    .requestMatchers("/practica/**").hasAnyRole("ESTUD", "TEMP", "TISTA")
                     .requestMatchers("/resultado/**").hasAnyRole("ESTUD", "TEMP", "TISTA")
                     .requestMatchers("/resultadoMateria/**").hasAnyRole("ESTUD", "TEMP", "TISTA")
                     .requestMatchers("/semanaActividad/**").hasAnyRole("ESTUD", "TEMP", "TISTA")

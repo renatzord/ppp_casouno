@@ -1,6 +1,5 @@
 package com.api.ppp.back.controllers;
 
-import com.api.ppp.back.models.Accion;
 import com.api.ppp.back.models.Practica;
 import com.api.ppp.back.models.Usuario;
 import com.api.ppp.back.services.PracticaService;
@@ -70,9 +69,9 @@ public class PracticaController {
     }
 
     // List of all assigned internships according the Tutor_Instituto linked an User
-    @GetMapping("/listar/usuario")
-    public ResponseEntity<?> listarByUsuario(@RequestBody Usuario usuario) {
-        return ResponseEntity.ok().body(service.findByTutorInstituto_Usuario(usuario));
+    @GetMapping("/listar/usuario/{id}")
+    public ResponseEntity<?> listarByUsuario(@PathVariable Integer id) {
+        return ResponseEntity.ok().body(service.findByTutorInstitutoUsuarioId(id));
     }
 
 }
