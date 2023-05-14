@@ -39,7 +39,7 @@ public class SecurityConfig {
                         config.setMaxAge(3600L);
                         return config;
                     }
-                }).and().csrf((csrf) -> csrf.csrfTokenRequestHandler(requestHandler).ignoringRequestMatchers("/register", "/usuariofenix/**", "/fenix/**", "/carrera/listar")
+                }).and().csrf((csrf) -> csrf.csrfTokenRequestHandler(requestHandler).ignoringRequestMatchers("/register", "/usuariofenix/**", "/fenix/**", "/carrera/**")
                         .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
                 .addFilterAfter(new CsrfCookieFilter(), BasicAuthenticationFilter.class)
                 .addFilterBefore(new RequestValidationBeforeFilter(), BasicAuthenticationFilter.class)
@@ -52,7 +52,6 @@ public class SecurityConfig {
                     .requestMatchers("/aspecto/**").hasAnyRole("ESTUD", "TEMP", "TISTA")
                     .requestMatchers("/aspectoPractica/**").hasAnyRole("ESTUD", "TEMP", "TISTA")
                     .requestMatchers("/calificacion/**").hasAnyRole("ESTUD", "TEMP", "TISTA")
-                    .requestMatchers("/carrera/**").hasAnyRole("ESTUD", "TEMP", "TISTA")
                     .requestMatchers("/convenio/**").hasAnyRole("ESTUD", "TEMP", "TISTA")
                     .requestMatchers("/convocatoria/**").hasAnyRole("ESTUD", "TEMP", "TISTA")
                     .requestMatchers("/empresa/**").hasAnyRole("ESTUD", "TEMP", "TISTA")
@@ -72,7 +71,7 @@ public class SecurityConfig {
                     .requestMatchers("/visita/**").hasAnyRole("ESTUD", "TEMP", "TISTA")
                     .requestMatchers("/ingresar").authenticated()
                     // Letting Access of fenix to ALL by the moment
-                    .requestMatchers("/register", "/usuariofenix/**", "/fenix/**", "/carrera/listar").permitAll()
+                    .requestMatchers("/register", "/usuariofenix/**", "/fenix/**", "/carrera/**").permitAll()
                 .and().formLogin()
                 .and().httpBasic();
         return http.build();
