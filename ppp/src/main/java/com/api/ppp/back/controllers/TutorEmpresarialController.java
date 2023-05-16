@@ -46,7 +46,7 @@ public class TutorEmpresarialController {
 
     // To create a record
     @PostMapping("/crear")
-    public ResponseEntity<?> create(@RequestBody TutorEmpresarial entity) {
+    public ResponseEntity<?> create(@RequestBody TutorEmpresarial entity, @RequestParam String rol) {
         try {
             if (!isPasswordSecure(entity.getUsuario().getPassword())) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST) .body("Password must be secure");
@@ -56,7 +56,7 @@ public class TutorEmpresarialController {
             TutorEmpresarial tutor = service.save(entity);
             if (tutor.getId() > 0) {
                 Authority role = new Authority();
-                role.setName("ROLE_TEMP");
+                role.setName(rol);
                 role.setUsuario(tutor.getUsuario());
                 authorityRepository.save(role);
                 return ResponseEntity.status(HttpStatus.CREATED)

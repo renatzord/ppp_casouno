@@ -49,7 +49,7 @@ public class TutorInstitutoController {
 
     // To create a record
     @PostMapping("/crear")
-    public ResponseEntity<?> crear(@RequestBody TutorInstituto entity) {
+    public ResponseEntity<?> crear(@RequestBody TutorInstituto entity, @RequestParam String rol) {
         try {
             if (!isPasswordSecure(entity.getUsuario().getPassword())) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST) .body("Password must be secure");
@@ -57,9 +57,9 @@ public class TutorInstitutoController {
             String hashPwd = passwordEncoder.encode(entity.getUsuario().getPassword());
             entity.getUsuario().setPassword(hashPwd);
             TutorInstituto tutor = service.save(entity);
-            if (tutor.getId() > 0) {
+            if (tutor.getUsuario().getId() > 0) {
                 Authority role = new Authority();
-                role.setName("ROLE_TISTA");
+                role.setName(rol);
                 role.setUsuario(tutor.getUsuario());
                 authorityRepository.save(role);
                 return ResponseEntity .status(HttpStatus.CREATED)

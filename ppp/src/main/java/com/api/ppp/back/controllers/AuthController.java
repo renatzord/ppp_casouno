@@ -45,7 +45,7 @@ public class AuthController {
             String hashPwd = passwordEncoder.encode(entity.getUsuario().getPassword());
             entity.getUsuario().setPassword(hashPwd);
             Estudiante estudiante = estudianteService.save(entity);
-            if (estudiante.getId() > 0) {
+            if (estudiante.getUsuario().getId() > 0) {
                 Authority role = new Authority();
                 role.setName("ROLE_ESTUD");
                 role.setUsuario(estudiante.getUsuario());
