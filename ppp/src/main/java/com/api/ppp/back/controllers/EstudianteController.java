@@ -1,12 +1,10 @@
 package com.api.ppp.back.controllers;
 
-import com.api.ppp.back.models.Accion;
-import com.api.ppp.back.models.Estudiante;
-import com.api.ppp.back.models.Practica;
-import com.api.ppp.back.models.TutorInstituto;
+import com.api.ppp.back.models.*;
 import com.api.ppp.back.services.EstudianteService;
 import com.api.ppp.back.services.PracticaService;
 import com.api.ppp.back.services.TutorInstitutoService;
+import com.api.ppp.back.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,6 +27,9 @@ public class EstudianteController {
 
     @Autowired
     private TutorInstitutoService tutorInstitutoService;
+
+    @Autowired
+    private UsuarioService usuarioService;
 
     // To list all records
     @GetMapping("/listar")
@@ -86,6 +87,15 @@ public class EstudianteController {
             estudiantes.add(pra.getEstudiante());
         }
         return ResponseEntity.ok().body(estudiantes);
+    }
+
+    @GetMapping("/buscarxusuario/{id}")
+    public ResponseEntity<?> buscarxUsuario(@PathVariable("id") Integer id) {
+        Optional<Estudiante> current = Optional.ofNullable(service.estudiantexUsuario(usuarioService.findById(id).orElse(null)));
+        if(current.isPresent()) {
+            return ResponseEntity.ok().body(current.get());
+        }
+        return ResponseEntity.notFound().build();
     }
 
 }

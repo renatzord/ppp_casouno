@@ -48,7 +48,6 @@ public class TareaController {
             Tarea current = optional.get();
             current.setDescripcion(entity.getDescripcion());
             current.setMateria(entity.getMateria());
-            current.setResultado(entity.getResultado());
             return ResponseEntity.status(HttpStatus.CREATED).body(service.save(current));
         }
         return ResponseEntity.notFound().build();
