@@ -37,6 +37,9 @@ public class Calificacion implements Serializable {
     @Column(name = "cal_total")
     private Integer total;
 
+    @Column(name = "cal_url")
+    private String url;
+
     // Foreign Key - Relationships
 
     @ManyToOne

@@ -38,6 +38,9 @@ public class Practica implements Serializable {
     @Column(name = "pra_departamento")
     private String departamento;
 
+    @Column(name = "pra_estado")
+    private Integer estado;
+
     // Foreign Key - Relationships
 
     @ManyToOne
@@ -81,5 +84,9 @@ public class Practica implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "practica", fetch = FetchType.LAZY)
     @JsonIgnore
     private List<AspectoPractica> aspectos;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "practica", fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<Tarea> tareas;
 
 }

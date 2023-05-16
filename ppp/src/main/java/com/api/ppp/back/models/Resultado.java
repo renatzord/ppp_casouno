@@ -26,10 +26,8 @@ public class Resultado implements Serializable {
     @JoinColumn(name = "rem_id",referencedColumnName = "rem_id")
     private ResultadoMateria resultadoMateria;
 
-    // Bidirectional Relationships
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "resultado",fetch = FetchType.LAZY)
-    @JsonIgnore
-    private List<Tarea> tareas;
+    @ManyToOne
+    @JoinColumn(name = "act_id",referencedColumnName = "act_id")
+    private Actividad actividad;
 
 }

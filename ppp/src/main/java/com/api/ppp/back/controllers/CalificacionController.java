@@ -54,6 +54,7 @@ public class CalificacionController {
             current.setE(entity.getE());
             current.setTutor(entity.getTutor());
             current.setTotal(entity.getTotal());
+            current.setUrl(entity.getUrl());
             return ResponseEntity.status(HttpStatus.CREATED).body(service.save(current));
         }
         return ResponseEntity.notFound().build();

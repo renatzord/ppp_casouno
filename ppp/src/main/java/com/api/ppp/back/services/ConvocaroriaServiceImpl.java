@@ -5,6 +5,10 @@ import com.api.ppp.back.daos.ConvocatoriaRepository;
 import com.api.ppp.back.models.Convocatoria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Date;
+import java.util.List;
 
 @Service
 public class ConvocaroriaServiceImpl extends BaseServiceImpl<Convocatoria, Integer> implements ConvocaroriaService {
@@ -14,6 +18,13 @@ public class ConvocaroriaServiceImpl extends BaseServiceImpl<Convocatoria, Integ
 
     public ConvocaroriaServiceImpl(BaseRepository<Convocatoria, Integer> baseRepository) {
         super(baseRepository);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public List<Convocatoria> convocatoriaActivas(Date fecha)
+    {
+        return (List<Convocatoria>) repository.findByFechaInicioGreaterThanEqualAndFechaFinLessThanEqual(fecha,fecha).orElse(null);
     }
 
 }

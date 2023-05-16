@@ -52,6 +52,7 @@ public class SolicitudEmpresaController {
             current.setFechaInicioTen(entity.getFechaInicioTen());
             current.setFechaMaxTen(entity.getFechaMaxTen());
             current.setEstado(entity.getEstado());
+            current.setUrl(entity.getUrl());
             return ResponseEntity.status(HttpStatus.CREATED).body(service.save(current));
         }
         return ResponseEntity.notFound().build();

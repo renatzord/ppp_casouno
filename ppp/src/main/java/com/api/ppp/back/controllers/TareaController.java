@@ -46,7 +46,6 @@ public class TareaController {
         Optional<Tarea> optional = service.findById(id);
         if(optional.isPresent()) {
             Tarea current = optional.get();
-            current.setActividad(entity.getActividad());
             current.setDescripcion(entity.getDescripcion());
             current.setMateria(entity.getMateria());
             current.setResultado(entity.getResultado());

@@ -3,8 +3,6 @@ package com.api.ppp.back.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 import java.io.Serializable;
 import java.util.List;
@@ -24,16 +22,16 @@ public class Tarea implements Serializable {
     // Foreign Key - Relationships
 
     @ManyToOne
-    @JoinColumn(name = "act_id",referencedColumnName = "act_id")
-    private Actividad actividad;
-
-    @ManyToOne
     @JoinColumn(name = "mat_id",referencedColumnName = "mat_id")
     private Materia materia;
 
     @ManyToOne
-    @JoinColumn(name = "rel_id", referencedColumnName = "rel_id")
-    private Resultado resultado;
+    @JoinColumn(name = "act_id", referencedColumnName = "act_id")
+    private Actividad actividad;
+
+    @ManyToOne
+    @JoinColumn(name = "pra_id", referencedColumnName = "pra_id")
+    private Practica practica;
 
     // Bidirectional Relationships
 

@@ -28,6 +28,9 @@ public class Convenio implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date fechaFin;
 
+    @Column(name = "con_url")
+    private String url;
+
     // Foreign Key - Relationships
 
     @ManyToOne

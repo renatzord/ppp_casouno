@@ -1,10 +1,12 @@
 package com.api.ppp.back.models;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.List;
 
 @Data
 @Entity
@@ -28,5 +30,15 @@ public class Actividad implements Serializable {
     @ManyToOne
     @JoinColumn(name = "mat_id", referencedColumnName = "mat_id")
     private Materia materia;
+
+    // Bidirectional Relationships
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "actividad", fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<Tarea> tareas;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "actividad", fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<Resultado> resultados;
 
 }

@@ -26,6 +26,9 @@ public class Visita implements Serializable {
     @Column(name = "vit_observacion")
     private String observacion;
 
+    @Column(name = "vit_url")
+    private String url;
+
     // Foreign Key - Relationships
 
     @ManyToOne

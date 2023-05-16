@@ -23,6 +23,9 @@ public class SolicitudEstudiante implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaEnvio;
 
+    @Column(name = "ses_url")
+    private String url;
+
     // Foreign Key - Relationships
 
     @ManyToOne
