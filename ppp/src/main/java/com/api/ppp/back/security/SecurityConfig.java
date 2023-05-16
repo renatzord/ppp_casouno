@@ -58,6 +58,7 @@ public class SecurityConfig {
                     .requestMatchers("/empresa/**").hasAnyRole("ESTUD", "TEMP", "TISTA","GEREN","RESPP","DIREC","CORDI","RECT")
                     .requestMatchers("/estudiante/**").hasAnyRole("ESTUD", "TEMP", "TISTA","GEREN","RESPP","DIREC","CORDI","RECT")
                     .requestMatchers("/materia/**").hasAnyRole("ESTUD", "TEMP", "TISTA","GEREN","RESPP","DIREC","CORDI","RECT")
+                    .requestMatchers("/practica/**").hasAnyRole("ESTUD", "TEMP", "TISTA","GEREN","RESPP","DIREC","CORDI","RECT")
                     .requestMatchers("/objetivoMateria/**").hasAnyRole("ESTUD", "TEMP", "TISTA","GEREN","RESPP","DIREC","CORDI","RECT")
                     .requestMatchers("/resultado/**").hasAnyRole("ESTUD", "TEMP", "TISTA","GEREN","RESPP","DIREC","CORDI","RECT")
                     .requestMatchers("/resultadoMateria/**").hasAnyRole("ESTUD", "TEMP", "TISTA","GEREN","RESPP","DIREC","CORDI","RECT")
