@@ -16,4 +16,6 @@ public interface UsuarioFenixService {
 
     public UsuarioFenix findByNombresAndCorreoAlumnos(String nombres, String correo);
 
+    public List<UsuarioFenix> findByDocentes();
+
 }

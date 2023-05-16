@@ -15,4 +15,6 @@ public interface UsuarioFenixRepository extends CrudRepository<UsuarioFenix,Inte
 
     Optional<UsuarioFenix> findByNombresAndCorreoAndTipo(String nombres,String correo,Integer tipo);
 
+    Optional<UsuarioFenix> findByTipo(Integer tipo);
+
 }
