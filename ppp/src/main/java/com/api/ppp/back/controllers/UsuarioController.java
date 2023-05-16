@@ -1,10 +1,12 @@
 package com.api.ppp.back.controllers;
 
+import com.api.ppp.back.daos.AuthorityRepository;
 import com.api.ppp.back.models.Usuario;
 import com.api.ppp.back.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -16,6 +18,9 @@ public class UsuarioController {
 
     @Autowired
     private UsuarioService service;
+
+    @Autowired
+    private AuthorityRepository authorityRepository;
 
     // To list all records
     @GetMapping("/listar")
@@ -37,6 +42,12 @@ public class UsuarioController {
     @PostMapping("/crear")
     public ResponseEntity<?> crear(@RequestBody Usuario entity) {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.save(entity));
+    }
+
+    // To list users by thier role
+    @GetMapping("/listar/rol")
+    public ResponseEntity<?> listarRol(String rol) {
+        return ResponseEntity.ok().body(authorityRepository.findByName(rol));
     }
 
 }
