@@ -53,6 +53,7 @@ public class ConvenioController {
             current.setFechaFin(entity.getFechaFin());
             current.setFechaInicio(entity.getFechaInicio());
             current.setSolicitudEmpresas(entity.getSolicitudEmpresas());
+            current.setUrl(entity.getUrl());
             return ResponseEntity.status(HttpStatus.CREATED).body(service.save(current));
         }
         return ResponseEntity.notFound().build();

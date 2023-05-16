@@ -74,4 +74,11 @@ public class UsuarioFenixController {
         return ResponseEntity.notFound().build();
     }
 
+    @GetMapping("/listardocentes")
+    public ResponseEntity<?> listarDocentes() {
+
+        return ResponseEntity.ok().body(service.findByDocentes());
+    }
+
+
 }

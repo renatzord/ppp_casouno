@@ -53,6 +53,7 @@ public class MateriaCarrerasFenixController {
         return ResponseEntity.notFound().build();
     }
 
+
     @GetMapping("/llenardatos")
     public String llenarDatos(){
 
@@ -62,12 +63,8 @@ public class MateriaCarrerasFenixController {
         if(listacarrera.size()==0 || listamateria.size()==0){
             return "Algo Malio Sal";
         }else{
-            List<Carrera> carreras= carreraService.findAll();
             for (MateriaCarrera fenix: listacarrera) {
-                boolean ban=true;
-                for (Carrera base: carreras) {
-                    if(base.getIdCarrera()== fenix.getCarreraMateriaId())ban=false;
-                }
+                boolean ban=carreraService.findByIdCarrera(fenix.getCarreraMateriaId());
                 if(ban){
                     Carrera nueva = new Carrera();
                     nueva.setIdCarrera(fenix.getCarreraMateriaId());
@@ -76,13 +73,9 @@ public class MateriaCarrerasFenixController {
                     carreraService.save(nueva);
                 }
             }
-            carreras= carreraService.findAll();
-            List<Materia> materias= materiaService.findAll();
+            List<Carrera> carreras= carreraService.findAll();
             for (MateriaCarrera fenix: listamateria) {
-                boolean ban=true;
-                if(materiaService.findByIdMateria(fenix.getCarreraMateriaId())!=null){
-                    ban=false;
-                }
+                boolean ban=materiaService.findByIdMateria(fenix.getCarreraMateriaId());
                 if(ban && fenix.getCiclo()>3){
                     Carrera existe = new Carrera();
                     for (Carrera car: carreras) {

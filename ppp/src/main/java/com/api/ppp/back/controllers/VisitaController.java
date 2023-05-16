@@ -49,6 +49,7 @@ public class VisitaController {
             current.setAsunto(entity.getAsunto());
             current.setSemana(entity.getSemana());
             current.setObservacion(entity.getObservacion());
+            current.setUrl(entity.getUrl());
             return ResponseEntity.status(HttpStatus.CREATED).body(service.save(current));
         }
         return ResponseEntity.notFound().build();

@@ -56,6 +56,7 @@ public class PracticaController {
             current.setFin(entity.getFin());
             current.setConcluciones(entity.getConcluciones());
             current.setDepartamento(entity.getDepartamento());
+            current.setEstado(entity.getEstado());
             return ResponseEntity.status(HttpStatus.CREATED).body(service.save(current));
         }
         return ResponseEntity.notFound().build();

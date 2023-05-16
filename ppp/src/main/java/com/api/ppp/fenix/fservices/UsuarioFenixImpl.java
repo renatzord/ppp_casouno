@@ -43,6 +43,14 @@ public class UsuarioFenixImpl implements UsuarioFenixService{
         return (UsuarioFenix) usuarioFenixRepository.findByNombresAndCorreoAndTipo(nombres,correo,1).orElse(null);
     }
 
+    @Override
+    @Transactional(readOnly = true)
+    public List<UsuarioFenix> findByDocentes()
+    {
+        return (List<UsuarioFenix>) usuarioFenixRepository.findByTipo(2).orElse(null);
+    }
+
+
 
 
 }

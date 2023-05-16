@@ -51,6 +51,7 @@ public class SolicitudEstudianteController {
             current.setConvocatoria(entity.getConvocatoria());
             current.setEstado(entity.getEstado());
             current.setFechaEnvio(entity.getFechaEnvio());
+            current.setUrl(entity.getUrl());
             return ResponseEntity.status(HttpStatus.CREATED).body(service.save(current));
         }
         return ResponseEntity.notFound().build();
@@ -75,6 +76,18 @@ public class SolicitudEstudianteController {
         Convocatoria entity = new Convocatoria();
         entity.setId(id);
         return service.solicitudesxConvocatoria(entity);
+    }
+
+    //by myrian
+    @PutMapping ("/editarEstado/{id}")
+    public ResponseEntity<?> editar(@PathVariable("id") Integer id, @RequestParam("estado") Integer estado) {
+        Optional<SolicitudEstudiante> optional = service.findById(id);
+        if (optional.isPresent()) {
+            SolicitudEstudiante current = optional.get();
+            current.setEstado(estado);
+            return ResponseEntity.status(HttpStatus.CREATED).body(service.save(current));
+        }
+        return ResponseEntity.notFound().build();
     }
 
 }

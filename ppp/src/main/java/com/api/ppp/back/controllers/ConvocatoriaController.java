@@ -4,10 +4,12 @@ import com.api.ppp.back.models.Accion;
 import com.api.ppp.back.models.Convocatoria;
 import com.api.ppp.back.services.ConvocaroriaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.Optional;
 
 @RestController
@@ -63,5 +65,11 @@ public class ConvocatoriaController {
     public ResponseEntity<Void> eliminarID(@PathVariable("id") Integer id) {
         service.deleteById(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/convocatoriasactivas")
+    public ResponseEntity<?> listarxfechaactiva(@Param("fecha") Date fecha) {
+
+        return ResponseEntity.ok().body(service.convocatoriaActivas(fecha));
     }
 }
