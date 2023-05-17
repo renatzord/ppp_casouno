@@ -16,8 +16,8 @@ public interface ConvocatoriaRepository extends BaseRepository<Convocatoria, Int
             "inner join SolicitudEmpresa sol on sol = cov.solicitudEmpresa " +
             "inner join Convenio con on con = sol.convenio " +
             "where con.carrera.id =:carreraId "+
-            "AND cov.fechaInicio >= CURRENT_DATE " +
-            "AND cov.fechaFin <= CURRENT_DATE")
+            "AND cov.fechaInicio <= CURRENT_DATE " +
+            "AND cov.fechaFin >= CURRENT_DATE")
     Optional<List<Convocatoria>> convocatoriasActivasxCarrera(@Param("carreraId") Integer carreraId);
 
 }
