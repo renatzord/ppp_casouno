@@ -23,4 +23,9 @@ public class SolicitudEstudianteServiceImpl extends BaseServiceImpl<SolicitudEst
     public List<SolicitudEstudiante> solicitudesxConvocatoria(Convocatoria convocatoria) {
         return (List<SolicitudEstudiante>) repository.findAllByConvocatoria(convocatoria).orElse(null);
     }
+
+    @Override
+    public List<SolicitudEstudiante> solicitudesAprovadasxConvocatoria(Convocatoria convocatoria) {
+        return (List<SolicitudEstudiante>) repository.findByConvocatoriaAndEstado(convocatoria,2).orElse(null);
+    }
 }

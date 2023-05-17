@@ -2,6 +2,7 @@ package com.api.ppp.back.controllers;
 
 import com.api.ppp.back.models.Convocatoria;
 import com.api.ppp.back.models.SolicitudEstudiante;
+import com.api.ppp.back.services.ConvocaroriaService;
 import com.api.ppp.back.services.SolicitudEstudianteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,6 +19,9 @@ public class SolicitudEstudianteController {
 
     @Autowired
     private SolicitudEstudianteService service;
+
+    @Autowired
+    private ConvocaroriaService convocaroriaService;
 
     // To list all records
     @GetMapping("/listar")
@@ -89,5 +93,11 @@ public class SolicitudEstudianteController {
         }
         return ResponseEntity.notFound().build();
     }
+
+    @GetMapping("/listaraprobadasxconvocatoria")
+    public ResponseEntity<?> listar(@RequestParam("id") Integer id) {
+        return ResponseEntity.ok().body(service.solicitudesAprovadasxConvocatoria(convocaroriaService.findById(id).orElse(null)));
+    }
+
 
 }

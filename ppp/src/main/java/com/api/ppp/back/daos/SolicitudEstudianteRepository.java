@@ -12,4 +12,6 @@ public interface SolicitudEstudianteRepository extends BaseRepository<SolicitudE
 
     Optional<List<SolicitudEstudiante>> findAllByConvocatoria(Convocatoria convocatoria);
 
+    Optional<List<SolicitudEstudiante>> findByConvocatoriaAndEstado(Convocatoria convocatoria,Integer estado);
+
 }
