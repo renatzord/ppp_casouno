@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface ConvocaroriaService extends BaseService<Convocatoria, Integer> {
 
-    public List<Convocatoria> convocatoriaActivas(Date fecha);
+    public List<Convocatoria> convocatoriaActivas(Integer car_id);
 
 }
