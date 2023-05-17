@@ -22,9 +22,9 @@ public class ConvocaroriaServiceImpl extends BaseServiceImpl<Convocatoria, Integ
 
     @Override
     @Transactional(readOnly = true)
-    public List<Convocatoria> convocatoriaActivas(Date fecha)
+    public List<Convocatoria> convocatoriaActivas(Integer car_id)
     {
-        return (List<Convocatoria>) repository.findByFechaInicioGreaterThanEqualAndFechaFinLessThanEqual(fecha,fecha).orElse(null);
+        return (List<Convocatoria>) repository.convocatoriasActivasxCarrera(car_id).orElse(null);
     }
 
 }

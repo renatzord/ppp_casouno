@@ -1,7 +1,9 @@
 package com.api.ppp.back.controllers;
 
 import com.api.ppp.back.models.Accion;
+import com.api.ppp.back.models.Estudiante;
 import com.api.ppp.back.models.Practica;
+import com.api.ppp.back.services.EstudianteService;
 import com.api.ppp.back.services.PracticaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,6 +19,9 @@ public class PracticaController {
 
     @Autowired
     private PracticaService service;
+
+    @Autowired
+    private EstudianteService estudianteService;
 
     // To list all records
     @GetMapping("/listar")
@@ -67,6 +72,15 @@ public class PracticaController {
     public ResponseEntity<Void> eliminarID(@PathVariable("id") Integer id) {
         service.deleteById(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/buscarxestudiante/{idEstudiante}")
+    public ResponseEntity<?> buscarxEstudiante(@PathVariable("idEstudiante") Integer id) {
+        Optional<Practica> current = Optional.ofNullable(service.practicaxEstudiante(estudianteService.findById(id).orElse(null)));
+        if(current.isPresent()) {
+            return ResponseEntity.ok().body(current.get());
+        }
+        return ResponseEntity.notFound().build();
     }
 
 }

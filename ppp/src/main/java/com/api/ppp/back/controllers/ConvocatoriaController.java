@@ -1,14 +1,14 @@
 package com.api.ppp.back.controllers;
 
-import com.api.ppp.back.models.Accion;
 import com.api.ppp.back.models.Convocatoria;
 import com.api.ppp.back.services.ConvocaroriaService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Optional;
 
@@ -68,8 +68,7 @@ public class ConvocatoriaController {
     }
 
     @GetMapping("/convocatoriasactivas")
-    public ResponseEntity<?> listarxfechaactiva(@Param("fecha") Date fecha) {
-
-        return ResponseEntity.ok().body(service.convocatoriaActivas(fecha));
+    public ResponseEntity<?> listarxfechaactiva(@RequestParam("idCarrera") Integer id) {
+        return ResponseEntity.ok().body(service.convocatoriaActivas(id));
     }
 }
