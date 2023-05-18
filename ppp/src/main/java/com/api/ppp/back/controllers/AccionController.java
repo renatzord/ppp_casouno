@@ -2,11 +2,16 @@ package com.api.ppp.back.controllers;
 
 import com.api.ppp.back.models.Accion;
 import com.api.ppp.back.services.AccionService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -35,19 +40,51 @@ public class AccionController {
 
     // To create a record
     @PostMapping("/crear")
-    public ResponseEntity<?> crear(@RequestBody Accion entity) {
+    public ResponseEntity<?> crear(@Valid @RequestBody Accion entity, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            Map<String, String> errors = new HashMap<>();
+            for (FieldError error : bindingResult.getFieldErrors()) {
+                errors.put(error.getField(), error.getDefaultMessage());
+            }
+
+            // Verificar si el campo "descripcion" está vacío
+            if (entity.getDescripcion() == null || entity.getDescripcion().trim().isEmpty()) {
+                errors.put("descripcion", "El campo descripción es obligatorio");
+            }
+
+            if (!errors.isEmpty()) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
+            }
+        }
+
         return ResponseEntity.status(HttpStatus.CREATED).body(service.save(entity));
     }
 
-    // To find one record and update it, specifically by a unique identifier (PK or ID)
     @PostMapping("/editar/{id}")
-    public ResponseEntity<?> editar(@PathVariable("id") Integer id, @RequestBody Accion entity) {
+    public ResponseEntity<?> editar(@PathVariable("id") Integer id, @Valid @RequestBody Accion entity, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            Map<String, String> errors = new HashMap<>();
+            for (FieldError error : bindingResult.getFieldErrors()) {
+                errors.put(error.getField(), error.getDefaultMessage());
+            }
+
+            // Verificar si el campo "descripcion" está vacío
+            if (entity.getDescripcion() == null || entity.getDescripcion().trim().isEmpty()) {
+                errors.put("descripcion", "El campo descripción es obligatorio");
+            }
+
+            if (!errors.isEmpty()) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
+            }
+        }
+
         Optional<Accion> optional = service.findById(id);
-        if(optional.isPresent()) {
+        if (optional.isPresent()) {
             Accion current = optional.get();
             current.setDescripcion(entity.getDescripcion());
             return ResponseEntity.status(HttpStatus.CREATED).body(service.save(current));
         }
+
         return ResponseEntity.notFound().build();
     }
 
