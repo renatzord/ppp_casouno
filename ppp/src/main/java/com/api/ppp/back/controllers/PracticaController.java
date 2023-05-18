@@ -4,11 +4,16 @@ import com.api.ppp.back.models.Practica;
 import com.api.ppp.back.models.Usuario;
 import com.api.ppp.back.services.EstudianteService;
 import com.api.ppp.back.services.PracticaService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -41,15 +46,96 @@ public class PracticaController {
 
     // To create a record
     @PostMapping("/crear")
-    public ResponseEntity<?> crear(@RequestBody Practica entity) {
+    public ResponseEntity<?> crear(@Valid @RequestBody Practica entity, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            Map<String, String> errors = new HashMap<>();
+            for (FieldError error : bindingResult.getFieldErrors()) {
+                errors.put(error.getField(), error.getDefaultMessage());
+            }
+
+            // Verificar si el campo "periodo" está vacío
+            if (entity.getPeriodo() == null || entity.getPeriodo().trim().isEmpty()) {
+                errors.put("periodo", "El campo periodo es obligatorio");
+            }
+
+            // Verificar si el campo "nSemanas" es menor o igual a cero
+            if (entity.getNSemanas() <= 0) {
+                errors.put("nSemanas", "El campo nSemanas debe ser mayor a cero");
+            }
+
+            // Verificar si el campo "inicio" es nulo
+            if (entity.getInicio() == null) {
+                errors.put("inicio", "El campo inicio es obligatorio");
+            }
+
+            // Verificar si el campo "fin" es nulo
+            if (entity.getFin() == null) {
+                errors.put("fin", "El campo fin es obligatorio");
+            }
+
+            // Verificar si el campo "concluciones" está vacío
+            if (entity.getConcluciones() == null || entity.getConcluciones().trim().isEmpty()) {
+                errors.put("concluciones", "El campo concluciones es obligatorio");
+            }
+
+            // Verificar si el campo "departamento" está vacío
+            if (entity.getDepartamento() == null || entity.getDepartamento().trim().isEmpty()) {
+                errors.put("departamento", "El campo departamento es obligatorio");
+            }
+
+            if (!errors.isEmpty()) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
+            }
+        }
+
         return ResponseEntity.status(HttpStatus.CREATED).body(service.save(entity));
     }
 
-    // To find one record and update it, specifically by a unique identifier (PK or ID)
     @PostMapping("/editar/{id}")
-    public ResponseEntity<?> editar(@PathVariable("id") Integer id, @RequestBody Practica entity) {
+    public ResponseEntity<?> editar(@PathVariable("id") Integer id, @Valid @RequestBody Practica entity, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            Map<String, String> errors = new HashMap<>();
+            for (FieldError error : bindingResult.getFieldErrors()) {
+                errors.put(error.getField(), error.getDefaultMessage());
+            }
+
+            // Verificar si el campo "periodo" está vacío
+            if (entity.getPeriodo() == null || entity.getPeriodo().trim().isEmpty()) {
+                errors.put("periodo", "El campo periodo es obligatorio");
+            }
+
+            // Verificar si el campo "nSemanas" es menor o igual a cero
+            if (entity.getNSemanas() <= 0) {
+                errors.put("nSemanas", "El campo nSemanas debe ser mayor a cero");
+            }
+
+            // Verificar si el campo "inicio" es nulo
+            if (entity.getInicio() == null) {
+                errors.put("inicio", "El campo inicio es obligatorio");
+            }
+
+            // Verificar si el campo "fin" es nulo
+            if (entity.getFin() == null) {
+                errors.put("fin", "El campo fin es obligatorio");
+            }
+
+            // Verificar si el campo "concluciones" está vacío
+            if (entity.getConcluciones() == null || entity.getConcluciones().trim().isEmpty()) {
+                errors.put("concluciones", "El campo concluciones es obligatorio");
+            }
+
+            // Verificar si el campo "departamento" está vacío
+            if (entity.getDepartamento() == null || entity.getDepartamento().trim().isEmpty()) {
+                errors.put("departamento", "El campo departamento es obligatorio");
+            }
+
+            if (!errors.isEmpty()) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
+            }
+        }
+
         Optional<Practica> optional = service.findById(id);
-        if(optional.isPresent()) {
+        if (optional.isPresent()) {
             Practica current = optional.get();
             current.setConvocatoria(entity.getConvocatoria());
             current.setEstudiante(entity.getEstudiante());
@@ -66,6 +152,7 @@ public class PracticaController {
         }
         return ResponseEntity.notFound().build();
     }
+
 
     // To find one record and delete it, specifically by a unique identifier (PK or ID)
     @DeleteMapping("/eliminar/{id}")

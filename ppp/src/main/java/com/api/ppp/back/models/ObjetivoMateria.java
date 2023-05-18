@@ -14,13 +14,13 @@ public class ObjetivoMateria implements Serializable {
     @Column(name = "obm_id")
     private Integer id;
 
-    @Column(name = "obm_descripcion")
+    @Column(name = "obm_descripcion", nullable = false)
     private String descripcion;
 
     // Foreign Key - Relationships
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     @JoinColumn(name = "mat_id", referencedColumnName = "mat_id")
     private Materia materia;
-
 }
+

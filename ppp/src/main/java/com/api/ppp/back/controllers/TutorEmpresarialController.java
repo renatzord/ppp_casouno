@@ -4,6 +4,7 @@ import com.api.ppp.back.daos.AuthorityRepository;
 import com.api.ppp.back.models.Authority;
 import com.api.ppp.back.models.TutorEmpresarial;
 import com.api.ppp.back.services.TutorEmpresarialService;
+import io.micrometer.common.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -46,10 +47,13 @@ public class TutorEmpresarialController {
 
     // To create a record
     @PostMapping("/crear")
-    public ResponseEntity<?> create(@RequestBody TutorEmpresarial entity, @RequestParam String rol) {
+    public ResponseEntity<?> crear(@RequestBody TutorEmpresarial entity, @RequestParam String rol) {
         try {
+            if (StringUtils.isEmpty(entity.getCargo())) {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("El campo 'cargo' es obligatorio");
+            }
             if (!isPasswordSecure(entity.getUsuario().getPassword())) {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST) .body("Password must be secure");
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("La contraseña debe ser segura");
             }
             String hashPwd = passwordEncoder.encode(entity.getUsuario().getPassword());
             entity.getUsuario().setPassword(hashPwd);
@@ -60,23 +64,25 @@ public class TutorEmpresarialController {
                 role.setUsuario(tutor.getUsuario());
                 authorityRepository.save(role);
                 return ResponseEntity.status(HttpStatus.CREATED)
-                        .body("Given user details are successfully registered");
+                        .body("Los detalles del usuario proporcionados se han registrado correctamente");
             } else {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("An error occurred while saving the user");
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Se produjo un error al guardar el usuario");
             }
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An exception occured due to " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Se produjo una excepción debido a " + e.getMessage());
         }
     }
 
-    // To find one record and update it, specifically by a unique identifier (PK or ID)
     @PostMapping("/editar/{id}")
     public ResponseEntity<?> editar(@PathVariable("id") Integer id, @RequestBody TutorEmpresarial entity) {
+        if (StringUtils.isEmpty(entity.getCargo())) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("El campo 'cargo' es obligatorio");
+        }
         if (!isPasswordSecure(entity.getUsuario().getPassword())) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST) .body("Password must be secure");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("La contraseña debe ser segura");
         }
         Optional<TutorEmpresarial> optional = service.findById(id);
-        if(optional.isPresent()) {
+        if (optional.isPresent()) {
             String hashPwd = passwordEncoder.encode(entity.getUsuario().getPassword());
             entity.getUsuario().setPassword(hashPwd);
             TutorEmpresarial current = optional.get();
@@ -87,6 +93,7 @@ public class TutorEmpresarialController {
         }
         return ResponseEntity.notFound().build();
     }
+
 
     // To find one record and delete it, specifically by a unique identifier (PK or ID)
     @DeleteMapping("/eliminar/{id}")

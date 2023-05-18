@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -36,21 +38,52 @@ public class AspectoController {
     // To create a record
     @PostMapping("/crear")
     public ResponseEntity<?> crear(@RequestBody Aspecto entity) {
+        Map<String, String> errors = new HashMap<>();
+
+        if (entity.getDetalle() == null || entity.getDetalle().trim().isEmpty()) {
+            errors.put("detalle", "El campo detalle es obligatorio");
+        }
+
+        if (entity.getObservaciones() == null || entity.getObservaciones().trim().isEmpty()) {
+            errors.put("observaciones", "El campo observaciones es obligatorio");
+        }
+
+        if (!errors.isEmpty()) {
+            return ResponseEntity.badRequest().body(errors);
+        }
+
         return ResponseEntity.status(HttpStatus.CREATED).body(service.save(entity));
     }
 
-    // To find one record and update it, specifically by a unique identifier (PK or ID)
     @PostMapping("/editar/{id}")
     public ResponseEntity<?> editar(@PathVariable("id") Integer id, @RequestBody Aspecto entity) {
         Optional<Aspecto> optional = service.findById(id);
-        if(optional.isPresent()) {
+        if (optional.isPresent()) {
             Aspecto current = optional.get();
+
+            Map<String, String> errors = new HashMap<>();
+
+            if (entity.getDetalle() == null || entity.getDetalle().trim().isEmpty()) {
+                errors.put("detalle", "El campo detalle es obligatorio");
+            }
+
+            if (entity.getObservaciones() == null || entity.getObservaciones().trim().isEmpty()) {
+                errors.put("observaciones", "El campo observaciones es obligatorio");
+            }
+
+            if (!errors.isEmpty()) {
+                return ResponseEntity.badRequest().body(errors);
+            }
+
             current.setDetalle(entity.getDetalle());
             current.setObservaciones(entity.getObservaciones());
+
             return ResponseEntity.status(HttpStatus.CREATED).body(service.save(current));
         }
+
         return ResponseEntity.notFound().build();
     }
+
 
     // To find one record and delete it, specifically by a unique identifier (PK or ID)
     @DeleteMapping("/eliminar/{id}")

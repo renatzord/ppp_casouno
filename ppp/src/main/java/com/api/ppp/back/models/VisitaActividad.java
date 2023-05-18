@@ -15,16 +15,18 @@ public class VisitaActividad implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "vac_actividad")
+    @Column(name = "vac_actividad", nullable = false)
     private String actividad;
 
-    @Column(name = "vac_observacion")
+    @Column(name = "vac_observacion", nullable = false)
     private String observacion;
 
     // Foreign Key - Relationships
 
     @ManyToOne
-    @JoinColumn(name = "vit_id",referencedColumnName = "vit_id")
+    @JoinColumn(name = "vit_id", referencedColumnName = "vit_id", nullable = false)
     private Visita visita;
 
+
 }
+

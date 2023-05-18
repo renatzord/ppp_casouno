@@ -16,4 +16,8 @@ public class ConvenioServiceImpl extends BaseServiceImpl<Convenio, Integer> impl
         super(baseRepository);
     }
 
+    @Override
+    public boolean existsByNumero(Integer numero) {
+        return false;
+    }
 }

@@ -3,6 +3,7 @@ package com.api.ppp.back.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -18,17 +19,18 @@ public class Actividad implements Serializable {
     @Column(name = "act_id")
     private Integer id;
 
+    @NotEmpty(message = "La descripción es obligatoria")
     @Column(name = "act_descripcion")
     private String descripcion;
 
     // Foreign Key - Relationships
 
-    @ManyToOne
-    @JoinColumn(name = "sol_id", referencedColumnName = "sol_id")
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "sol_id", referencedColumnName = "sol_id", nullable = false)
     private SolicitudEmpresa solicitudEmpresa;
 
-    @ManyToOne
-    @JoinColumn(name = "mat_id", referencedColumnName = "mat_id")
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "mat_id", referencedColumnName = "mat_id", nullable = false)
     private Materia materia;
 
     // Bidirectional Relationships
@@ -42,3 +44,4 @@ public class Actividad implements Serializable {
     private List<Resultado> resultados;
 
 }
+

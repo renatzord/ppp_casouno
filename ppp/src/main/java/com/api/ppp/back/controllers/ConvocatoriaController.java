@@ -39,10 +39,18 @@ public class ConvocatoriaController {
     // To create a record
     @PostMapping("/crear")
     public ResponseEntity<?> crear(@RequestBody Convocatoria entity) {
+        if (entity.getNumero() == null) {
+            return ResponseEntity.badRequest().body("El número de convocatoria es obligatorio");
+        }
+
+        // Verificar si el número de convocatoria ya existe en la base de datos
+        if (service.existsByNumero(entity.getNumero())) {
+            return ResponseEntity.badRequest().body("El número de convocatoria ya está en uso");
+        }
+
         return ResponseEntity.status(HttpStatus.CREATED).body(service.save(entity));
     }
 
-    // To find one record and update it, specifically by a unique identifier (PK or ID)
     @PostMapping("/editar/{id}")
     public ResponseEntity<?> editar(@PathVariable("id") Integer id, @RequestBody Convocatoria entity) {
         Optional<Convocatoria> optional = service.findById(id);
@@ -59,6 +67,7 @@ public class ConvocatoriaController {
         }
         return ResponseEntity.notFound().build();
     }
+
 
     // To find one record and delete it, specifically by a unique identifier (PK or ID)
     @DeleteMapping("/eliminar/{id}")

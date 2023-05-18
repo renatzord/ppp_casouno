@@ -14,13 +14,14 @@ public class ResultadoMateria implements Serializable {
     @Column(name = "rem_id")
     private Integer id;
 
-    @Column(name = "rem_descripcion")
+    @Column(name = "rem_descripcion", nullable = false)
     private String descripcion;
 
     // Foreign Key - Relationships
 
     @ManyToOne
-    @JoinColumn(name = "car_id", referencedColumnName = "car_id")
+    @JoinColumn(name = "car_id", referencedColumnName = "car_id", nullable = false)
     private Carrera carrera;
 
 }
+

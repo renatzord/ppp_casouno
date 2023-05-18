@@ -17,14 +17,14 @@ public class Convenio implements Serializable {
     @Column(name = "con_id")
     private Integer id;
 
-    @Column(name = "con_numero")
+    @Column(name = "con_numero", nullable = false, unique = true)
     private Integer numero;
 
-    @Column(name = "con_fecha_inicio")
+    @Column(name = "con_fecha_inicio", nullable = false)
     @Temporal(TemporalType.DATE)
     private Date fechaInicio;
 
-    @Column(name = "con_fecha_fin")
+    @Column(name = "con_fecha_fin", nullable = false)
     @Temporal(TemporalType.DATE)
     private Date fechaFin;
 
@@ -33,12 +33,12 @@ public class Convenio implements Serializable {
 
     // Foreign Key - Relationships
 
-    @ManyToOne
-    @JoinColumn(name = "epr_id", referencedColumnName = "epr_id")
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "epr_id", referencedColumnName = "epr_id", nullable = false)
     private Empresa empresa;
 
-    @ManyToOne
-    @JoinColumn(name = "car_id", referencedColumnName = "car_id")
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "car_id", referencedColumnName = "car_id", nullable = false)
     private Carrera carrera;
 
     @ManyToOne
@@ -47,8 +47,8 @@ public class Convenio implements Serializable {
 
     // Bidirectional Relationships
 
-    @OneToMany(mappedBy = "convenio",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "convenio", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore
     private List<SolicitudEmpresa> solicitudEmpresas;
-
 }
+

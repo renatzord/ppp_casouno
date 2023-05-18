@@ -3,11 +3,16 @@ package com.api.ppp.back.controllers;
 import com.api.ppp.back.models.Accion;
 import com.api.ppp.back.models.SemanaActividad;
 import com.api.ppp.back.services.SemanaActividadService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -36,15 +41,81 @@ public class SemanaActividadController {
 
     // To create a record
     @PostMapping("/crear")
-    public ResponseEntity<?> crear(@RequestBody SemanaActividad entity) {
+    public ResponseEntity<?> crear(@Valid @RequestBody SemanaActividad entity, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            Map<String, String> errors = new HashMap<>();
+            for (FieldError error : bindingResult.getFieldErrors()) {
+                errors.put(error.getField(), error.getDefaultMessage());
+            }
+
+            // Verificar si el campo "dia" está vacío
+            if (entity.getDia() == null) {
+                errors.put("dia", "El campo día es obligatorio");
+            }
+
+            // Verificar si el campo "horaInicio" está vacío
+            if (entity.getHoraInicio() == null) {
+                errors.put("horaInicio", "El campo hora inicio es obligatorio");
+            }
+
+            // Verificar si el campo "horaFin" está vacío
+            if (entity.getHoraFin() == null) {
+                errors.put("horaFin", "El campo hora fin es obligatorio");
+            }
+
+            // Verificar si el campo "totalHoras" está vacío
+            if (entity.getTotalHoras() == null) {
+                errors.put("totalHoras", "El campo total horas es obligatorio");
+            }
+
+            // Verificar si el campo "actividad" está vacío
+            if (entity.getActividad() == null || entity.getActividad().trim().isEmpty()) {
+                errors.put("actividad", "El campo actividad es obligatorio");
+            }
+
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
+        }
         return ResponseEntity.status(HttpStatus.CREATED).body(service.save(entity));
     }
 
-    // To find one record and update it, specifically by a unique identifier (PK or ID)
     @PostMapping("/editar/{id}")
-    public ResponseEntity<?> editar(@PathVariable("id") Integer id, @RequestBody SemanaActividad entity) {
+    public ResponseEntity<?> editar(@PathVariable("id") Integer id, @Valid @RequestBody SemanaActividad entity, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            Map<String, String> errors = new HashMap<>();
+            for (FieldError error : bindingResult.getFieldErrors()) {
+                errors.put(error.getField(), error.getDefaultMessage());
+            }
+
+            // Verificar si el campo "dia" está vacío
+            if (entity.getDia() == null) {
+                errors.put("dia", "El campo día es obligatorio");
+            }
+
+            // Verificar si el campo "horaInicio" está vacío
+            if (entity.getHoraInicio() == null) {
+                errors.put("horaInicio", "El campo hora inicio es obligatorio");
+            }
+
+            // Verificar si el campo "horaFin" está vacío
+            if (entity.getHoraFin() == null) {
+                errors.put("horaFin", "El campo hora fin es obligatorio");
+            }
+
+            // Verificar si el campo "totalHoras" está vacío
+            if (entity.getTotalHoras() == null) {
+                errors.put("totalHoras", "El campo total horas es obligatorio");
+            }
+
+            // Verificar si el campo "actividad" está vacío
+            if (entity.getActividad() == null || entity.getActividad().trim().isEmpty()) {
+                errors.put("actividad", "El campo actividad es obligatorio");
+            }
+
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errors);
+        }
+
         Optional<SemanaActividad> optional = service.findById(id);
-        if(optional.isPresent()) {
+        if (optional.isPresent()) {
             SemanaActividad current = optional.get();
             current.setPractica(entity.getPractica());
             current.setDia(entity.getDia());
@@ -54,8 +125,10 @@ public class SemanaActividadController {
             current.setActividad(entity.getActividad());
             return ResponseEntity.status(HttpStatus.CREATED).body(service.save(current));
         }
+
         return ResponseEntity.notFound().build();
     }
+
 
     // To find one record and delete it, specifically by a unique identifier (PK or ID)
     @DeleteMapping("/eliminar/{id}")

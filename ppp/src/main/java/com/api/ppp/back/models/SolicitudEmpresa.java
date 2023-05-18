@@ -20,7 +20,7 @@ public class SolicitudEmpresa implements Serializable {
     @Column(name = "sol_num_practicas")
     private Integer numPracticantes;
 
-    @Column(name = "sol_num_horas")
+    @Column(name = "sol_num_horas", columnDefinition = "INTEGER DEFAULT 240")
     private Integer numHoras;
 
     @Column(name = "sol_fecha_inicio_ten")
@@ -31,7 +31,7 @@ public class SolicitudEmpresa implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date fechaMaxTen;
 
-    @Column(name = "sol_estado")
+    @Column(name = "sol_estado", columnDefinition = "BOOLEAN DEFAULT true")
     private Integer estado;
 
     @Column(name = "sol_url")
@@ -39,18 +39,20 @@ public class SolicitudEmpresa implements Serializable {
 
     // Foreign Key - Relationships
 
-    @ManyToOne
-    @JoinColumn(name = "con_id", referencedColumnName = "con_id")
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "con_id", referencedColumnName = "con_id", nullable = false)
     private Convenio convenio;
 
     // Bidirectional Relationships
 
-    @OneToMany(mappedBy = "solicitudEmpresa",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "solicitudEmpresa", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore
     private List<Actividad> actividades;
 
-    @OneToMany(mappedBy = "solicitudEmpresa",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "solicitudEmpresa", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore
     private List<Convocatoria> convocatorias;
 
+
 }
+

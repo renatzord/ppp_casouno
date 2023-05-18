@@ -2,6 +2,7 @@ package com.api.ppp.back.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -18,15 +19,18 @@ public class Aspecto implements Serializable {
     private Integer id;
 
     @Column(name = "aps_detalle")
+    @NotEmpty(message = "El campo detalle es obligatorio")
     private String detalle;
 
     @Column(name = "aps_observaciones")
+    @NotEmpty(message = "El campo observaciones es obligatorio")
     private String observaciones;
 
     // Bidirectional Relationships
 
-    @OneToMany(mappedBy = "aspecto",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "aspecto", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore
     private List<AspectoPractica> aspectoPracticas;
 
 }
+

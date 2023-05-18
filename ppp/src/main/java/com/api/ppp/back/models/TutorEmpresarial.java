@@ -31,8 +31,9 @@ public class TutorEmpresarial {
 
     // Bidirectional Relationships
 
-    @OneToMany(mappedBy = "tutorEmpresarial",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "tutorEmpresarial", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore
     private List<Practica> practicas;
 
 }
+

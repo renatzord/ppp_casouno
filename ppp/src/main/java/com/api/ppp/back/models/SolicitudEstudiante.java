@@ -1,6 +1,7 @@
 package com.api.ppp.back.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -16,7 +17,7 @@ public class SolicitudEstudiante implements Serializable {
     @Column(name = "ses_id")
     private Integer id;
 
-    @Column(name = "ses_estado")
+    @Column(name = "ses_estado", columnDefinition = "INTEGER DEFAULT 0")
     private Integer estado;
 
     @Column(name = "ses_fecha_envio")
@@ -29,11 +30,16 @@ public class SolicitudEstudiante implements Serializable {
     // Foreign Key - Relationships
 
     @ManyToOne
-    @JoinColumn(name = "est_id")
+    @JoinColumn(name = "est_id", nullable = false)
+    @NotNull
     private Estudiante estudiante;
 
     @ManyToOne
-    @JoinColumn(name = "cov_id", referencedColumnName = "cov_id")
+    @JoinColumn(name = "cov_id", referencedColumnName = "cov_id", nullable = false)
+    @NotNull
     private Convocatoria convocatoria;
 
+    // Otros campos y relaciones
+
 }
+

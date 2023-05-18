@@ -26,10 +26,10 @@ public class DetalleTarea implements Serializable {
     // Foreign Key - Relationships
 
     @ManyToOne
-    @JoinColumn(name = "tar_id",referencedColumnName = "tar_id")
+    @JoinColumn(name = "tar_id", referencedColumnName = "tar_id")
     private Tarea tarea;
 
     @ManyToOne
-    @JoinColumn(name = "obm_id",referencedColumnName = "obm_id")
+    @JoinColumn(name = "obm_id", referencedColumnName = "obm_id")
     private ObjetivoMateria objetivoMateria;
 }

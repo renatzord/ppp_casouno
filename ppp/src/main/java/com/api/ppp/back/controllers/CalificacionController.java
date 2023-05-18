@@ -37,15 +37,47 @@ public class CalificacionController {
     // To create a record
     @PostMapping("/crear")
     public ResponseEntity<?> crear(@RequestBody Calificacion entity) {
+        // Validar los campos requeridos
+        if (entity.getTutor() == null || entity.getA() == null || entity.getB() == null ||
+                entity.getC() == null || entity.getD() == null || entity.getE() == null) {
+            return ResponseEntity.badRequest().body("Todos los campos son obligatorios");
+        }
+
+        // Validar rango de valores
+        if (entity.getTutor() < 0 || entity.getTutor() > 1 ||
+                entity.getA() < 0 || entity.getA() > 20 ||
+                entity.getB() < 0 || entity.getB() > 20 ||
+                entity.getC() < 0 || entity.getC() > 20 ||
+                entity.getD() < 0 || entity.getD() > 20 ||
+                entity.getE() < 0 || entity.getE() > 20) {
+            return ResponseEntity.badRequest().body("Los valores están fuera de rango");
+        }
+
         return ResponseEntity.status(HttpStatus.CREATED).body(service.save(entity));
     }
 
-    // To find one record and update it, specifically by a unique identifier (PK or ID)
     @PostMapping("/editar/{id}")
     public ResponseEntity<?> editar(@PathVariable("id") Integer id, @RequestBody Calificacion entity) {
         Optional<Calificacion> optional = service.findById(id);
-        if(optional.isPresent()) {
+        if (optional.isPresent()) {
             Calificacion current = optional.get();
+
+            // Validar los campos requeridos
+            if (entity.getTutor() == null || entity.getA() == null || entity.getB() == null ||
+                    entity.getC() == null || entity.getD() == null || entity.getE() == null) {
+                return ResponseEntity.badRequest().body("Todos los campos son obligatorios");
+            }
+
+            // Validar rango de valores
+            if (entity.getTutor() < 0 || entity.getTutor() > 1 ||
+                    entity.getA() < 0 || entity.getA() > 20 ||
+                    entity.getB() < 0 || entity.getB() > 20 ||
+                    entity.getC() < 0 || entity.getC() > 20 ||
+                    entity.getD() < 0 || entity.getD() > 20 ||
+                    entity.getE() < 0 || entity.getE() > 20) {
+                return ResponseEntity.badRequest().body("Los valores están fuera de rango");
+            }
+
             current.setPractica(entity.getPractica());
             current.setA(entity.getA());
             current.setB(entity.getB());
@@ -55,10 +87,13 @@ public class CalificacionController {
             current.setTutor(entity.getTutor());
             current.setTotal(entity.getTotal());
             current.setUrl(entity.getUrl());
+
             return ResponseEntity.status(HttpStatus.CREATED).body(service.save(current));
         }
+
         return ResponseEntity.notFound().build();
     }
+
 
     // To find one record and delete it, specifically by a unique identifier (PK or ID)
     @DeleteMapping("/eliminar/{id}")

@@ -63,10 +63,10 @@ public class EstudianteController {
     @PostMapping("/editar/{id}")
     public ResponseEntity<?> editar(@PathVariable("id") Integer id, @RequestBody Estudiante entity) {
         if (!isPasswordSecure(entity.getUsuario().getPassword())) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST) .body("Password must be secure");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Password must be secure");
         }
         Optional<Estudiante> optional = service.findById(id);
-        if(optional.isPresent()) {
+        if (optional.isPresent()) {
             String hashPwd = passwordEncoder.encode(entity.getUsuario().getPassword());
             entity.getUsuario().setPassword(hashPwd);
             Estudiante current = optional.get();
@@ -81,6 +81,7 @@ public class EstudianteController {
         }
         return ResponseEntity.notFound().build();
     }
+
 
     // To find one record and delete it, specifically by a unique identifier (PK or ID)
     @DeleteMapping("/eliminar/{id}")

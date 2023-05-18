@@ -15,16 +15,17 @@ public class Sucursal implements Serializable {
     @Column(name = "suc_id")
     private Integer id;
 
-    @Column(name = "suc_nombre")
+    @Column(name = "suc_nombre", nullable = false)
     private String nombre;
 
-    @Column(name = "suc_direccion")
+    @Column(name = "suc_direccion", nullable = false)
     private String direccion;
 
     // Foreign Key - Relationships
 
-    @ManyToOne
+    @ManyToOne(optional = false)
     @JoinColumn(name = "epr_id", referencedColumnName = "epr_id")
     private Empresa empresa;
 
 }
+

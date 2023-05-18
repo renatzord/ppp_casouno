@@ -8,5 +8,6 @@ import java.util.List;
 public interface ConvocaroriaService extends BaseService<Convocatoria, Integer> {
 
     public List<Convocatoria> convocatoriaActivas(Integer car_id);
+    boolean existsByNumero(Integer numero);
 
 }

@@ -40,11 +40,10 @@ public class AspectoPracticaController {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.save(entity));
     }
 
-    // To find one record and update it, specifically by a unique identifier (PK or ID)
     @PostMapping("/editar/{id}")
     public ResponseEntity<?> editar(@PathVariable("id") Integer id, @RequestBody AspectoPractica entity) {
         Optional<AspectoPractica> optional = service.findById(id);
-        if(optional.isPresent()) {
+        if (optional.isPresent()) {
             AspectoPractica current = optional.get();
             current.setPractica(entity.getPractica());
             current.setRespuesta(entity.getRespuesta());
@@ -53,6 +52,7 @@ public class AspectoPracticaController {
         }
         return ResponseEntity.notFound().build();
     }
+
 
     // To find one record and delete it, specifically by a unique identifier (PK or ID)
     @DeleteMapping("/eliminar/{id}")

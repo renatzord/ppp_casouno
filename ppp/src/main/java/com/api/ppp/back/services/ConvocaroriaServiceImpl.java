@@ -27,4 +27,9 @@ public class ConvocaroriaServiceImpl extends BaseServiceImpl<Convocatoria, Integ
         return (List<Convocatoria>) repository.convocatoriasActivasxCarrera(car_id).orElse(null);
     }
 
+    @Override
+    public boolean existsByNumero(Integer numero) {
+        return false;
+    }
+
 }

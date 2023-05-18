@@ -37,14 +37,18 @@ public class VisitaActividadController {
     // To create a record
     @PostMapping("/crear")
     public ResponseEntity<?> crear(@RequestBody VisitaActividad entity) {
+        if (entity.getActividad() == null || entity.getActividad().trim().isEmpty()
+                || entity.getObservacion() == null || entity.getObservacion().trim().isEmpty()
+                || entity.getVisita() == null) {
+            return ResponseEntity.badRequest().body("Todos los campos son obligatorios");
+        }
         return ResponseEntity.status(HttpStatus.CREATED).body(service.save(entity));
     }
 
-    // To find one record and update it, specifically by a unique identifier (PK or ID)
     @PostMapping("/editar/{id}")
     public ResponseEntity<?> editar(@PathVariable("id") Integer id, @RequestBody VisitaActividad entity) {
         Optional<VisitaActividad> optional = service.findById(id);
-        if(optional.isPresent()) {
+        if (optional.isPresent()) {
             VisitaActividad current = optional.get();
             current.setVisita(entity.getVisita());
             current.setActividad(entity.getActividad());
@@ -53,6 +57,8 @@ public class VisitaActividadController {
         }
         return ResponseEntity.notFound().build();
     }
+
+
 
     // To find one record and delete it, specifically by a unique identifier (PK or ID)
     @DeleteMapping("/eliminar/{id}")

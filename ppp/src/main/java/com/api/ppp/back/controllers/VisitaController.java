@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -36,24 +38,57 @@ public class VisitaController {
     // To create a record
     @PostMapping("/crear")
     public ResponseEntity<?> crear(@RequestBody Visita entity) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(service.save(entity));
+        Map<String, String> errors = new HashMap<>();
+
+        if (entity.getAsunto() == null || entity.getAsunto().trim().isEmpty()) {
+            errors.put("asunto", "El campo asunto es obligatorio");
+        }
+        if (entity.getSemana() == null) {
+            errors.put("semana", "El campo semana es obligatorio");
+        }
+        if (entity.getObservacion() == null || entity.getObservacion().trim().isEmpty()) {
+            errors.put("observacion", "El campo observacion es obligatorio");
+        }
+
+        if (errors.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.CREATED).body(service.save(entity));
+        } else {
+            return ResponseEntity.badRequest().body(errors);
+        }
     }
 
-    // To find one record and update it, specifically by a unique identifier (PK or ID)
     @PostMapping("/editar/{id}")
     public ResponseEntity<?> editar(@PathVariable("id") Integer id, @RequestBody Visita entity) {
         Optional<Visita> optional = service.findById(id);
-        if(optional.isPresent()) {
+        if (optional.isPresent()) {
             Visita current = optional.get();
             current.setPractica(entity.getPractica());
             current.setAsunto(entity.getAsunto());
             current.setSemana(entity.getSemana());
             current.setObservacion(entity.getObservacion());
             current.setUrl(entity.getUrl());
-            return ResponseEntity.status(HttpStatus.CREATED).body(service.save(current));
+
+            Map<String, String> errors = new HashMap<>();
+
+            if (current.getAsunto() == null || current.getAsunto().trim().isEmpty()) {
+                errors.put("asunto", "El campo asunto es obligatorio");
+            }
+            if (current.getSemana() == null) {
+                errors.put("semana", "El campo semana es obligatorio");
+            }
+            if (current.getObservacion() == null || current.getObservacion().trim().isEmpty()) {
+                errors.put("observacion", "El campo observacion es obligatorio");
+            }
+
+            if (errors.isEmpty()) {
+                return ResponseEntity.status(HttpStatus.CREATED).body(service.save(current));
+            } else {
+                return ResponseEntity.badRequest().body(errors);
+            }
         }
         return ResponseEntity.notFound().build();
     }
+
 
     // To find one record and delete it, specifically by a unique identifier (PK or ID)
     @DeleteMapping("/eliminar/{id}")

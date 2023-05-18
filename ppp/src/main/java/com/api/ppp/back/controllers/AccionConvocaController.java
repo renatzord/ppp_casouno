@@ -54,6 +54,7 @@ public class AccionConvocaController {
         return ResponseEntity.notFound().build();
     }
 
+
     // To find one record and delete it, specifically by a unique identifier (PK or ID)
     @DeleteMapping("/eliminar/{id}")
     public ResponseEntity<Void> eliminarID(@PathVariable("id") Integer id) {
