@@ -95,4 +95,10 @@ public class TutorEmpresarialController {
         return ResponseEntity.noContent().build();
     }
 
+    // To find a Tutor with his user ID
+    @GetMapping("/buscar/gerente/{id}")
+    public ResponseEntity<?> buscarGerenteUsuario(@PathVariable Integer id) {
+        return ResponseEntity.ok().body(service.buscarGerenteUsuario(id));
+    }
+
 }

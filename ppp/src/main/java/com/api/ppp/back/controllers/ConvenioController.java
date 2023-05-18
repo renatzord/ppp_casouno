@@ -65,4 +65,11 @@ public class ConvenioController {
         service.deleteById(id);
         return ResponseEntity.noContent().build();
     }
+
+    // to find a list of Convenio referenced to a Empresa
+    @GetMapping("/buscar/empresa/{id}")
+    public ResponseEntity<?> buscarPorEmpresa(@PathVariable("id") Integer id) {
+        return ResponseEntity.ok(service.busrcarPorEmpresa(id));
+    }
+
 }

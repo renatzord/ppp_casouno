@@ -6,6 +6,8 @@ import com.api.ppp.back.models.Convenio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ConvenioServiceImpl extends BaseServiceImpl<Convenio, Integer> implements ConvenioService {
 
@@ -14,6 +16,11 @@ public class ConvenioServiceImpl extends BaseServiceImpl<Convenio, Integer> impl
 
     public ConvenioServiceImpl(BaseRepository<Convenio, Integer> baseRepository) {
         super(baseRepository);
+    }
+
+    @Override
+    public List<Convenio> busrcarPorEmpresa(Integer id) {
+        return repository.findByEmpresaId(id);
     }
 
 }

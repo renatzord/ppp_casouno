@@ -6,7 +6,6 @@ import com.api.ppp.back.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -44,7 +43,7 @@ public class UsuarioController {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.save(entity));
     }
 
-    // To list users by thier role
+    // To list users by their roles
     @GetMapping("/listar/rol")
     public ResponseEntity<?> listarRol(String rol) {
         return ResponseEntity.ok().body(authorityRepository.findByName(rol));
