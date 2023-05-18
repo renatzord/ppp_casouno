@@ -9,4 +9,6 @@ public interface ConvocaroriaService extends BaseService<Convocatoria, Integer> 
 
     public List<Convocatoria> convocatoriaActivas(Integer car_id);
 
+    List<Convocatoria> listConvocatorias();
+
 }

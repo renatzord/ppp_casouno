@@ -20,4 +20,7 @@ public interface ConvocatoriaRepository extends BaseRepository<Convocatoria, Int
             "AND cov.fechaFin >= CURRENT_DATE")
     Optional<List<Convocatoria>> convocatoriasActivasxCarrera(@Param("carreraId") Integer carreraId);
 
+    @Query(value = "SELECT cov FROM Convocatoria cov WHERE CURRENT_DATE BETWEEN cov.fechaInicio AND cov.fechaFin")
+    List<Convocatoria> findAllConvocatorias();
+
 }

@@ -60,4 +60,11 @@ public class MateriaController {
         service.deleteById(id);
         return ResponseEntity.noContent().build();
     }
+
+    // To find a list of Materia by its Carrera ID
+    @GetMapping("/buscar/carrera/{id}")
+    public ResponseEntity<?> buscarCarreraID(@PathVariable("id") Integer id) {
+        return ResponseEntity.ok().body(service.findByCarreraId(id));
+    }
+
 }

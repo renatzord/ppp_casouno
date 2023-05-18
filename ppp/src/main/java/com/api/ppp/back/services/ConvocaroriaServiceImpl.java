@@ -11,7 +11,7 @@ import java.util.Date;
 import java.util.List;
 
 @Service
-public class ConvocaroriaServiceImpl extends BaseServiceImpl<Convocatoria, Integer> implements ConvocaroriaService {
+ public class ConvocaroriaServiceImpl extends BaseServiceImpl<Convocatoria, Integer> implements ConvocaroriaService {
 
     @Autowired
     private ConvocatoriaRepository repository;
@@ -25,6 +25,11 @@ public class ConvocaroriaServiceImpl extends BaseServiceImpl<Convocatoria, Integ
     public List<Convocatoria> convocatoriaActivas(Integer car_id)
     {
         return (List<Convocatoria>) repository.convocatoriasActivasxCarrera(car_id).orElse(null);
+    }
+
+    @Override
+    public List<Convocatoria> listConvocatorias() {
+        return repository.findAllConvocatorias();
     }
 
 }

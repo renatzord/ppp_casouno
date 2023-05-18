@@ -6,6 +6,8 @@ import com.api.ppp.back.models.Materia;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class MateriaServiceImpl extends BaseServiceImpl<Materia, Integer> implements MateriaService {
 
@@ -19,5 +21,10 @@ public class MateriaServiceImpl extends BaseServiceImpl<Materia, Integer> implem
     @Override
     public boolean findByIdMateria(Integer idMateria) {
         return (repository.findByIdMateria(idMateria).orElse(null)==null);
+    }
+
+    @Override
+    public List<Materia> findByCarreraId(Integer id) {
+        return repository.findByCarreraId(id);
     }
 }

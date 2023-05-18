@@ -49,6 +49,7 @@ public class SecurityConfig {
                     .requestMatchers("/accion/**").hasAnyRole("ESTUD", "TEMP", "TISTA","GEREN","RESPP","DIREC","CORDI","RECT")
                     .requestMatchers("/accionConvoca/**").hasAnyRole("ESTUD", "TEMP", "TISTA","GEREN","RESPP","DIREC","CORDI","RECT")
                     .requestMatchers("/anexos/**").hasAnyRole("ESTUD", "TEMP", "TISTA","GEREN","RESPP","DIREC","CORDI","RECT")
+                    .requestMatchers("/actividad/**").hasAnyRole("ESTUD", "TEMP", "TISTA","GEREN","RESPP","DIREC","CORDI","RECT")
                     .requestMatchers("/aspecto/**").hasAnyRole("ESTUD", "TEMP", "TISTA","GEREN","RESPP","DIREC","CORDI","RECT")
                     .requestMatchers("/aspectoPractica/**").hasAnyRole("ESTUD", "TEMP", "TISTA","GEREN","RESPP","DIREC","CORDI","RECT")
                     .requestMatchers("/calificacion/**").hasAnyRole("ESTUD", "TEMP", "TISTA","GEREN","RESPP","DIREC","CORDI","RECT")
@@ -73,7 +74,7 @@ public class SecurityConfig {
                     .requestMatchers("/visita/**").hasAnyRole("ESTUD", "TEMP", "TISTA","GEREN","RESPP","DIREC","CORDI","RECT")
                     .requestMatchers("/ingresar").authenticated()
                     // Letting Access of fenix to ALL by the moment
-                    .requestMatchers("/register", "/usuariofenix/**", "/fenix/**", "/carrera/**").permitAll()
+                    .requestMatchers("/register", "/usuariofenix/**", "/fenix/**", "/carrera/**", "/noticias").permitAll()
                 .and().formLogin()
                 .and().httpBasic();
         return http.build();
