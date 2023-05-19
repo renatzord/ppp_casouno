@@ -8,6 +8,6 @@ import java.util.List;
 @Repository
 public interface SemanaActividadRepository extends BaseRepository<SemanaActividad, Integer> {
 
-    List<SemanaActividad> findByPracticaId(Integer id);
+    List<SemanaActividad> findByPracticaEstudianteId(Integer id);
 
 }

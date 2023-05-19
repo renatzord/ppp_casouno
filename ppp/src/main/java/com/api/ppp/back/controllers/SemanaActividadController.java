@@ -64,10 +64,10 @@ public class SemanaActividadController {
         return ResponseEntity.noContent().build();
     }
 
-    // to find a SemanaActividad by a Practida ID
-    @GetMapping("/buscar/practica/{id}")
-    public ResponseEntity<?> buscarPracticaID(@PathVariable("id") Integer id) {
-        return ResponseEntity.ok().body(service.listarPracticaId(id));
+    // to find a list of SemanaActividad by an Estudiante ID
+    @GetMapping("/buscar/estudiante/{id}")
+    public ResponseEntity<?> buscarSActividadEstudianteID(@PathVariable("id") Integer id) {
+        return ResponseEntity.ok().body(service.listarSActividadEstudianteId(id));
     }
 
 }

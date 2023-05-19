@@ -20,8 +20,8 @@ public class SemanaActividadServiceImpl extends BaseServiceImpl<SemanaActividad,
     }
 
     @Override
-    public List<SemanaActividad> listarPracticaId(Integer id) {
-        return repository.findByPracticaId(id);
+    public List<SemanaActividad> listarSActividadEstudianteId(Integer id) {
+        return repository.findByPracticaEstudianteId(id);
     }
 
 }
