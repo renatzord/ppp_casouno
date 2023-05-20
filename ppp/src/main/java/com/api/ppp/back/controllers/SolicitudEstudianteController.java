@@ -1,14 +1,16 @@
 package com.api.ppp.back.controllers;
 
 import com.api.ppp.back.models.Convocatoria;
+import com.api.ppp.back.models.SolicitudEmpresa;
 import com.api.ppp.back.models.SolicitudEstudiante;
 import com.api.ppp.back.services.ConvocaroriaService;
 import com.api.ppp.back.services.SolicitudEstudianteService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -97,6 +99,36 @@ public class SolicitudEstudianteController {
     @GetMapping("/listaraprobadasxconvocatoria")
     public ResponseEntity<?> listar(@RequestParam("id") Integer id) {
         return ResponseEntity.ok().body(service.solicitudesAprovadasxConvocatoria(convocaroriaService.findById(id).orElse(null)));
+    }
+
+    @PostMapping("/guardarpdf")
+    public ResponseEntity<String> guardarDocumento(@RequestParam("archivo") MultipartFile archivo, @RequestParam("id")Integer id) {
+        try {
+            Optional<SolicitudEstudiante> optional = service.findById(id);
+            if (optional.isPresent()) {
+                SolicitudEstudiante current = optional.get();
+                current.setUrl(archivo.getBytes());
+                service.save(current);
+                return ResponseEntity.ok("El documento se ha guardado correctamente. "+current.getUrl().length);
+            }
+        } catch (IOException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al guardar el documento.");
+        }
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al guardar el documento.");
+    }
+
+    @GetMapping("/mostrarpdf/{id}")
+    public ResponseEntity<byte[]> obtenerDocumento(@PathVariable("id") Integer id) {
+        Optional<SolicitudEstudiante> optional = service.findById(id);
+        if (optional.isPresent()) {
+            SolicitudEstudiante current = optional.get();
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_PDF);
+            headers.setContentDisposition(ContentDisposition.attachment().filename(current.getEstudiante().getUsuario().getCedula()+".pdf").build());
+            return new ResponseEntity<>(current.getUrl(), headers, HttpStatus.OK);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
 

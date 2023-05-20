@@ -1,13 +1,13 @@
 package com.api.ppp.back.controllers;
 
-import com.api.ppp.back.models.Accion;
 import com.api.ppp.back.models.SolicitudEmpresa;
 import com.api.ppp.back.services.SolicitudEmpresaService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.Optional;
 
 @RestController
@@ -63,5 +63,34 @@ public class SolicitudEmpresaController {
     public ResponseEntity<Void> eliminarID(@PathVariable("id") Integer id) {
         service.deleteById(id);
         return ResponseEntity.noContent().build();
+    }
+    @PostMapping("/guardarpdf")
+    public ResponseEntity<String> guardarDocumento(@RequestParam("archivo") MultipartFile archivo, @RequestParam("id")Integer id) {
+        try {
+            Optional<SolicitudEmpresa> optional = service.findById(id);
+            if (optional.isPresent()) {
+                SolicitudEmpresa current = optional.get();
+                current.setUrl(archivo.getBytes());
+                service.save(current);
+                return ResponseEntity.ok("El documento se ha guardado correctamente. "+current.getUrl().length);
+            }
+        } catch (IOException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al guardar el documento.");
+        }
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al guardar el documento.");
+    }
+
+    @GetMapping("/mostrarpdf/{id}")
+    public ResponseEntity<byte[]> obtenerDocumento(@PathVariable("id") Integer id) {
+        Optional<SolicitudEmpresa> optional = service.findById(id);
+        if (optional.isPresent()) {
+            SolicitudEmpresa current = optional.get();
+            HttpHeaders headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_PDF);
+            headers.setContentDisposition(ContentDisposition.attachment().filename(current.getId()+".pdf").build());
+            return new ResponseEntity<>(current.getUrl(), headers, HttpStatus.OK);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 }

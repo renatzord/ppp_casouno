@@ -34,8 +34,8 @@ public class SolicitudEmpresa implements Serializable {
     @Column(name = "sol_estado")
     private Integer estado;
 
-    @Column(name = "sol_url")
-    private String url;
+    @Column(name = "sol_url", columnDefinition = "bytea")
+    private byte[] url;
 
     // Foreign Key - Relationships
 

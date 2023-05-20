@@ -26,8 +26,8 @@ public class Visita implements Serializable {
     @Column(name = "vit_observacion")
     private String observacion;
 
-    @Column(name = "vit_url")
-    private String url;
+    @Column(name = "vit_url",columnDefinition = "bytea")
+    private byte[] url;
 
     // Foreign Key - Relationships
 
