@@ -15,8 +15,11 @@ public class Anexos implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "ane_url")
-    private String url;
+    @Column(name = "ane_tipo")
+    private Integer tipo;
+
+    @Column(name = "ane_url",columnDefinition = "bytea")
+    private byte[] url;
 
     // Foreign Key - Relationships
 
