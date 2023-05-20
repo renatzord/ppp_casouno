@@ -4,6 +4,7 @@ import com.api.ppp.back.models.Accion;
 import com.api.ppp.back.models.TutorInstituto;
 import com.api.ppp.back.services.TutorEmpresarialService;
 import com.api.ppp.back.services.TutorInstitutoService;
+import com.api.ppp.back.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,9 @@ public class TutorInstitutoController {
 
     @Autowired
     private TutorInstitutoService service;
+
+    @Autowired
+    private UsuarioService usuarioService;
 
     // To list all records
     @GetMapping("/listar")
@@ -59,5 +63,14 @@ public class TutorInstitutoController {
     public ResponseEntity<Void> eliminarID(@PathVariable("id") Integer id) {
         service.deleteById(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/buscarxusuario/{id}")
+    public ResponseEntity<?> buscarxUsuario(@PathVariable("id") Integer id) {
+        Optional<TutorInstituto> current = Optional.ofNullable(service.tutorxUsuario(usuarioService.findById(id).orElse(null)));
+        if(current.isPresent()) {
+            return ResponseEntity.ok().body(current.get());
+        }
+        return ResponseEntity.notFound().build();
     }
 }

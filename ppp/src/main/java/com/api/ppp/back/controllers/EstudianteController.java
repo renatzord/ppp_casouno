@@ -1,10 +1,7 @@
 package com.api.ppp.back.controllers;
 
 import com.api.ppp.back.models.*;
-import com.api.ppp.back.services.EstudianteService;
-import com.api.ppp.back.services.PracticaService;
-import com.api.ppp.back.services.TutorInstitutoService;
-import com.api.ppp.back.services.UsuarioService;
+import com.api.ppp.back.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,6 +27,9 @@ public class EstudianteController {
 
     @Autowired
     private UsuarioService usuarioService;
+
+    @Autowired
+    private TutorEmpresarialService tutorEmpresarialService;
 
     // To list all records
     @GetMapping("/listar")
@@ -96,6 +96,16 @@ public class EstudianteController {
             return ResponseEntity.ok().body(current.get());
         }
         return ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("/listarxtutorempresarial/{id}")
+    public ResponseEntity<?> listarEmp(@PathVariable("id") Integer id) {
+        List<Estudiante> estudiantes = new ArrayList<>();
+        TutorEmpresarial docente=tutorEmpresarialService.findById(id).orElse(null);
+        for (Practica pra: practicaService.practicaxEmpresa(docente)) {
+            estudiantes.add(pra.getEstudiante());
+        }
+        return ResponseEntity.ok().body(estudiantes);
     }
 
 }
