@@ -1,6 +1,7 @@
 package com.api.ppp.back.daos;
 
 import com.api.ppp.back.models.TutorEmpresarial;
+import com.api.ppp.back.models.Usuario;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
@@ -10,4 +11,5 @@ public interface TutorEmpresarialRepository extends BaseRepository<TutorEmpresar
 
     Optional<TutorEmpresarial> findByUsuarioId(Integer id);
 
+    Optional<TutorEmpresarial> findByUsuario(Usuario usuario);
 }

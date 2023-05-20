@@ -4,6 +4,7 @@ import com.api.ppp.back.daos.BaseRepository;
 import com.api.ppp.back.daos.PracticaRepository;
 import com.api.ppp.back.models.Estudiante;
 import com.api.ppp.back.models.Practica;
+import com.api.ppp.back.models.TutorEmpresarial;
 import com.api.ppp.back.models.TutorInstituto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,6 +34,11 @@ public class PracticaServiceImpl extends BaseServiceImpl<Practica, Integer> impl
     @Override
     public Practica practicaxEstudiante(Estudiante estudiante) {
         return repository.findByEstudiante(estudiante).orElse(null);
+    }
+
+    @Override
+    public List<Practica> practicaxEmpresa(TutorEmpresarial tutorInstituto) {
+        return repository.findByTutorEmpresarial(tutorInstituto).orElse(null);
     }
 
 }
