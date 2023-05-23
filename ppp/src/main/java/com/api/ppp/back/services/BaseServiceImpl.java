@@ -18,6 +18,10 @@ public abstract class BaseServiceImpl<T, ID extends Serializable> implements Bas
 
     @Override
     public List<T> findAll() {
+        List<T> entities = baseRepository.findAll();
+        if (entities.isEmpty()) {
+            throw new ResourceNotFoundException("No hay registros");
+        }
         return baseRepository.findAll();
     }
 
