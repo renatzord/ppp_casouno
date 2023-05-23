@@ -21,7 +21,7 @@ public class TutorInstituto {
     @Column(name = "tin_id")
     private Integer id;
 
-    @NotEmpty(message = "Error en datos provenientes de Fenix")
+    @NotNull(message = "Error en datos provenientes de Fenix")
     @Column(name = "tin_docente_id")
     private Integer idDocente;
 

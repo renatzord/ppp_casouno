@@ -1,6 +1,7 @@
 package com.api.ppp.back.services;
 
 import com.api.ppp.back.daos.BaseRepository;
+import com.api.ppp.back.exception.ResourceNotFoundException;
 import org.springframework.beans.BeanUtils;
 
 import java.io.Serializable;
@@ -22,7 +23,11 @@ public abstract class BaseServiceImpl<T, ID extends Serializable> implements Bas
 
     @Override
     public Optional<T> findById(ID id) {
-        return baseRepository.findById(id);
+        Optional<T> entity = baseRepository.findById(id);
+        if (entity.isPresent()) {
+            return baseRepository.findById(id);
+        }
+        throw new ResourceNotFoundException("Recurso no encontrado para el ID: " + id);
     }
 
     @Override
@@ -43,7 +48,7 @@ public abstract class BaseServiceImpl<T, ID extends Serializable> implements Bas
             BeanUtils.copyProperties(t, entity);
             return baseRepository.save(entity);
         }
-        return null;
+        throw new ResourceNotFoundException("Recurso no encontrado para el ID: " + id + " por lo que no se puede actualizar.");
     }
 
     @Override

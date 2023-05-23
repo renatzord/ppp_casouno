@@ -37,7 +37,7 @@ public class Estudiante {
     private Integer idEstudiante;
 
     @NotNull(message = "El usuario es obligatorio")
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "usu_id", referencedColumnName = "usu_id")
     private Usuario usuario;
 
