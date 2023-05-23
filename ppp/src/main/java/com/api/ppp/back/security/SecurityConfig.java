@@ -69,7 +69,7 @@ public class SecurityConfig {
                     .requestMatchers("/sucursal/**").hasAnyRole("ESTUD", "TEMP", "TISTA","GEREN","RESPP","DIREC","CORDI","RECT")
                     .requestMatchers("/tutorEmpresa/**").hasAnyRole("ESTUD", "TEMP", "TISTA","GEREN","RESPP","DIREC","CORDI","RECT")
                     .requestMatchers("/tutorInstituto/**").hasAnyRole("ESTUD", "TEMP", "TISTA","GEREN","RESPP","DIREC","CORDI","RECT")
-                    .requestMatchers("/usuario/**").hasAnyRole("ESTUD", "TEMP", "TISTA","GEREN","RESPP","DIREC","CORDI","RECT")
+                    .requestMatchers("/usuario/**").hasAnyRole("ADMIN", "ESTUD", "TEMP", "TISTA","GEREN","RESPP","DIREC","CORDI","RECT")
                     .requestMatchers("/visitaActividad/**").hasAnyRole("ESTUD", "TEMP", "TISTA","GEREN","RESPP","DIREC","CORDI","RECT")
                     .requestMatchers("/visita/**").hasAnyRole("ESTUD", "TEMP", "TISTA","GEREN","RESPP","DIREC","CORDI","RECT")
                     .requestMatchers("/ingresar").authenticated()
