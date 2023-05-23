@@ -1,6 +1,7 @@
 package com.api.ppp.back.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -19,6 +20,7 @@ public class SolicitudEstudiante implements Serializable {
     @Column(name = "ses_estado")
     private Integer estado;
 
+    @NotNull(message = "La fecha de envio es obligatoria.")
     @Column(name = "ses_fecha_envio")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fechaEnvio;
@@ -28,10 +30,12 @@ public class SolicitudEstudiante implements Serializable {
 
     // Foreign Key - Relationships
 
+    @NotNull(message = "El estudiante es obligatorio.")
     @ManyToOne
     @JoinColumn(name = "est_id")
     private Estudiante estudiante;
 
+    @NotNull(message = "La convocatoria es obligatoria.")
     @ManyToOne
     @JoinColumn(name = "cov_id", referencedColumnName = "cov_id")
     private Convocatoria convocatoria;
