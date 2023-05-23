@@ -101,6 +101,17 @@ public class SolicitudEstudianteController {
         return ResponseEntity.ok().body(service.solicitudesAprovadasxConvocatoria(convocaroriaService.findById(id).orElse(null)));
     }
 
+    @GetMapping("/listaraprobadasxconvocatoria0")
+    public ResponseEntity<?> listar0(@RequestParam("id") Integer id) {
+        Convocatoria bryayanvago= (Convocatoria) convocaroriaService.findById(id).orElse(null);
+        if (bryayanvago!=null){
+            for (SolicitudEstudiante sol:bryayanvago.getSolicitudEstudiantes()) {
+                if (sol.getEstado()!=0) bryayanvago.getSolicitudEstudiantes().remove(sol);
+            }
+        }
+        return ResponseEntity.ok().body(service.solicitudesAprovadasxConvocatoria(bryayanvago));
+    }
+
     @PostMapping("/guardarpdf")
     public ResponseEntity<String> guardarDocumento(@RequestParam("archivo") MultipartFile archivo, @RequestParam("id")Integer id) {
         try {
