@@ -103,6 +103,7 @@ public class SolicitudEstudianteController {
 
     @GetMapping("/listarpendientesxconvocatoria")
     public ResponseEntity<?> listarsolicitadas(@RequestParam("id") Integer id) {
+        //AQUI LA SUBIDA
         return ResponseEntity.ok().body(service.solicitudesPendientesxConvocatoria(convocaroriaService.findById(id).orElse(null)));
     }
 
