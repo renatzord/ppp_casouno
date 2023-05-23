@@ -5,6 +5,7 @@ import jakarta.validation.ConstraintViolationException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.orm.jpa.JpaObjectRetrievalFailureException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -29,8 +30,8 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(DataIntegrityViolationException.class)
     public ResponseEntity<ErrorMessage> handleDataIntegrityViolationException(DataIntegrityViolationException ex) {
         ErrorMessage errorResponse = new ErrorMessage(HttpStatus.BAD_REQUEST.value(),
-                LocalDateTime.now(), "Error de integridad de datos",
-                "El usuario ya está registrado.");
+                LocalDateTime.now(), "Error de integridad de datos (registro existente).",
+                ex.getRootCause().getMessage());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
     }
 
@@ -41,6 +42,16 @@ public class GlobalExceptionHandler {
         errorResponse.setDate(LocalDateTime.now());
         errorResponse.setMessage("Recurso no encontrado");
         errorResponse.setDescription(ex.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
+    }
+
+    @ExceptionHandler(JpaObjectRetrievalFailureException.class)
+    public ResponseEntity<ErrorMessage> handleJpaObjectRetrievalFailureException(JpaObjectRetrievalFailureException ex) {
+        ErrorMessage errorResponse = new ErrorMessage();
+        errorResponse.setStatusCode(HttpStatus.NOT_FOUND.value());
+        errorResponse.setDate(LocalDateTime.now());
+        errorResponse.setMessage("EL recurso no se encuentra en la base de datos.");
+        errorResponse.setDescription(ex.getRootCause().getMessage());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorResponse);
     }
 
