@@ -1,6 +1,7 @@
 package com.api.ppp.back.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -16,16 +17,18 @@ public class AspectoPractica implements Serializable {
     private Integer id;
 
     @Column(name = "apr_respuesta")
-    private Boolean respuesta;
+    private Boolean respuesta = false;
 
     // Foreign Key - Relationships
 
     @ManyToOne
-    @JoinColumn(name = "apr_aps_id")
+    @JoinColumn(name = "apr_aps_id", referencedColumnName = "aps_id", nullable = false)
+    @NotNull(message = "El aspecto es obligatorio.")
     private Aspecto aspecto;
 
     @ManyToOne
-    @JoinColumn(name = "apr_pra_id")
+    @JoinColumn(name = "apr_pra_id", referencedColumnName = "pra_id", nullable = false)
+    @NotNull(message = "La práctica es obligatoria.")
     private Practica practica;
 
     // Bidirectional Relationships

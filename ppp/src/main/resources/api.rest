@@ -19,9 +19,9 @@ Content-Type: application/json
   "idEstudiante": 221,
   "usuario": {
     "id": 0,
-    "cedula": "0234823945",
-    "nombre": "Jonathan",
-    "apellido": "Malla",
+    "cedula": "",
+    "nombre": "",
+    "apellido": "",
     "correo": "jonathan@gmail.com",
     "titulo": "BGU",
     "telefono": "0928374321",
