@@ -2,13 +2,16 @@ package com.api.ppp.back.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 import java.util.List;
 
 @Data
 @Entity
-@Table(name = "tutor_empresarial")
+@Table(name = "tutor_empresarial", uniqueConstraints = {
+        @UniqueConstraint(columnNames = "usu_id")
+})
 public class TutorEmpresarial {
 
     @Id
@@ -21,17 +24,19 @@ public class TutorEmpresarial {
 
     // Foreign Key - Relationships
 
+    @NotNull(message = "La empresa es obligatoria.")
     @ManyToOne
     @JoinColumn(name = "epr_id", referencedColumnName = "epr_id")
     private Empresa empresa;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @NotNull(message = "El usuario es obligatorio.")
+    @OneToOne
     @JoinColumn(name = "usu_id", referencedColumnName = "usu_id")
     private Usuario usuario;
 
     // Bidirectional Relationships
 
-    @OneToMany(mappedBy = "tutorEmpresarial",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "tutorEmpresarial", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore
     private List<Practica> practicas;
 

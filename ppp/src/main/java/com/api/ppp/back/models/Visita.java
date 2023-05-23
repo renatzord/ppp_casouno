@@ -2,6 +2,8 @@ package com.api.ppp.back.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -17,9 +19,11 @@ public class Visita implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @NotEmpty(message = "El asunto es obligatorio.")
     @Column(name = "vit_asunto")
     private String asunto;
 
+    @NotNull(message = "La semana es obligatoria.")
     @Column(name = "vit_semana")
     private Integer semana;
 
@@ -31,6 +35,7 @@ public class Visita implements Serializable {
 
     // Foreign Key - Relationships
 
+    @NotNull(message = "La práctica es obligatoria.")
     @ManyToOne
     @JoinColumn(name = "pra_id", referencedColumnName = "pra_id")
     private Practica practica;

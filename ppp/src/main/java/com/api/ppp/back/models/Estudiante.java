@@ -9,7 +9,9 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name = "estudiante")
+@Table(name = "estudiante", uniqueConstraints = {
+        @UniqueConstraint(columnNames = "usu_id")
+})
 public class Estudiante {
 
     @Id

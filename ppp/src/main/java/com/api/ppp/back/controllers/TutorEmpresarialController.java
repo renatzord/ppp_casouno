@@ -51,26 +51,17 @@ public class TutorEmpresarialController {
     // To create a record
     @PostMapping("/crear")
     public ResponseEntity<?> create(@RequestBody TutorEmpresarial entity, @RequestParam String rol) {
-        try {
-            if (!isPasswordSecure(entity.getUsuario().getPassword())) {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST) .body("Password must be secure");
-            }
-            String hashPwd = passwordEncoder.encode(entity.getUsuario().getPassword());
-            entity.getUsuario().setPassword(hashPwd);
-            TutorEmpresarial tutor = service.save(entity);
-            if (tutor.getId() > 0) {
-                Authority role = new Authority();
-                role.setName(rol);
-                role.setUsuario(tutor.getUsuario());
-                authorityRepository.save(role);
-                return ResponseEntity.status(HttpStatus.CREATED)
-                        .body("Given user details are successfully registered");
-            } else {
-                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("An error occurred while saving the user");
-            }
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("An exception occured due to " + e.getMessage());
+        if (!isPasswordSecure(entity.getUsuario().getPassword())) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST) .body("La contraseña no es segura.");
         }
+        String hashPwd = passwordEncoder.encode(entity.getUsuario().getPassword());
+        entity.getUsuario().setPassword(hashPwd);
+        TutorEmpresarial tutor = service.save(entity);
+        Authority role = new Authority();
+        role.setName(rol);
+        role.setUsuario(tutor.getUsuario());
+        authorityRepository.save(role);
+        return ResponseEntity.status(HttpStatus.CREATED).body("Tutor registrado con exito.");
     }
 
     // To find one record and update it, specifically by a unique identifier (PK or ID)

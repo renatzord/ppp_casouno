@@ -1,6 +1,7 @@
 package com.api.ppp.back.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -15,6 +16,7 @@ public class VisitaActividad implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @NotEmpty(message = "La actividad es obligatoria.")
     @Column(name = "vac_actividad")
     private String actividad;
 
