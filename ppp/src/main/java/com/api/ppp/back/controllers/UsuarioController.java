@@ -1,17 +1,20 @@
 package com.api.ppp.back.controllers;
 
 import com.api.ppp.back.daos.AuthorityRepository;
+import com.api.ppp.back.exception.ResourceNotFoundException;
 import com.api.ppp.back.models.Authority;
-import com.api.ppp.back.models.TutorInstituto;
 import com.api.ppp.back.models.Usuario;
 import com.api.ppp.back.services.UsuarioService;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import static com.api.ppp.back.constant.Validate.isPasswordSecure;
 
@@ -61,10 +64,37 @@ public class UsuarioController {
         return ResponseEntity .status(HttpStatus.CREATED).body("Usuario registrado con exito.");
     }
 
-    // To list users by their roles
+    // To list users by a specific role
     @GetMapping("/listar/rol")
     public ResponseEntity<?> listarRol(String rol) {
         return ResponseEntity.ok().body(authorityRepository.findByName(rol));
+    }
+
+    // To find a set of authorities by a user ID
+    @GetMapping("/authority/usuario/{id}")
+    public ResponseEntity<?> buscarAuthUserID(@PathVariable("id") Integer id) {
+        Optional<Usuario> usuario = service.findById(id);
+        Set<Authority> authorities = authorityRepository.findByUsuario(usuario.get());
+        return ResponseEntity.ok().body(authorities);
+    }
+
+    // to list all records in table authorities
+    @GetMapping("/authority/listar")
+    public ResponseEntity<?> buscarAuth() {
+        List<Authority> authorities = authorityRepository.findAll();
+        return ResponseEntity.ok().body(authorities);
+    }
+
+    // To update a user's role name just by its name
+    @PostMapping("/authority/editar/{id}")
+    public ResponseEntity<?> editarAuthority(@PathVariable("id") Integer id, @RequestParam String name) {
+        Optional<Authority> current = authorityRepository.findById(id);
+        if (current.isEmpty()) {
+            throw new ResourceNotFoundException("Recurso no encontrado para el ID: " + id + " por lo que no se puede actualizar.");
+        }
+        Authority authority = current.get();
+        authority.setName(name);
+        return ResponseEntity.ok().body(authorityRepository.save(authority));
     }
 
 }

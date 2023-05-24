@@ -42,10 +42,10 @@ public class AuthenticationProvider implements org.springframework.security.auth
             if (passwordEncoder.matches(pwd, usuario.get().getPassword())) {
                 return new UsernamePasswordAuthenticationToken(username, pwd, getGrantedAuthorities(authorities));
             } else {
-                throw new BadCredentialsException("Invalid password!");
+                throw new BadCredentialsException("Contraseña incorrecta!");
             }
         }else {
-            throw new BadCredentialsException("No user registered with this details!");
+            throw new BadCredentialsException("No hay un usuario registrado con esas credenciales!");
         }
     }
 

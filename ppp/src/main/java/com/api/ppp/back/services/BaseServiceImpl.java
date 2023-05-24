@@ -29,7 +29,7 @@ public abstract class BaseServiceImpl<T, ID extends Serializable> implements Bas
     public Optional<T> findById(ID id) {
         Optional<T> entity = baseRepository.findById(id);
         if (entity.isPresent()) {
-            return baseRepository.findById(id);
+            return entity;
         }
         throw new ResourceNotFoundException("Recurso no encontrado para el ID: " + id);
     }
