@@ -2,6 +2,7 @@ package com.api.ppp.back.services;
 
 import com.api.ppp.back.daos.BaseRepository;
 import com.api.ppp.back.daos.PracticaRepository;
+import com.api.ppp.back.exception.ResourceNotFoundException;
 import com.api.ppp.back.models.Estudiante;
 import com.api.ppp.back.models.Practica;
 import com.api.ppp.back.models.TutorEmpresarial;
@@ -24,12 +25,29 @@ public class PracticaServiceImpl extends BaseServiceImpl<Practica, Integer> impl
 
     @Override
     public List<Practica> findByTutorInstitutoUsuarioId(Integer id) {
-        return repository.findByTutorInstitutoUsuarioId(id);
+        List<Practica> practicas = repository.findByTutorInstitutoUsuarioId(id);
+        if (practicas.isEmpty()) {
+            throw new ResourceNotFoundException("No hay registros");
+        }
+        return practicas;
     }
 
     @Override
     public List<Practica> findByTutorEmpresarialUsuarioId(Integer id) {
-        return repository.findByTutorEmpresarialUsuarioId(id);
+        List<Practica> practicas = repository.findByTutorEmpresarialUsuarioId(id);
+        if (practicas.isEmpty()) {
+            throw new ResourceNotFoundException("No hay registros");
+        }
+        return practicas;
+    }
+
+    @Override
+    public List<Practica> findByConvocatoriaId(Integer id) {
+        List<Practica> practicas = repository.findByConvocatoriaId(id);
+        if (practicas.isEmpty()) {
+            throw new ResourceNotFoundException("No hay registros");
+        }
+        return practicas;
     }
 
     @Override

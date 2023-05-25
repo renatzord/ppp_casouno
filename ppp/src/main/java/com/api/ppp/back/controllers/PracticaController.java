@@ -80,10 +80,16 @@ public class PracticaController {
         return ResponseEntity.ok().body(service.findByTutorInstitutoUsuarioId(id));
     }
 
-    // List of all assigned internships according the Tutor_Instituto linked an User
+    // List of all assigned internships according the Tutor_Empresarial linked an User
     @GetMapping("/listar/temp/{id}")
     public ResponseEntity<?> listarByTemp(@PathVariable Integer id) {
         return ResponseEntity.ok().body(service.findByTutorEmpresarialUsuarioId(id));
+    }
+
+    // To list all practices by a Convocatoria ID
+    @GetMapping("/listar/convocatoria/{id}")
+    public ResponseEntity<?> listarByConvocatoria(@PathVariable Integer id) {
+        return ResponseEntity.ok().body(service.findByConvocatoriaId(id));
     }
 
     @GetMapping("/buscarxestudiante/{idEstudiante}")

@@ -62,4 +62,11 @@ public class CarreraController {
         service.deleteById(id);
         return ResponseEntity.noContent().build();
     }
+
+    // To find a Carrera by iis IdCarrera (Fenix)
+    @DeleteMapping("/buscar/idCarrera/{id}")
+    public ResponseEntity<?> buscarPorIdCarrera(Integer idCarrera) {
+        return ResponseEntity.ok().body(service.buscarPorIdCarrera(idCarrera));
+    }
+
 }
