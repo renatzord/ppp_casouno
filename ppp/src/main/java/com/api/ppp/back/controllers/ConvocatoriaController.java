@@ -72,6 +72,7 @@ public class ConvocatoriaController {
         return ResponseEntity.ok().body(service.convocatoriaActivas(id));
     }
 
+    // TO find a Convocatoria by a SolEmpresa_ID
     @GetMapping("/buscar/solEmpresa/{id}")
     public ResponseEntity<?> buscarPorSolicitudEmpresa(@PathVariable Integer id) {
         return ResponseEntity.ok().body(service.findBySolicitudEmpresaId(id));
