@@ -97,4 +97,12 @@ public class CalificacionController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    // TO find a list of Calificacion assiated to a Practica ID
+    @GetMapping("/listar/practica/{id}")
+    public ResponseEntity<?> buscarPorTistaId(@PathVariable Integer id) {
+        return ResponseEntity.ok().body(service.findByPracticaId(id));
+    }
+
+
 }
