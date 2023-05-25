@@ -18,6 +18,9 @@ public class Notificacion implements Serializable {
     @Column(name = "not_tipo")
     private Integer tipo;
 
+    @Column(name = "not_estado")
+    private boolean estado;
+
     // Foreign Key - Relationships
 
     @ManyToOne(cascade = CascadeType.ALL)
