@@ -7,7 +7,7 @@ import com.api.ppp.back.models.TutorInstituto;
 
 import java.util.List;
 
-import java.util.List;
+import java.util.Optional;
 
 public interface PracticaService extends BaseService<Practica, Integer> {
 
@@ -18,5 +18,7 @@ public interface PracticaService extends BaseService<Practica, Integer> {
     public Practica practicaxEstudiante(Estudiante estudiante);
 
     List<Practica> practicaxEmpresa(TutorEmpresarial tutorInstituto);
+
+    List<Practica> practicaxEstudianteUsuario(Integer id);
 
 }

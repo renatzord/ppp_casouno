@@ -89,4 +89,9 @@ public class PracticaController {
         return ResponseEntity.notFound().build();
     }
 
+    @GetMapping("/listar/usuarioest/{id}")
+    public ResponseEntity<?> listarByUsuarioEst(@PathVariable Integer id) {
+        return ResponseEntity.ok().body(service.practicaxEstudianteUsuario(id));
+    }
+
 }

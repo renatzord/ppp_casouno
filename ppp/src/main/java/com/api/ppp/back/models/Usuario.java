@@ -10,6 +10,7 @@ import lombok.Data;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -62,5 +63,13 @@ public class Usuario implements Serializable {
     @JsonIgnore
     @OneToMany(mappedBy = "usuario", fetch = FetchType.EAGER)
     private Set<Authority> authorities;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "usuarioTutor", fetch = FetchType.LAZY)
+    private List<Notificacion> notificaciones_tutores;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "usuarioEstudiante", fetch = FetchType.LAZY)
+    private List<Notificacion> notificaciones_estudiante;
 
 }

@@ -18,5 +18,7 @@ public interface PracticaRepository extends BaseRepository<Practica, Integer> {
 
     Optional<List<Practica>>findByTutorEmpresarial(TutorEmpresarial tutorInstituto);
 
+    List<Practica> findByEstudianteUsuarioId(Integer id);
+
 
 }

@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PracticaServiceImpl extends BaseServiceImpl<Practica, Integer> implements PracticaService {
@@ -39,6 +40,11 @@ public class PracticaServiceImpl extends BaseServiceImpl<Practica, Integer> impl
     @Override
     public List<Practica> practicaxEmpresa(TutorEmpresarial tutorInstituto) {
         return repository.findByTutorEmpresarial(tutorInstituto).orElse(null);
+    }
+
+    @Override
+    public List<Practica> practicaxEstudianteUsuario(Integer id) {
+        return repository.findByEstudianteUsuarioId(id);
     }
 
 }
