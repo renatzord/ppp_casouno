@@ -28,6 +28,11 @@ public class PracticaServiceImpl extends BaseServiceImpl<Practica, Integer> impl
     }
 
     @Override
+    public List<Practica> findByTutorEmpresarialUsuarioId(Integer id) {
+        return repository.findByTutorEmpresarialUsuarioId(id);
+    }
+
+    @Override
     public List<Practica> practicaxDocente(TutorInstituto tutorInstituto) {
         return repository.findByTutorInstituto(tutorInstituto).orElse(null);
     }

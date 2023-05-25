@@ -13,6 +13,8 @@ public interface PracticaService extends BaseService<Practica, Integer> {
 
     List<Practica> findByTutorInstitutoUsuarioId(Integer id);
 
+    List<Practica> findByTutorEmpresarialUsuarioId(Integer id);
+
     public List<Practica> practicaxDocente(TutorInstituto tutorInstituto);
 
     public Practica practicaxEstudiante(Estudiante estudiante);

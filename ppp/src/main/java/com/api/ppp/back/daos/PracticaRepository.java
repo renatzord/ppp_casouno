@@ -12,6 +12,9 @@ import java.util.Optional;
 public interface PracticaRepository extends BaseRepository<Practica, Integer> {
 
     List<Practica> findByTutorInstitutoUsuarioId(Integer id);
+
+    List<Practica> findByTutorEmpresarialUsuarioId(Integer id);
+
     Optional<List<Practica>>findByTutorInstituto(TutorInstituto tutorInstituto);
 
     Optional<Practica>findByEstudiante(Estudiante estudiante);
