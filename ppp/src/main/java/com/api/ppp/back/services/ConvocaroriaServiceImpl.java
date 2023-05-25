@@ -2,6 +2,7 @@ package com.api.ppp.back.services;
 
 import com.api.ppp.back.daos.BaseRepository;
 import com.api.ppp.back.daos.ConvocatoriaRepository;
+import com.api.ppp.back.exception.ResourceNotFoundException;
 import com.api.ppp.back.models.Convocatoria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -30,6 +31,15 @@ import java.util.List;
     @Override
     public List<Convocatoria> listConvocatorias() {
         return repository.findAllConvocatorias();
+    }
+
+    @Override
+    public List<Convocatoria> findBySolicitudEmpresaId(Integer id) {
+        List<Convocatoria> convocatorias = repository.findBySolicitudEmpresaId(id);
+        if (convocatorias.isEmpty()) {
+            throw new ResourceNotFoundException("No hay registros relacionados en Convocatoria con la SolicitudEmpresa_ID: " + id);
+        }
+        return convocatorias;
     }
 
 }

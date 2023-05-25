@@ -27,7 +27,7 @@ public class PracticaServiceImpl extends BaseServiceImpl<Practica, Integer> impl
     public List<Practica> findByTutorInstitutoUsuarioId(Integer id) {
         List<Practica> practicas = repository.findByTutorInstitutoUsuarioId(id);
         if (practicas.isEmpty()) {
-            throw new ResourceNotFoundException("No hay registros");
+            throw new ResourceNotFoundException("No hay registros relacionados en Practicas con TISTA_ID: " + id);
         }
         return practicas;
     }
@@ -36,7 +36,7 @@ public class PracticaServiceImpl extends BaseServiceImpl<Practica, Integer> impl
     public List<Practica> findByTutorEmpresarialUsuarioId(Integer id) {
         List<Practica> practicas = repository.findByTutorEmpresarialUsuarioId(id);
         if (practicas.isEmpty()) {
-            throw new ResourceNotFoundException("No hay registros");
+            throw new ResourceNotFoundException("No hay registros relacionados en Practicas con TEMP_ID: " + id);
         }
         return practicas;
     }
@@ -45,7 +45,7 @@ public class PracticaServiceImpl extends BaseServiceImpl<Practica, Integer> impl
     public List<Practica> findByConvocatoriaId(Integer id) {
         List<Practica> practicas = repository.findByConvocatoriaId(id);
         if (practicas.isEmpty()) {
-            throw new ResourceNotFoundException("No hay registros");
+            throw new ResourceNotFoundException("No hay registros relacionados en Practicas con Convocatoria ID: " + id);
         }
         return practicas;
     }

@@ -64,8 +64,8 @@ public class CarreraController {
     }
 
     // To find a Carrera by iis IdCarrera (Fenix)
-    @DeleteMapping("/buscar/idCarrera/{id}")
-    public ResponseEntity<?> buscarPorIdCarrera(Integer idCarrera) {
+    @GetMapping("/buscar/idCarrera")
+    public ResponseEntity<?> buscarPorIdCarrera(@RequestParam Integer idCarrera) {
         return ResponseEntity.ok().body(service.buscarPorIdCarrera(idCarrera));
     }
 

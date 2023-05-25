@@ -71,4 +71,10 @@ public class ConvocatoriaController {
     public ResponseEntity<?> listarxfechaactiva(@RequestParam("idCarrera") Integer id) {
         return ResponseEntity.ok().body(service.convocatoriaActivas(id));
     }
+
+    @GetMapping("/buscar/solEmpresa/{id}")
+    public ResponseEntity<?> buscarPorSolicitudEmpresa(@PathVariable Integer id) {
+        return ResponseEntity.ok().body(service.findBySolicitudEmpresaId(id));
+    }
+
 }
