@@ -24,4 +24,6 @@ public interface ConvocatoriaRepository extends BaseRepository<Convocatoria, Int
             "AND cov.solicitudEmpresa.estado = 1")
     List<Convocatoria> findAllConvocatorias();
 
+    List<Convocatoria> findBySolicitudEmpresaId(Integer id);
+
 }

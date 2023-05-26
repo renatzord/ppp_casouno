@@ -10,7 +10,7 @@ import java.io.Serializable;
 
 @Data
 @Entity
-@Table(name = "calificacion")
+@Table(name = "calificacion", uniqueConstraints = @UniqueConstraint(columnNames = {"cal_tutor", "pra_id"}) )
 public class Calificacion implements Serializable {
 
     @Id
@@ -20,7 +20,7 @@ public class Calificacion implements Serializable {
 
     @Column(name = "cal_tutor")
     @NotNull(message = "El tutor es obligatorio.")
-    @Min(value = 0, message = "Tutor solo puede ser 0 y 1.") @Max(value = 1, message = "Tutor solo puede ser 0 y 1.")
+    @Min(value = 0, message = "Tutor solo puede ser 0 y 1.") @Max(value = 3, message = "Tutor solo puede ser 0 y 1.")
     private Integer tutor;
 
     @Column(name = "cal_a", nullable = false)
