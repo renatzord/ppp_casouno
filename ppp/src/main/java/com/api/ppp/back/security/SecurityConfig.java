@@ -100,7 +100,7 @@ public class SecurityConfig {
                 .hasAnyRole("ESTUD", "TEMP", "TISTA", "GEREN", "RESPP", "DIREC", "CORDI", "RECT", "ADMIN")
                 .requestMatchers("/ingresar").authenticated()
                 // Letting Access of fenix to ALL by the moment
-                .requestMatchers("/register", "/usuariofenix/*", "/fenix/", "/carrera/*", "/noticias").permitAll()
+                .requestMatchers("/register", "/usuariofenix/**", "/fenix/**", "/carrera/**", "/noticias").permitAll()
                 .and().formLogin().and().httpBasic();
         return http.build();
     }
