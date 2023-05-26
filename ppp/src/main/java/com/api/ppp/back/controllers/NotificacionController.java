@@ -47,10 +47,7 @@ public class NotificacionController {
 
     @GetMapping("/listarestudiante/{usuarioid}")
     public ResponseEntity<?> listarest(@PathVariable("usuarioid") Integer id) {
-        List<Notificacion> lista= new ArrayList<>();
-        lista.addAll(service.notificacionxtipo(usuarioService.findById(id).orElse(null),3));
-        lista.addAll(service.notificacionxtipo(usuarioService.findById(id).orElse(null),4));
-        return ResponseEntity.ok().body(lista);
+        return ResponseEntity.ok().body(service.notificacionxtipo(usuarioService.findById(id).orElse(null),3));
     }
 
 }

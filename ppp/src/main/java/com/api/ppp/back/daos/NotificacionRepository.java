@@ -12,7 +12,7 @@ public interface NotificacionRepository extends BaseRepository<Notificacion, Int
 
     Optional <List<Notificacion>>  findTop20ByUsuarioTutorOrderByIdDesc(Usuario usuarioTutor);
 
-    Optional<List<Notificacion>> findTop20ByUsuarioEstudianteOrderByIdDesc(Usuario usuarioEstudiante);
+    Optional<List<Notificacion>> findTop20ByUsuarioEstudianteAndTipoOrderByIdDesc(Usuario usuarioEstudiante,Integer tipo);
 
 
 }
