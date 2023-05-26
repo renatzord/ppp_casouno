@@ -52,7 +52,7 @@ public class TutorEmpresarialController {
     @PostMapping("/crear")
     public ResponseEntity<?> create(@RequestBody TutorEmpresarial entity, @RequestParam String rol) {
         if (!isPasswordSecure(entity.getUsuario().getPassword())) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST) .body("La contraseña no es segura.");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("La contraseña no es segura.");
         }
         String hashPwd = passwordEncoder.encode(entity.getUsuario().getPassword());
         entity.getUsuario().setPassword(hashPwd);
@@ -61,7 +61,7 @@ public class TutorEmpresarialController {
         role.setName(rol);
         role.setUsuario(tutor.getUsuario());
         authorityRepository.save(role);
-        return ResponseEntity.status(HttpStatus.CREATED).body("Tutor registrado con exito.");
+        return ResponseEntity.status(HttpStatus.CREATED).body(tutor);
     }
 
     // To find one record and update it, specifically by a unique identifier (PK or ID)

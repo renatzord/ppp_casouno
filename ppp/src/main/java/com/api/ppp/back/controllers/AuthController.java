@@ -38,10 +38,11 @@ public class AuthController {
     @Autowired
     private AuthorityRepository authorityRepository;
 
+
     @PostMapping("/register")
     public ResponseEntity<?> crear(@Valid @RequestBody Estudiante entity) {
         if (!isPasswordSecure(entity.getUsuario().getPassword())) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST) .body("La contraseña no es segura");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("La contraseña no es segura");
         }
         String hashPwd = passwordEncoder.encode(entity.getUsuario().getPassword());
         entity.getUsuario().setPassword(hashPwd);
@@ -50,7 +51,7 @@ public class AuthController {
         role.setName("ROLE_ESTUD");
         role.setUsuario(estudiante.getUsuario());
         authorityRepository.save(role);
-        return ResponseEntity.status(HttpStatus.CREATED).body("Usuario registrado con exito.");
+        return ResponseEntity.status(HttpStatus.CREATED).body(estudiante);
     }
 
     @RequestMapping("/ingresar")

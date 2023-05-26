@@ -22,7 +22,7 @@ public class NotificacionController {
     @Autowired
     private UsuarioService usuarioService;
 
-    @GetMapping("/listar")
+    @GetMapping("/listar/{usuarioid}/{tipo}")
     public ResponseEntity<?> listar(@PathVariable("usuarioid") Integer id,@PathVariable("tipo") Integer tipo) {
         return ResponseEntity.ok().body(service.notificacionxtipo(usuarioService.findById(id).orElse(null),tipo));
     }
@@ -32,12 +32,12 @@ public class NotificacionController {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.save(entity));
     }
 
-    @PostMapping("/editar/{id}")
-    public ResponseEntity<?> editar(@PathVariable("id") Integer id, @RequestBody Notificacion entity) {
+    @PostMapping("/editar/{id}/{estado}")
+    public ResponseEntity<?> editar(@PathVariable("id") Integer id, @PathVariable("estado") Boolean estado) {
         Optional<Notificacion> optional = service.findById(id);
         if(optional.isPresent()) {
             Notificacion current = optional.get();
-            current.setEstado(entity.isEstado());
+            current.setEstado(estado);
             return ResponseEntity.status(HttpStatus.CREATED).body(service.save(current));
         }
         return ResponseEntity.notFound().build();

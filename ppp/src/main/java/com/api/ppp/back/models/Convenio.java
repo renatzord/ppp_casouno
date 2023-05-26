@@ -51,7 +51,7 @@ public class Convenio implements Serializable {
     @JoinColumn(name = "car_id", referencedColumnName = "car_id", nullable = false)
     private Carrera carrera;
 
-    @NotNull(message = "La firma/RESPP es obligatoria.")
+    //@NotNull(message = "La firma/RESPP es obligatoria.")
     @ManyToOne
     @JoinColumn(name = "con_firma_inst", referencedColumnName = "tin_id")
     private TutorInstituto firmaInst;

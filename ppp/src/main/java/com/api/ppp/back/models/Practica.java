@@ -57,12 +57,12 @@ public class Practica implements Serializable {
     @JoinColumn(name = "est_id", referencedColumnName = "est_id")
     private Estudiante estudiante;
 
-    @NotNull(message = "El tutor del instituto es obligatorio.")
+    //@NotNull(message = "El tutor del instituto es obligatorio.")
     @ManyToOne
     @JoinColumn(name = "tin_id", referencedColumnName = "tin_id")
     private TutorInstituto tutorInstituto;
 
-    @NotNull(message = "El tutor de la empresa es obligatorio.")
+    //@NotNull(message = "El tutor de la empresa es obligatorio.")
     @ManyToOne
     @JoinColumn(name = "tem_id", referencedColumnName = "tem_id")
     private TutorEmpresarial tutorEmpresarial;
