@@ -31,7 +31,6 @@ public class Actividad implements Serializable {
     @JoinColumn(name = "sol_id", referencedColumnName = "sol_id", nullable = false)
     private SolicitudEmpresa solicitudEmpresa;
 
-    @NotNull(message = "La materia es obligatoria.")
     @ManyToOne
     @JoinColumn(name = "mat_id", referencedColumnName = "mat_id", nullable = false)
     private Materia materia;

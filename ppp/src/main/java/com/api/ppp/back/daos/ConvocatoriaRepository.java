@@ -21,7 +21,7 @@ public interface ConvocatoriaRepository extends BaseRepository<Convocatoria, Int
     Optional<List<Convocatoria>> convocatoriasActivasxCarrera(@Param("carreraId") Integer carreraId);
 
     @Query(value = "SELECT cov FROM Convocatoria cov WHERE CURRENT_DATE BETWEEN cov.fechaInicio AND cov.fechaFin " +
-            "AND cov.solicitudEmpresa.estado = 1")
+            "AND cov.solicitudEmpresa.estado = 2")
     List<Convocatoria> findAllConvocatorias();
 
     List<Convocatoria> findBySolicitudEmpresaId(Integer id);
