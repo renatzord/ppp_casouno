@@ -28,11 +28,11 @@ public class Actividad implements Serializable {
 
     @NotNull(message = "La solicitud es obligatoria.")
     @ManyToOne
-    @JoinColumn(name = "sol_id", referencedColumnName = "sol_id", nullable = false)
+    @JoinColumn(name = "sol_id", referencedColumnName = "sol_id")
     private SolicitudEmpresa solicitudEmpresa;
 
     @ManyToOne
-    @JoinColumn(name = "mat_id", referencedColumnName = "mat_id", nullable = false)
+    @JoinColumn(name = "mat_id", referencedColumnName = "mat_id")
     private Materia materia;
 
     // Bidirectional Relationships
