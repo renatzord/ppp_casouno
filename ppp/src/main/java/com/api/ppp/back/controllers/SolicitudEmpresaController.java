@@ -93,4 +93,17 @@ public class SolicitudEmpresaController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    // To find by ESTADO 1 ENVIADA
+    @GetMapping("/estadoEnviado")
+    public ResponseEntity<?> listarPorEstadoEnviado() {
+        return ResponseEntity.ok().body(service.listarPorEstadoEnviado());
+    }
+
+    // To find by ESTADO 2 ACEPTADA
+    @GetMapping("/estadoAceptado")
+    public ResponseEntity<?> listarPorEstadoAceptado() {
+        return ResponseEntity.ok().body(service.listarPorEstadoAceptadoo());
+    }
+
 }
