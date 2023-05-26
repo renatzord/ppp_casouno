@@ -10,7 +10,7 @@ import java.util.Optional;
 @Repository
 public interface NotificacionRepository extends BaseRepository<Notificacion, Integer> {
 
-    Optional <List<Notificacion>>  findTop20ByUsuarioTutorOrderByIdDesc(Usuario usuarioTutor);
+    Optional <List<Notificacion>>  findTop20ByUsuarioTutorAndTipoOrderByIdDesc(Usuario usuarioTutor,Integer tipo);
 
     Optional<List<Notificacion>> findTop20ByUsuarioEstudianteAndTipoOrderByIdDesc(Usuario usuarioEstudiante,Integer tipo);
 

@@ -29,7 +29,10 @@ public class NotificacionServiceImpl extends BaseServiceImpl<Notificacion, Integ
             lista.addAll(repository.findTop20ByUsuarioEstudianteAndTipoOrderByIdDesc(usuario,4).orElse(null));
             return lista;
         }else{
-            return repository.findTop20ByUsuarioTutorOrderByIdDesc(usuario).orElse(null);
+            if(tipo==1)
+            return repository.findTop20ByUsuarioTutorAndTipoOrderByIdDesc(usuario,tipo).orElse(null);
+            else
+                return repository.findTop20ByUsuarioTutorAndTipoOrderByIdDesc(usuario,tipo).orElse(null);
         }
     }
 }
