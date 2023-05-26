@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -41,6 +43,14 @@ public class NotificacionController {
             return ResponseEntity.status(HttpStatus.CREATED).body(service.save(current));
         }
         return ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("/listarestudiante/{usuarioid}")
+    public ResponseEntity<?> listarest(@PathVariable("usuarioid") Integer id) {
+        List<Notificacion> lista= new ArrayList<>();
+        lista.addAll(service.notificacionxtipo(usuarioService.findById(id).orElse(null),3));
+        lista.addAll(service.notificacionxtipo(usuarioService.findById(id).orElse(null),4));
+        return ResponseEntity.ok().body(lista);
     }
 
 }
