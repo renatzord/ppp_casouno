@@ -4,6 +4,7 @@ import com.api.ppp.back.models.Convocatoria;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 public interface ConvocaroriaService extends BaseService<Convocatoria, Integer> {
 
@@ -11,6 +12,8 @@ public interface ConvocaroriaService extends BaseService<Convocatoria, Integer> 
 
     List<Convocatoria> listConvocatorias();
 
-    List<Convocatoria> findBySolicitudEmpresaId(Integer id);
+    Optional<Convocatoria> findBySolicitudEmpresaId(Integer id);
+
+
 
 }

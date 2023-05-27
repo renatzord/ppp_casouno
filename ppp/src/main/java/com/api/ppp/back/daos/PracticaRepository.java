@@ -1,11 +1,8 @@
 package com.api.ppp.back.daos;
 
-import com.api.ppp.back.models.Estudiante;
-import com.api.ppp.back.models.Practica;
-import com.api.ppp.back.models.TutorEmpresarial;
+import com.api.ppp.back.models.*;
 import org.springframework.stereotype.Repository;
 import java.util.List;
-import com.api.ppp.back.models.TutorInstituto;
 import java.util.Optional;
 
 @Repository
@@ -24,5 +21,7 @@ public interface PracticaRepository extends BaseRepository<Practica, Integer> {
     List<Practica> findByEstudianteUsuarioId(Integer id);
 
     List<Practica> findByConvocatoriaId(Integer id);
+
+    List<Practica> findByConvocatoria_SolicitudEmpresa_Convenio_Empresa(Empresa empresa);
 
 }

@@ -23,6 +23,9 @@ public interface ConvocatoriaRepository extends BaseRepository<Convocatoria, Int
     @Query(value = "SELECT cov FROM Convocatoria cov WHERE CURRENT_DATE BETWEEN cov.fechaInicio AND cov.fechaFin")
     List<Convocatoria> findAllConvocatorias();
 
-    List<Convocatoria> findBySolicitudEmpresaId(Integer id);
+    @Query("SELECT c FROM Convocatoria c WHERE c.solicitudEmpresa.id = :id AND c.id = (SELECT MAX(c2.id) FROM Convocatoria c2 WHERE c2.solicitudEmpresa.id = :id)")
+    Optional<Convocatoria> findLatestBySolicitudEmpresaId(Integer id);
+
+
 
 }

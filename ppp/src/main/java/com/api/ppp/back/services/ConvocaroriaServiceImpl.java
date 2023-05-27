@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Service
  public class ConvocaroriaServiceImpl extends BaseServiceImpl<Convocatoria, Integer> implements ConvocaroriaService {
@@ -34,8 +34,8 @@ import java.util.List;
     }
 
     @Override
-    public List<Convocatoria> findBySolicitudEmpresaId(Integer id) {
-        List<Convocatoria> convocatorias = repository.findBySolicitudEmpresaId(id);
+    public Optional<Convocatoria> findBySolicitudEmpresaId(Integer id) {
+        Optional<Convocatoria> convocatorias = repository.findLatestBySolicitudEmpresaId(id);
         if (convocatorias.isEmpty()) {
             throw new ResourceNotFoundException("No hay registros relacionados en Convocatoria con la SolicitudEmpresa_ID: " + id);
         }

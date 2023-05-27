@@ -1,9 +1,13 @@
 package com.api.ppp.back.controllers;
 
+import com.api.ppp.back.exception.ResourceNotFoundException;
+import com.api.ppp.back.models.Empresa;
 import com.api.ppp.back.models.Practica;
+import com.api.ppp.back.models.TutorEmpresarial;
 import com.api.ppp.back.models.Usuario;
 import com.api.ppp.back.services.EstudianteService;
 import com.api.ppp.back.services.PracticaService;
+import com.api.ppp.back.services.TutorEmpresarialService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +26,8 @@ public class PracticaController {
     @Autowired
     private EstudianteService estudianteService;
 
+    @Autowired
+    private TutorEmpresarialService tutorEmpresarialService;
 
     // To list all records
     @GetMapping("/listar")
@@ -105,5 +111,19 @@ public class PracticaController {
     public ResponseEntity<?> listarByUsuarioEst(@PathVariable Integer id) {
         return ResponseEntity.ok().body(service.practicaxEstudianteUsuario(id));
     }
+
+    @GetMapping("/buscar/practica/geren")
+    public ResponseEntity<?> listarPorGerenUsario(@RequestParam Integer id) {
+        Optional<TutorEmpresarial> optional = tutorEmpresarialService.buscarGerenteUsuario(id);
+        if (optional.isEmpty()) {
+            throw new ResourceNotFoundException("No existe un Genrente con ese ID: " + id);
+        }
+        TutorEmpresarial empresarial = optional.get();
+        Empresa empresa = new Empresa();
+        empresa.setId(empresarial.getId());
+        return ResponseEntity.ok(service.findByConvocatoriaSolicitudEmpresaConvenioEmpresa(empresa));
+    }
+
+
 
 }

@@ -1,9 +1,6 @@
 package com.api.ppp.back.services;
 
-import com.api.ppp.back.models.Estudiante;
-import com.api.ppp.back.models.Practica;
-import com.api.ppp.back.models.TutorEmpresarial;
-import com.api.ppp.back.models.TutorInstituto;
+import com.api.ppp.back.models.*;
 
 import java.util.List;
 
@@ -24,5 +21,7 @@ public interface PracticaService extends BaseService<Practica, Integer> {
     List<Practica> practicaxEstudianteUsuario(Integer id);
 
     List<Practica> findByConvocatoriaId(Integer id);
+
+    List<Practica> findByConvocatoriaSolicitudEmpresaConvenioEmpresa(Empresa empresa);
 
 }

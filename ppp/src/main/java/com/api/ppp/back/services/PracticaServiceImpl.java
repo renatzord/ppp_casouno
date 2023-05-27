@@ -3,10 +3,7 @@ package com.api.ppp.back.services;
 import com.api.ppp.back.daos.BaseRepository;
 import com.api.ppp.back.daos.PracticaRepository;
 import com.api.ppp.back.exception.ResourceNotFoundException;
-import com.api.ppp.back.models.Estudiante;
-import com.api.ppp.back.models.Practica;
-import com.api.ppp.back.models.TutorEmpresarial;
-import com.api.ppp.back.models.TutorInstituto;
+import com.api.ppp.back.models.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -46,6 +43,15 @@ public class PracticaServiceImpl extends BaseServiceImpl<Practica, Integer> impl
         List<Practica> practicas = repository.findByConvocatoriaId(id);
         if (practicas.isEmpty()) {
             throw new ResourceNotFoundException("No hay registros relacionados en Practicas con Convocatoria ID: " + id);
+        }
+        return practicas;
+    }
+
+    @Override
+    public List<Practica> findByConvocatoriaSolicitudEmpresaConvenioEmpresa(Empresa empresa) {
+        List<Practica> practicas = repository.findByConvocatoria_SolicitudEmpresa_Convenio_Empresa(empresa);
+        if (practicas.isEmpty()) {
+            throw new ResourceNotFoundException("Sin registros relacionados con Practocas y Empresa_ID: " + empresa);
         }
         return practicas;
     }
