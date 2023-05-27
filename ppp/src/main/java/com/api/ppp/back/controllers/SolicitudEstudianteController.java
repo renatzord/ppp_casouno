@@ -5,6 +5,7 @@ import com.api.ppp.back.models.SolicitudEmpresa;
 import com.api.ppp.back.models.SolicitudEstudiante;
 import com.api.ppp.back.services.ConvocaroriaService;
 import com.api.ppp.back.services.SolicitudEstudianteService;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
@@ -135,6 +136,11 @@ public class SolicitudEstudianteController {
         } else {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @GetMapping("/listar/estud/usuario/{id}")
+    public ResponseEntity<?> buscarPorEstudUsuarioId(@PathVariable  Integer id) {
+        return ResponseEntity.ok().body(service.findByEstudianteUsuarioId(id));
     }
 
 

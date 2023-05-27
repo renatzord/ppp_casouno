@@ -2,8 +2,10 @@ package com.api.ppp.back.services;
 
 import com.api.ppp.back.daos.BaseRepository;
 import com.api.ppp.back.daos.SolicitudEstudianteRepository;
+import com.api.ppp.back.exception.ResourceNotFoundException;
 import com.api.ppp.back.models.Convocatoria;
 import com.api.ppp.back.models.SolicitudEstudiante;
+import com.api.ppp.back.models.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,4 +35,14 @@ public class SolicitudEstudianteServiceImpl extends BaseServiceImpl<SolicitudEst
     public List<SolicitudEstudiante> solicitudesPendientesxConvocatoria(Convocatoria convocatoria) {
         return (List<SolicitudEstudiante>) repository.findByConvocatoriaAndEstadoOrEstado(convocatoria,0, 1).orElse(null);
     }
+
+    @Override
+    public List<SolicitudEstudiante> findByEstudianteUsuarioId(Integer id) {
+        List<SolicitudEstudiante> solicitudEstudiantes = repository.findByEstudianteUsuarioId(id);
+        if (solicitudEstudiantes.isEmpty()) {
+            throw new ResourceNotFoundException("Sin registros relacionados de SolicitudEstudiante con Estudiante_Usu_ID: " + id);
+        }
+        return solicitudEstudiantes;
+    }
+
 }
