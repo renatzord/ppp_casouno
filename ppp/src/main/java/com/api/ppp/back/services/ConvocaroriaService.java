@@ -12,8 +12,8 @@ public interface ConvocaroriaService extends BaseService<Convocatoria, Integer> 
 
     List<Convocatoria> listConvocatorias();
 
-    Optional<Convocatoria> findBySolicitudEmpresaId(Integer id);
+    Convocatoria findBySolicitudEmpresaId(Integer id);
 
-
+    Convocatoria findLatestConvocatoria();
 
 }

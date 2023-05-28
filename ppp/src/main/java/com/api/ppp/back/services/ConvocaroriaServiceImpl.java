@@ -34,12 +34,21 @@ import java.util.Optional;
     }
 
     @Override
-    public Optional<Convocatoria> findBySolicitudEmpresaId(Integer id) {
+    public Convocatoria findBySolicitudEmpresaId(Integer id) {
         Optional<Convocatoria> convocatorias = repository.findLatestBySolicitudEmpresaId(id);
         if (convocatorias.isEmpty()) {
             throw new ResourceNotFoundException("No hay registros relacionados en Convocatoria con la SolicitudEmpresa_ID: " + id);
         }
-        return convocatorias;
+        return convocatorias.get();
+    }
+
+    @Override
+    public Convocatoria findLatestConvocatoria() {
+        Optional<Convocatoria> convocatoria = repository.findLatestConvocatoria();
+        if (convocatoria.isEmpty()) {
+            throw new ResourceNotFoundException("No hay registros");
+        }
+        return convocatoria.get();
     }
 
 }

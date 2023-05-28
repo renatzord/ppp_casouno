@@ -60,4 +60,9 @@ public class ResultadoMateriaController {
         return ResponseEntity.noContent().build();
     }
 
+    @GetMapping("/listar/carrera/{id}")
+    public ResponseEntity<?> listarPorCarreraID(@PathVariable Integer id) {
+        return ResponseEntity.ok().body(service.findByCarreraId(id));
+    }
+
 }
