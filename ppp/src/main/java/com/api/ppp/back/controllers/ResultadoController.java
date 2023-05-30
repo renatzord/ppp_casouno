@@ -40,7 +40,7 @@ public class ResultadoController {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.save(entity));
     }
 
-    @PostMapping("/crear/muschos")
+    @PostMapping("/crear/muchos")
     public ResponseEntity<?> crearMuchos(@RequestBody List<Resultado> entity) {
         return ResponseEntity.status(HttpStatus.CREATED).body(service.saveAll(entity));
     }
