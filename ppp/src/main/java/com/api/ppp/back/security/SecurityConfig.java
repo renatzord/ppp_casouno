@@ -31,7 +31,7 @@ public class SecurityConfig {
                     @Override
                     public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
                         CorsConfiguration config = new CorsConfiguration();
-                        config.setAllowedOrigins(Arrays.asList("http://localhost:4200", "http://localhost:58697"));
+                        config.setAllowedOrigins(Collections.singletonList("*"));
                         config.setAllowedMethods(Collections.singletonList("*"));
                         config.setAllowCredentials(true);
                         config.setAllowedHeaders(Collections.singletonList("*"));
@@ -97,6 +97,8 @@ public class SecurityConfig {
                 .requestMatchers("/visitaActividad/**")
                 .hasAnyRole("ESTUD", "TEMP", "TISTA", "GEREN", "RESPP", "DIREC", "CORDI", "RECT", "ADMIN")
                 .requestMatchers("/visita/**")
+                .hasAnyRole("ESTUD", "TEMP", "TISTA", "GEREN", "RESPP", "DIREC", "CORDI", "RECT", "ADMIN")
+                .requestMatchers("/notificacion/**")
                 .hasAnyRole("ESTUD", "TEMP", "TISTA", "GEREN", "RESPP", "DIREC", "CORDI", "RECT", "ADMIN")
                 .requestMatchers("/ingresar").authenticated()
                 // Letting Access of fenix to ALL by the moment
