@@ -23,19 +23,19 @@ public class SemanaActividad implements Serializable {
     @NotNull(message = "La fecha es obligatoria.")
     @Column(name = "sac_dia")
     @Temporal(TemporalType.DATE)
-    @JsonFormat(pattern = "yyyy-MM-dd-ss")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date dia;
 
     @NotNull(message = "La hora de inicio es obligatoria.")
     @Column(name = "sac_hora_inicio")
     @Temporal(TemporalType.TIME)
-    @JsonFormat(pattern = "HH:mm")
+    @JsonFormat(pattern = "HH:mm:ss")
     private LocalTime horaInicio;
 
     @NotNull(message = "La hora de fin es obligatoria.")
     @Column(name = "sac_hora_fin")
     @Temporal(TemporalType.TIME)
-    @JsonFormat(pattern = "HH:mm")
+    @JsonFormat(pattern = "HH:mm:ss")
     private LocalTime horaFin;
 
     @NotNull(message = "El número de horas es obligatorio")
