@@ -29,13 +29,13 @@ public class SolicitudEmpresa implements Serializable {
     @NotNull(message = "La fecha de inicio tentativa es obligatoria.")
     @Column(name = "sol_fecha_inicio_ten")
     @Temporal(TemporalType.DATE)
-    @JsonFormat(pattern = "dd-MM-yyyy")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date fechaInicioTen;
 
     @NotNull(message = "La fecha de fin tentativa es obligatoria.")
     @Column(name = "sol_max_ten")
     @Temporal(TemporalType.DATE)
-    @JsonFormat(pattern = "dd-MM-yyyy")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date fechaMaxTen;
 
     @Column(name = "sol_estado")

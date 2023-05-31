@@ -31,12 +31,12 @@ public class Practica implements Serializable {
 
     @Column(name = "pra_inicio")
     @Temporal(TemporalType.DATE)
-    @JsonFormat(pattern = "dd-MM-yyyy")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date inicio;
 
     @Column(name = "pra_fin")
     @Temporal(TemporalType.DATE)
-    @JsonFormat(pattern = "dd-MM-yyyy")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date fin;
 
     @Column(name = "pra_concluciones")

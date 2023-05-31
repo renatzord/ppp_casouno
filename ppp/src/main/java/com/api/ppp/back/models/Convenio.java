@@ -29,13 +29,13 @@ public class Convenio implements Serializable {
     @NotNull(message = "La fecha es obligatoria.")
     @Column(name = "con_fecha_inicio")
     @Temporal(TemporalType.DATE)
-    @JsonFormat(pattern = "dd-MM-yyyy")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date fechaInicio;
 
     @NotNull(message = "La fecha es obligatoria.")
     @Column(name = "con_fecha_fin")
     @Temporal(TemporalType.DATE)
-    @JsonFormat(pattern = "dd-MM-yyyy")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date fechaFin;
 
     //@Lob

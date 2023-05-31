@@ -24,13 +24,13 @@ public class Convocatoria {
     @NotNull(message = "La fecha es obligatoria.")
     @Column(name = "cov_fecha_inicio")
     @Temporal(TemporalType.DATE)
-    @JsonFormat(pattern = "dd-MM-yyyy")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date fechaInicio;
 
     @NotNull(message = "La fecha es obligatoria.")
     @Column(name = "cov_fecha_fin")
     @Temporal(TemporalType.DATE)
-    @JsonFormat(pattern = "dd-MM-yyyy")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date fechaFin;
 
     @NotNull(message = "El número es obligatorio.")

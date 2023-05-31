@@ -24,7 +24,7 @@ public class SolicitudEstudiante implements Serializable {
     @NotNull(message = "La fecha de envio es obligatoria.")
     @Column(name = "ses_fecha_envio")
     @Temporal(TemporalType.TIMESTAMP)
-    @JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date fechaEnvio;
 
     @Column(name = "ses_url",columnDefinition = "bytea")

@@ -23,7 +23,7 @@ public class SemanaActividad implements Serializable {
     @NotNull(message = "La fecha es obligatoria.")
     @Column(name = "sac_dia")
     @Temporal(TemporalType.DATE)
-    @JsonFormat(pattern = "dd-MM-yyyy")
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date dia;
 
     @NotNull(message = "La hora de inicio es obligatoria.")
