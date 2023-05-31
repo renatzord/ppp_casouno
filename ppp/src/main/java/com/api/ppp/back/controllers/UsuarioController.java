@@ -5,7 +5,6 @@ import com.api.ppp.back.exception.ResourceNotFoundException;
 import com.api.ppp.back.models.Authority;
 import com.api.ppp.back.models.Usuario;
 import com.api.ppp.back.services.UsuarioService;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
