@@ -26,6 +26,7 @@ public interface ConvocatoriaRepository extends BaseRepository<Convocatoria, Int
     @Query("SELECT c FROM Convocatoria c WHERE c.solicitudEmpresa.id = :id AND c.id = (SELECT MAX(c2.id) FROM Convocatoria c2 WHERE c2.solicitudEmpresa.id = :id)")
     Optional<Convocatoria> findLatestBySolicitudEmpresaId(Integer id);
 
-
+    @Query("SELECT c FROM Convocatoria c WHERE c.id = (SELECT MAX(c2.id) FROM Convocatoria c2)")
+    Optional<Convocatoria> findLatestConvocatoria();
 
 }

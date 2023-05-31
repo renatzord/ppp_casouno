@@ -100,4 +100,17 @@ public class ConvenioController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    // To find the last Convenio record by his Empresa ID
+    @GetMapping("buscar/ultimo/empresa/{id}")
+    public ResponseEntity<?> buscarUltimoEmpresaID(Integer id) {
+        return ResponseEntity.ok().body(service.findLatestByEmpresaId(id));
+    }
+
+    // To find the last Convenio record
+    @GetMapping("buscar/ultimo")
+    public ResponseEntity<?> buscarUltimo(Integer id) {
+        return ResponseEntity.ok().body(service.findLatestConvenio());
+    }
+
 }

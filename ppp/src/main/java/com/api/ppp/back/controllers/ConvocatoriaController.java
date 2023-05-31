@@ -72,9 +72,14 @@ public class ConvocatoriaController {
     }
 
     // TO find a list of Convocatoria by a SolEmpresa_ID
-    @GetMapping("/buscar/solEmpresa/{id}")
+    @GetMapping("/buscar/ultimo/solEmpresa/{id}")
     public ResponseEntity<?> buscarPorSolicitudEmpresa(@PathVariable Integer id) {
         return ResponseEntity.ok().body(service.findBySolicitudEmpresaId(id));
+    }
+
+    @GetMapping("/buscar/ultimo")
+    public ResponseEntity<?> buscarPorSolicitudEmpresa() {
+        return ResponseEntity.ok().body(service.findLatestConvocatoria());
     }
 
 }
