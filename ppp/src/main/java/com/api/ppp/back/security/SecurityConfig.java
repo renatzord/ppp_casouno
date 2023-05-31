@@ -31,7 +31,7 @@ public class SecurityConfig {
                     @Override
                     public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
                         CorsConfiguration config = new CorsConfiguration();
-                        config.setAllowedOriginPatterns(Collections.singletonList("http://localhost:4200/")); // Reemplaza "http://example.com" con tu dominio permitido o patrón
+                        config.setAllowedOrigins(Arrays.asList("http://localhost:4200", "http://localhost:58697"));// Reemplaza "http://example.com" con tu dominio permitido o patrón
                         config.setAllowedMethods(Collections.singletonList("*"));
                         config.setAllowCredentials(true);
                         config.setAllowedHeaders(Collections.singletonList("*"));
