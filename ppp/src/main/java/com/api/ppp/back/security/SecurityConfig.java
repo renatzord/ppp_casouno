@@ -26,20 +26,7 @@ public class SecurityConfig {
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
         CsrfTokenRequestAttributeHandler requestHandler = new CsrfTokenRequestAttributeHandler();
         requestHandler.setCsrfRequestAttributeName("_csrf");
-        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().cors().disable()
-                /*.configurationSource(new CorsConfigurationSource() {
-                    @Override
-                    public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
-                        CorsConfiguration config = new CorsConfiguration();
-                        config.setAllowedOrigins(Collections.singletonList("*"));
-                        config.setAllowedMethods(Collections.singletonList("*"));
-                        config.setAllowCredentials(true);
-                        config.setAllowedHeaders(Collections.singletonList("*"));
-                        config.setExposedHeaders(Arrays.asList("Authorization"));
-                        config.setMaxAge(3600L);
-                        return config;
-                    }
-                }).and()*/
+        http.cors().disable()
                 .csrf((csrf) -> csrf.csrfTokenRequestHandler(requestHandler).ignoringRequestMatchers("/**", "/register")
                         .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
                 .addFilterAfter(new CsrfCookieFilter(), BasicAuthenticationFilter.class)
