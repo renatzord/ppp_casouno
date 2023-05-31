@@ -12,7 +12,6 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/detalleTarea")
-@CrossOrigin(origins="*")
 public class DetalleTareaController {
 
     @Autowired

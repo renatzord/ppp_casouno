@@ -11,7 +11,6 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/aspecto")
-@CrossOrigin(origins="*")
 public class AspectoController {
 
     @Autowired
