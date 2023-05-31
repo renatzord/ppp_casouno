@@ -15,7 +15,6 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/fenix")
-@CrossOrigin(origins="*")
 public class MateriaCarrerasFenixController {
 
     @Autowired
