@@ -1,5 +1,6 @@
 package com.api.ppp.back.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
@@ -30,10 +31,12 @@ public class Practica implements Serializable {
 
     @Column(name = "pra_inicio")
     @Temporal(TemporalType.DATE)
+    @JsonFormat(pattern = "dd-MM-yyyy")
     private Date inicio;
 
     @Column(name = "pra_fin")
     @Temporal(TemporalType.DATE)
+    @JsonFormat(pattern = "dd-MM-yyyy")
     private Date fin;
 
     @Column(name = "pra_concluciones")

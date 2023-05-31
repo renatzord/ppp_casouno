@@ -1,5 +1,6 @@
 package com.api.ppp.back.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -28,11 +29,13 @@ public class SolicitudEmpresa implements Serializable {
     @NotNull(message = "La fecha de inicio tentativa es obligatoria.")
     @Column(name = "sol_fecha_inicio_ten")
     @Temporal(TemporalType.DATE)
+    @JsonFormat(pattern = "dd-MM-yyyy")
     private Date fechaInicioTen;
 
     @NotNull(message = "La fecha de fin tentativa es obligatoria.")
     @Column(name = "sol_max_ten")
     @Temporal(TemporalType.DATE)
+    @JsonFormat(pattern = "dd-MM-yyyy")
     private Date fechaMaxTen;
 
     @Column(name = "sol_estado")

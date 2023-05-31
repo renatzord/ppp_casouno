@@ -1,5 +1,6 @@
 package com.api.ppp.back.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -23,6 +24,7 @@ public class SolicitudEstudiante implements Serializable {
     @NotNull(message = "La fecha de envio es obligatoria.")
     @Column(name = "ses_fecha_envio")
     @Temporal(TemporalType.TIMESTAMP)
+    @JsonFormat(pattern = "dd-MM-yyyy HH:mm:ss")
     private Date fechaEnvio;
 
     @Column(name = "ses_url",columnDefinition = "bytea")

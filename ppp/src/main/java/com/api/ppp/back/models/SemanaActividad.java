@@ -1,5 +1,6 @@
 package com.api.ppp.back.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -22,16 +23,19 @@ public class SemanaActividad implements Serializable {
     @NotNull(message = "La fecha es obligatoria.")
     @Column(name = "sac_dia")
     @Temporal(TemporalType.DATE)
+    @JsonFormat(pattern = "dd-MM-yyyy")
     private Date dia;
 
     @NotNull(message = "La hora de inicio es obligatoria.")
     @Column(name = "sac_hora_inicio")
     @Temporal(TemporalType.TIME)
+    @JsonFormat(pattern = "HH:mm")
     private LocalTime horaInicio;
 
     @NotNull(message = "La hora de fin es obligatoria.")
     @Column(name = "sac_hora_fin")
     @Temporal(TemporalType.TIME)
+    @JsonFormat(pattern = "HH:mm")
     private LocalTime horaFin;
 
     @NotNull(message = "El número de horas es obligatorio")

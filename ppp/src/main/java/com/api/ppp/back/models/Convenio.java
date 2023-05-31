@@ -1,5 +1,6 @@
 package com.api.ppp.back.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -28,11 +29,13 @@ public class Convenio implements Serializable {
     @NotNull(message = "La fecha es obligatoria.")
     @Column(name = "con_fecha_inicio")
     @Temporal(TemporalType.DATE)
+    @JsonFormat(pattern = "dd-MM-yyyy")
     private Date fechaInicio;
 
     @NotNull(message = "La fecha es obligatoria.")
     @Column(name = "con_fecha_fin")
     @Temporal(TemporalType.DATE)
+    @JsonFormat(pattern = "dd-MM-yyyy")
     private Date fechaFin;
 
     //@Lob
