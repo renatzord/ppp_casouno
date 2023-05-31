@@ -47,6 +47,7 @@ public class PracticaController {
     // To create a record
     @PostMapping("/crear")
     public ResponseEntity<?> crear(@RequestBody Practica entity) {
+        entity.setConcluciones(".");
         return ResponseEntity.status(HttpStatus.CREATED).body(service.save(entity));
     }
 
