@@ -39,7 +39,7 @@ public class Practica implements Serializable {
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date fin;
 
-    @Column(name = "pra_concluciones")
+    @Column(name = "pra_concluciones", columnDefinition = "VARCHAR(255) DEFAULT ' '")
     private String concluciones;
 
     @Column(name = "pra_departamento")
