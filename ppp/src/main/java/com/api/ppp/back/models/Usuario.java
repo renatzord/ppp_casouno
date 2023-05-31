@@ -22,8 +22,9 @@ import java.util.Set;
 public class Usuario implements Serializable {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO, generator="native")
-    @GenericGenerator(name = "native", strategy = "native")
+    //@GeneratedValue(strategy= GenerationType.AUTO, generator="native")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@GenericGenerator(name = "native", strategy = "native")
     @Column(name = "usu_id")
     private Integer id;
 
