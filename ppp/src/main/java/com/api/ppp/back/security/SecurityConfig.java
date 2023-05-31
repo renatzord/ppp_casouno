@@ -26,8 +26,8 @@ public class SecurityConfig {
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
         CsrfTokenRequestAttributeHandler requestHandler = new CsrfTokenRequestAttributeHandler();
         requestHandler.setCsrfRequestAttributeName("_csrf");
-        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().cors()
-                .configurationSource(new CorsConfigurationSource() {
+        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().cors().disable()
+                /*.configurationSource(new CorsConfigurationSource() {
                     @Override
                     public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
                         CorsConfiguration config = new CorsConfiguration();
@@ -39,10 +39,9 @@ public class SecurityConfig {
                         config.setMaxAge(3600L);
                         return config;
                     }
-                }).and()
-                .csrf().disable()git
-                //.csrf((csrf) -> csrf.csrfTokenRequestHandler(requestHandler).ignoringRequestMatchers("/**", "/register")
-                  //      .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
+                }).and()*/
+                .csrf((csrf) -> csrf.csrfTokenRequestHandler(requestHandler).ignoringRequestMatchers("/**", "/register")
+                        .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()))
                 .addFilterAfter(new CsrfCookieFilter(), BasicAuthenticationFilter.class)
                 .addFilterBefore(new RequestValidationBeforeFilter(), BasicAuthenticationFilter.class)
                 .addFilterAfter(new JWTTokenGeneratorFilter(), BasicAuthenticationFilter.class)
