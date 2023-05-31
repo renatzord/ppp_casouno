@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface AnexoService extends BaseService<Anexos, Integer> {
 
-    List<Anexos> anexoTipo(Practica practica,Integer tipo);
+    Anexos anexoTipo(Integer id, Integer tipo);
 
 }

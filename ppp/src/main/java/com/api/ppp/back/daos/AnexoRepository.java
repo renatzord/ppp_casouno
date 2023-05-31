@@ -11,7 +11,7 @@ import java.util.Optional;
 public interface AnexoRepository extends BaseRepository<Anexos, Integer> {
 
     Optional<List<Anexos>> findAllByPractica(Practica practica);
-    Optional<List<Anexos>> findAllByPracticaAndTipo(Practica practica,Integer tipo);
+    Optional<Anexos> findAllByPracticaIdAndTipo(Integer id, Integer tipo);
 
 
 }

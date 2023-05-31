@@ -107,10 +107,9 @@ public class AnexosController {
         }
     }
 
-    @GetMapping("/listarxtipo")
-    public ResponseEntity<?> listar(@RequestParam("idpractica")Integer id,@RequestParam("tipo")Integer tipo) {
-        Practica practica=practicaService.findById(id).orElse(null);
-        return ResponseEntity.ok().body(service.anexoTipo(practica,tipo));
+    @GetMapping("/listarxtipo/{id}")
+    public ResponseEntity<?> listar(@PathVariable Integer id, @RequestParam Integer tipo) {
+        return ResponseEntity.ok().body(service.anexoTipo(id, tipo));
     }
 
 }
