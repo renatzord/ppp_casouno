@@ -1,5 +1,6 @@
 package com.api.ppp.back.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -23,11 +24,13 @@ public class Convocatoria {
     @NotNull(message = "La fecha es obligatoria.")
     @Column(name = "cov_fecha_inicio")
     @Temporal(TemporalType.DATE)
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date fechaInicio;
 
     @NotNull(message = "La fecha es obligatoria.")
     @Column(name = "cov_fecha_fin")
     @Temporal(TemporalType.DATE)
+    @JsonFormat(pattern = "yyyy-MM-dd")
     private Date fechaFin;
 
     @NotNull(message = "El número es obligatorio.")
