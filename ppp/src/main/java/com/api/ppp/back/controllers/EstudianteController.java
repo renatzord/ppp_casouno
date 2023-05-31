@@ -16,7 +16,6 @@ import static com.api.ppp.back.constant.Validate.isPasswordSecure;
 
 @RestController
 @RequestMapping("/estudiante")
-@CrossOrigin(origins="*")
 public class EstudianteController {
 
     @Autowired

@@ -12,7 +12,6 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/actividad")
-@CrossOrigin(origins="*")
 public class ActividadController {
 
     @Autowired

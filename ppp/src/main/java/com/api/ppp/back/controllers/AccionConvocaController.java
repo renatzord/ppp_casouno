@@ -12,7 +12,6 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/accionConvoca")
-@CrossOrigin(origins="*")
 public class AccionConvocaController {
 
     @Autowired

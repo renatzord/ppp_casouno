@@ -12,7 +12,6 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/materia")
-@CrossOrigin(origins="*")
 public class MateriaController {
 
     @Autowired

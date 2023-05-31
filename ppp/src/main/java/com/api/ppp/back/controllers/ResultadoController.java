@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/resultado")
-@CrossOrigin(origins="*")
 public class ResultadoController {
 
     @Autowired

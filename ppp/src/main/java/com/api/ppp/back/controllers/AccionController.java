@@ -11,7 +11,6 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/accion")
-@CrossOrigin(origins="*")
 public class AccionController {
 
     @Autowired

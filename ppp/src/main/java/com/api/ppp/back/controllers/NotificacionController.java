@@ -15,7 +15,6 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/notificacion")
-@CrossOrigin(origins="*")
 public class NotificacionController {
 
     @Autowired

@@ -15,7 +15,6 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/semanaActividad")
-@CrossOrigin(origins="*")
 public class SemanaActividadController {
 
     @Autowired
