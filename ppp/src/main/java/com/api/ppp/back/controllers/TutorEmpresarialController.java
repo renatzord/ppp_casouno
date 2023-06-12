@@ -22,8 +22,8 @@ public class TutorEmpresarialController {
     @Autowired
     private TutorEmpresarialService service;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    /*@Autowired
+    private PasswordEncoder passwordEncoder;*/
 
     @Autowired
     private AuthorityRepository authorityRepository;
@@ -48,7 +48,7 @@ public class TutorEmpresarialController {
     }
 
     // To create a record
-    @PostMapping("/crear")
+    /*@PostMapping("/crear")
     public ResponseEntity<?> create(@RequestBody TutorEmpresarial entity, @RequestParam String rol) {
         if (!isPasswordSecure(entity.getUsuario().getPassword())) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("La contraseña no es segura.");
@@ -61,10 +61,10 @@ public class TutorEmpresarialController {
         role.setUsuario(tutor.getUsuario());
         authorityRepository.save(role);
         return ResponseEntity.status(HttpStatus.CREATED).body(tutor);
-    }
+    }*/
 
     // To find one record and update it, specifically by a unique identifier (PK or ID)
-    @PostMapping("/editar/{id}")
+    /*@PostMapping("/editar/{id}")
     public ResponseEntity<?> editar(@PathVariable("id") Integer id, @RequestBody TutorEmpresarial entity) {
         if (!isPasswordSecure(entity.getUsuario().getPassword())) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST) .body("Password must be secure");
@@ -80,7 +80,7 @@ public class TutorEmpresarialController {
             return ResponseEntity.status(HttpStatus.CREATED).body(service.save(current));
         }
         return ResponseEntity.notFound().build();
-    }
+    }*/
 
     // To find one record and delete it, specifically by a unique identifier (PK or ID)
     @DeleteMapping("/eliminar/{id}")

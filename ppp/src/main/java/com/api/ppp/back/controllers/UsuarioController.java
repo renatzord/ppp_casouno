@@ -8,6 +8,7 @@ import com.api.ppp.back.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,9 +28,6 @@ public class UsuarioController {
     @Autowired
     private AuthorityRepository authorityRepository;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
     // To list all records
     @GetMapping("/listar")
     public ResponseEntity<?> listar() {
@@ -47,7 +45,7 @@ public class UsuarioController {
     }
 
     // To create a record
-    @PostMapping("/crear")
+    /*@PostMapping("/crear")
     public ResponseEntity<?> crear(@RequestBody Usuario entity, @RequestParam String rol) {
         if (!isPasswordSecure(entity.getPassword())) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST) .body("Password must be secure");
@@ -60,7 +58,7 @@ public class UsuarioController {
         role.setUsuario(usuario);
         authorityRepository.save(role);
         return ResponseEntity .status(HttpStatus.CREATED).body("Usuario registrado con exito.");
-    }
+    }*/
 
     // To list users by a specific role
     @GetMapping("/listar/rol")
@@ -93,6 +91,12 @@ public class UsuarioController {
         Authority authority = current.get();
         authority.setName(name);
         return ResponseEntity.ok().body(authorityRepository.save(authority));
+    }
+
+    @RequestMapping("/datos")
+    public Usuario getUserDetailsAfterLogin(@RequestParam String email) {
+        Optional<Usuario> usuario = service.findByCorreo(email);
+        return usuario.orElse(null);
     }
 
 }

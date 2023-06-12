@@ -1,6 +1,5 @@
 package com.api.ppp.back.controllers;
 
-import com.api.ppp.back.models.Accion;
 import com.api.ppp.back.models.Empresa;
 import com.api.ppp.back.services.EmpresaService;
 import org.springframework.beans.factory.annotation.Autowired;

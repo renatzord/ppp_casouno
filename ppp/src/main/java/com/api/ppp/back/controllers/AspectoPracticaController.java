@@ -1,6 +1,5 @@
 package com.api.ppp.back.controllers;
 
-import com.api.ppp.back.models.Accion;
 import com.api.ppp.back.models.AspectoPractica;
 import com.api.ppp.back.services.AspectoPracticaService;
 import org.springframework.beans.factory.annotation.Autowired;

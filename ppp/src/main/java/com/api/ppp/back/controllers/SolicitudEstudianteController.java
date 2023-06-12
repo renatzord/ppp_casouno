@@ -1,11 +1,9 @@
 package com.api.ppp.back.controllers;
 
 import com.api.ppp.back.models.Convocatoria;
-import com.api.ppp.back.models.SolicitudEmpresa;
 import com.api.ppp.back.models.SolicitudEstudiante;
 import com.api.ppp.back.services.ConvocaroriaService;
 import com.api.ppp.back.services.SolicitudEstudianteService;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;

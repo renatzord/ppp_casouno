@@ -1,11 +1,8 @@
 package com.api.ppp.back.controllers;
 
 import com.api.ppp.back.daos.AuthorityRepository;
-import com.api.ppp.back.models.Accion;
 import com.api.ppp.back.models.Authority;
-import com.api.ppp.back.models.TutorEmpresarial;
 import com.api.ppp.back.models.TutorInstituto;
-import com.api.ppp.back.services.TutorEmpresarialService;
 import com.api.ppp.back.services.TutorInstitutoService;
 import com.api.ppp.back.services.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +22,8 @@ public class TutorInstitutoController {
     @Autowired
     private TutorInstitutoService service;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    /*@Autowired
+    private PasswordEncoder passwordEncoder;*/
 
     @Autowired
     private AuthorityRepository authorityRepository;
@@ -51,7 +48,7 @@ public class TutorInstitutoController {
     }
 
     // To create a record
-    @PostMapping("/crear")
+    /*@PostMapping("/crear")
     public ResponseEntity<?> crear(@RequestBody TutorInstituto entity, @RequestParam String rol) {
         if (!isPasswordSecure(entity.getUsuario().getPassword())) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("La contraseña no es segura.");
@@ -64,10 +61,10 @@ public class TutorInstitutoController {
         role.setUsuario(tutor.getUsuario());
         authorityRepository.save(role);
         return ResponseEntity.status(HttpStatus.CREATED).body(tutor);
-    }
+    }*/
 
     // To find one record and update it, specifically by a unique identifier (PK or ID)
-    @PostMapping("/editar/{id}")
+    /*@PostMapping("/editar/{id}")
     public ResponseEntity<?> editar(@PathVariable("id") Integer id, @RequestBody TutorInstituto entity) {
         if (!isPasswordSecure(entity.getUsuario().getPassword())) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST) .body("Password must be secure");
@@ -82,7 +79,7 @@ public class TutorInstitutoController {
             return ResponseEntity.status(HttpStatus.CREATED).body(service.save(current));
         }
         return ResponseEntity.notFound().build();
-    }
+    }*/
 
     // To find one record and delete it, specifically by a unique identifier (PK or ID)
     @DeleteMapping("/eliminar/{id}")

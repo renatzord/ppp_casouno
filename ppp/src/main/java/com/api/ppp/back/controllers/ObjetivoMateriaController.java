@@ -1,6 +1,5 @@
 package com.api.ppp.back.controllers;
 
-import com.api.ppp.back.models.Accion;
 import com.api.ppp.back.models.Materia;
 import com.api.ppp.back.models.ObjetivoMateria;
 import com.api.ppp.back.services.MateriaService;

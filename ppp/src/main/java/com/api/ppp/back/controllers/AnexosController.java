@@ -1,9 +1,7 @@
 package com.api.ppp.back.controllers;
 
 import com.api.ppp.back.models.Anexos;
-import com.api.ppp.back.models.Practica;
 import com.api.ppp.back.services.AnexoService;
-import com.api.ppp.back.services.PracticaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
@@ -18,9 +16,6 @@ public class AnexosController {
 
     @Autowired
     private AnexoService service;
-
-    @Autowired
-    private PracticaService practicaService;
 
     // To list all records
     @GetMapping("/listar")

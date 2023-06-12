@@ -21,8 +21,8 @@ public class EstudianteController {
     @Autowired
     private EstudianteService service;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    /*@Autowired
+    private PasswordEncoder passwordEncoder;*/
 
     @Autowired
     private PracticaService practicaService;
@@ -59,7 +59,7 @@ public class EstudianteController {
     }
 
     // To find one record and update it, specifically by a unique identifier (PK or ID)
-    @PostMapping("/editar/{id}")
+    /*@PostMapping("/editar/{id}")
     public ResponseEntity<?> editar(@PathVariable("id") Integer id, @RequestBody Estudiante entity) {
         if (!isPasswordSecure(entity.getUsuario().getPassword())) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST) .body("Password must be secure");
@@ -79,7 +79,7 @@ public class EstudianteController {
             return ResponseEntity.status(HttpStatus.CREATED).body(service.save(current));
         }
         return ResponseEntity.notFound().build();
-    }
+    }*/
 
     // To find one record and delete it, specifically by a unique identifier (PK or ID)
     @DeleteMapping("/eliminar/{id}")

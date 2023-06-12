@@ -4,7 +4,6 @@ import com.api.ppp.back.exception.ResourceNotFoundException;
 import com.api.ppp.back.models.Empresa;
 import com.api.ppp.back.models.Practica;
 import com.api.ppp.back.models.TutorEmpresarial;
-import com.api.ppp.back.models.Usuario;
 import com.api.ppp.back.services.EstudianteService;
 import com.api.ppp.back.services.PracticaService;
 import com.api.ppp.back.services.TutorEmpresarialService;

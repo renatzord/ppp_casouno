@@ -1,6 +1,5 @@
 package com.api.ppp.back.controllers;
 
-import com.api.ppp.back.models.Accion;
 import com.api.ppp.back.models.SemanaActividad;
 import com.api.ppp.back.services.SemanaActividadService;
 import org.springframework.beans.factory.annotation.Autowired;
