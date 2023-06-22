@@ -120,7 +120,7 @@ public class PracticaController {
         }
         TutorEmpresarial empresarial = optional.get();
         Empresa empresa = new Empresa();
-        empresa.setId(empresarial.getId());
+        empresa.setId(empresarial.getEmpresa().getId());
         return ResponseEntity.ok(service.findByConvocatoriaSolicitudEmpresaConvenioEmpresa(empresa));
     }
 
